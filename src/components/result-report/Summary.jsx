@@ -83,7 +83,7 @@ export default function Summary() {
           <InnerBox>
             <InnerBox1 style={{ width: "49.5%", margin: "3vh 0 0 0" }}>
               <FeedbackTitle>
-                <span style={{ color: "green" }}>YES</span> 피드백
+                <span style={{ color: "#1AD079" }}>YES</span> 피드백
               </FeedbackTitle>
               <FeedbackText>
                 <FT>
@@ -105,7 +105,7 @@ export default function Summary() {
             <VerticalLine />
             <InnerBox2 style={{ width: "49.5%", marginLeft: "0" }}>
               <FeedbackTitle>
-                <span style={{ color: "red" }}>NO</span> 피드백
+                <span style={{ color: "#FF7D33" }}>NO</span> 피드백
               </FeedbackTitle>
               <FeedbackText>
                 <FT>

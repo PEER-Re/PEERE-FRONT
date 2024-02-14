@@ -373,101 +373,195 @@ export const FT = styled.div`
 
 /* result-report > Review */
 
+// export const ContentContainer = styled.div`
+//   position: relative;
+//   display: flex;
+//   flex-direction: column;
+//   margin-top: 0;
+//   width: 100%;
+//   height: 100%;
+//   justify-content: space-between;
+// `;
+
+// export const ReviewContainer = styled.div`
+//   box-sizing: border-box;
+//   width: 100%;
+//   height: 80%;
+//   display: flex;
+//   flex-direction: column;
+//   border-radius: 18px;
+//   text-align: left;
+//   gap: 20px;
+//   background-color: #fff;
+
+//   p {
+//     font-size: 24px;
+//     font-weight: 800;
+//     margin: 0;
+//   }
+// `;
+
+// export const ReviewInnerContainer = styled.div`
+//   width: 72vw;
+//   height: 32vh;
+//   margin: auto;
+//   overflow-y: auto;
+// `;
+
+// export const ReviewBox = styled.div`
+//   width: 72vw;
+//   min-height: 120px;
+//   margin: 0 auto 20px auto;
+//   display: flex;
+//   justify-content: space-between;
+// `;
+
+// export const ProfileBox = styled.div`
+//   width: 20%;
+//   min-height: 6vw;
+//   display: flex;
+//   align-items: flex-end;
+//   margin-left: 10px;
+// `;
+
+// export const ProfileImage = styled.div`
+//   width: 8vh;
+//   height: 8vh;
+//   background: url(${profileImg1});
+//   background-repeat: no-repeat;
+//   background-size: contain;
+//   background-position: center;
+//   margin: 0 0 0.5vh 3vh;
+// `;
+
+// export const ProfileText = styled.div`
+//   width: 15vh;
+//   margin: 0 0 0.5vh 2vh;
+// `;
+
+// export const ProfileName = styled.div`
+//   font-weight: 600;
+//   font-size: 3.3vh;
+//   margin: 0 0 0.5vh 0;
+// `;
+
+// export const ProfileIntroduce = styled.div`
+//   font-weight: 400;
+//   font-size: 1.6vh;
+// `;
+
+// export const CommentBox = styled.div`
+//   width: 70%;
+//   background: url(${comment1});
+//   background-repeat: no-repeat;
+//   background-size: contain;
+//   background-position: right;
+//   display: flex;
+//   justify-content: end;
+//   margin-right: 20px;
+// `;
+
+// export const CommentText = styled.div`
+//   width: 90%;
+//   height: 60%;
+//   margin: auto 1.7vw auto 0;
+//   font-size: 1.11vw;
+//   font-weight: 300;
+//   overflow-y: auto;
+// `;
+
 export const ContentContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-top: 0;
+  border: 5px solid blue;
+  box-sizing: border-box;
   width: 100%;
-  height: 100%;
-  justify-content: space-between;
+  margin-top: 150px;
 `;
 
 export const ReviewContainer = styled.div`
+  border: 1px solid red;
   box-sizing: border-box;
-  width: 100%;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  border-radius: 18px;
-  text-align: left;
-  gap: 20px;
-  background-color: #fff;
-
-  p {
-    font-size: 24px;
-    font-weight: 800;
-    margin: 0;
-  }
 `;
 
 export const ReviewInnerContainer = styled.div`
-  width: 72vw;
-  height: 32vh;
-  margin: auto;
-  overflow-y: auto;
+  border: 1px solid red;
+  box-sizing: border-box;
 `;
 
 export const ReviewBox = styled.div`
-  width: 72vw;
-  min-height: 120px;
-  margin: 0 auto 20px auto;
+  border: 1px solid green;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  align-items: end;
+  margin-bottom: 20px;
+  gap: 20px;
 `;
 
 export const ProfileBox = styled.div`
-  width: 20%;
-  min-height: 6vw;
+  border: 1px solid yellow;
+  box-sizing: border-box;
   display: flex;
-  align-items: flex-end;
-  margin-left: 10px;
 `;
 
 export const ProfileImage = styled.div`
-  width: 8vh;
-  height: 8vh;
+  border: 1px solid red;
+  box-sizing: border-box;
+  width: 70px;
+  height: 70px;
   background: url(${profileImg1});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  margin: 0 0 0.5vh 3vh;
 `;
 
 export const ProfileText = styled.div`
-  width: 15vh;
-  margin: 0 0 0.5vh 2vh;
+  border: 1px solid blue;
+  box-sizing: border-box;
+  padding: 0 10px 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 `;
 
 export const ProfileName = styled.div`
+  border: 1px solid red;
+  box-sizing: border-box;
+  font-size: 22px;
   font-weight: 600;
-  font-size: 3.3vh;
-  margin: 0 0 0.5vh 0;
+  padding: 5px 5px 2px 0;
+  white-space: nowrap;
 `;
 
 export const ProfileIntroduce = styled.div`
+  border: 1px solid red;
+  box-sizing: border-box;
+  font-size: 12px;
   font-weight: 400;
-  font-size: 1.6vh;
+  padding-bottom: 5px;
+  white-space: nowrap;
 `;
 
 export const CommentBox = styled.div`
-  width: 70%;
+  border: 1px solid blue;
+  box-sizing: border-box;
+  width: 80%;
+  height: 100px;
   background: url(${comment1});
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: right;
+  background-size: cover;
+  background-position: left;
+  padding: 20px 30px 20px 50px;
   display: flex;
-  justify-content: end;
-  margin-right: 20px;
+  justify-content: right;
+  align-items: center;
 `;
 
 export const CommentText = styled.div`
-  width: 90%;
-  height: 60%;
-  margin: auto 1.7vw auto 0;
-  font-size: 1.11vw;
-  font-weight: 300;
-  overflow-y: auto;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  width: 100%;
+  height: 60px;
+  overflow-y: scroll;
 `;
 
 /* result-report > Input */
