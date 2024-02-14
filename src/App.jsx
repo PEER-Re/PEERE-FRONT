@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import TestPage from "/src/pages/test/TestPage.jsx";
 import {
   ContentWrapper,
@@ -9,6 +10,7 @@ import {
 } from "/src/styles/style.js";
 import SideBar from "/src/components/sidebar/SideBar";
 import Header from "/src/components/header/header";
+import TeamSpace from "./pages/team-space/TeamSpace";
 import TeamReport from "/src/pages/team-report/TeamReport";
 import ResultReport from "/src/pages/result-report/ResultReport";
 import PersonalReport from "./pages/personal-report/PersonalReport";
@@ -25,6 +27,15 @@ import { FirstMainWrapper } from "./styles/style";
 // route 설정 해주세요
 // 경로 "/"는 추후 각자 설정해주세요.
 function App() {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // 경로 변경 시 배경 이미지 변경
+    showLogin();
+    isSpecifixBg();
+    teamSpaceBg();
+  }, [location]); 
 
   // 로그인 페이지 사이드바 숨김 함수
   const showLogin = () => {
@@ -68,6 +79,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/test" element={<TestPage />} />
+            <Route path="/team-space" element={<TeamSpace/>} />
             <Route path="/team-report" element={<TeamReport />} />
             <Route path="/personal-report" element={<PersonalReport />} />
             <Route path="/result-report" element={<ResultReport />} />
@@ -83,53 +95,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-//--------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-// import { Route, Routes } from "react-router-dom";
-// import TestPage from "/src/pages/test/TestPage.jsx";
-// import {
-//   ContentWrapper,
-//   HeaderWrapper,
-//   LeftBody,
-//   MainWrapper,
-//   RightBody,
-// } from "/src/styles/style.js";
-// import SideBar from "/src/components/sidebar/SideBar";
-// import Header from "/src/components/header/header";
-// import TeamReport from "/src/pages/team-report/TeamReport";
-// import ResultReport from "/src/pages/result-report/ResultReport";
-// import PersonalReport from "./pages/personal-report/PersonalReport";
-// import Feedback from "./pages/feedback/Feedback";
-// import FeedbackUsers from "./pages/feedback/FeedbackUsers";
-// import Home from "./pages/home/Home";
-
-// // route 설정 해주세요
-// // 경로 "/"는 추후 각자 설정해주세요.
-// function App() {
-//   return (
-//     <MainWrapper>
-//       <ContentWrapper>
-//       <Routes>
-//         <Route path="/" element={<Home/>}/>
-//       </Routes>
-//       </ContentWrapper>
-//       </MainWrapper>
-//   );
-// }
-// export default App;
