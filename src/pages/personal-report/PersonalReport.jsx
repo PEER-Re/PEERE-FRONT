@@ -29,7 +29,7 @@ function PersonalReport() {
 
   const sendGetRequest = async () => {
     try {
-      const projectId = 1; // 프로젝트 ID
+      const projectId = 8; // 프로젝트 ID
 
       const response = await axios.get(
         `http://13.124.90.245:8080/api/projects/${projectId}/my-report`,
