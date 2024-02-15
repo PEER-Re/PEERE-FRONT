@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import BG from "/src/assets/images/background/background.svg";
-import BG_3 from "/src/assets/images/background/background_3.svg";
-import BG_4 from "/src/assets/images/background/background_4.svg";
+import BG from "/src/assets/images/background/background.png";
+import BG_2 from "/src/assets/images/background/background_2.png";
+import BG_3 from "/src/assets/images/background/background_3.png";
 import detailBackground from "/src/assets/images/result-report/reportBox.png";
 import detailBackground2 from "/src/assets/images/result-report/reportBox2.png";
 import comment1 from "/src/assets/images/result-report/말풍선1.png";
@@ -12,7 +12,7 @@ import profileImg1 from "/src/assets/images/result-report/미모티콘1.png";
 // import profileImg3 from "/src/assets/images/result-report/미모티콘3.png";
 import sendButton from "/src/assets/images/result-report/전송버튼.png";
 import KakaoButtonImage from "/src/assets/images/login/kakaologin.svg";
-import HomeBgImage from "/src/assets/images/login/home_bg.svg";
+import HomeBgImage from "/src/assets/images/login/background.png";
 import HomeLogoImage from "/src/assets/images/login/logo.svg";
 import HomeExplain from "/src/assets/images/login/moto.svg";
 
@@ -75,7 +75,7 @@ export const ContentWrapper = styled.div`
   flex-grow: 1;
   margin: 0;
   background: url(${(props) =>
-    props.$isbg ? (props.$istsbg ? BG : BG_4) : props.$istsbg ? BG_3 : BG_4});
+    props.$isbg ? (props.$istsbg ? BG : BG_3) : props.$istsbg ? BG_2 : BG_3});
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -1132,10 +1132,24 @@ background-size: cover;
 background-repeat: no-repeat;
 z-index: 10;
 
+box-sizing: border-box;
+padding: 30px;
+
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+`;
+
+export const HomeBox = styled.div`
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background-color: #ffffff;
+border-radius: 27px;
 `;
 
 export const LogoImg = styled.div`
@@ -1159,4 +1173,5 @@ margin-top: 50px;
   height: 88px;
   background-repeat: no-repeat;
 `;
+
 
