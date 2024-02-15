@@ -1,5 +1,3 @@
-import React from 'react';
-import a
 import { HomeContainer, LogoImg, MotoImg, LoginButton, HomeBg, HomeBox } from '/src/styles/style';
 
 const Home = () => {
