@@ -198,41 +198,30 @@ export const Line = styled.hr`
 /* result-report */
 
 export const ResultContainer = styled.div`
-  /* border: 3px solid yellow; */
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 80px;
+  padding: 30px 80px 0 80px;
   text-align: left;
+  overflow: hidden;
 `;
 
 /* result-report > Summary */
 
 export const DetailContainer = styled.div`
-  position: absolute;
+  box-sizing: border-box;
+  position: relative;
   display: flex;
   align-self: flex-end;
-  margin: 0 0 4vh 0;
-
-  @media (max-width: 1500px) {
-    position: relative;
-    margin-top: -120px;
-  }
-
-  @media (max-width: 1500px) and (max-height: 700px) {
-    margin-top: -100px;
-  }
-
-  @media (max-width: 1500px) and (max-height: 600px) {
-    margin-top: 0;
-  }
+  margin: 0 0 30px 0;
 `;
 
 export const Detail = styled.div`
+  box-sizing: border-box;
   min-width: 40vw;
   min-height: 5vh;
   background: url(${detailBackground});
@@ -245,6 +234,7 @@ export const Detail = styled.div`
 `;
 
 export const Detail2 = styled.div`
+  box-sizing: border-box;
   min-width: 40vw;
   min-height: 5vh;
   background: url(${detailBackground2});
@@ -257,6 +247,7 @@ export const Detail2 = styled.div`
 `;
 
 export const ButtonBox = styled.div`
+  box-sizing: border-box;
   width: 87vh;
   height: 2vh;
   display: flex;
@@ -265,6 +256,7 @@ export const ButtonBox = styled.div`
 `;
 
 export const TeamButton = styled.div`
+  box-sizing: border-box;
   width: 10vh;
   margin-right: 4.9vh;
   margin-top: 0.5vh;
@@ -274,6 +266,7 @@ export const TeamButton = styled.div`
 `;
 
 export const FeedbackButton = styled.div`
+  box-sizing: border-box;
   width: 10vh;
   margin-right: 1.8vh;
   margin-top: 0.5vh;
@@ -283,6 +276,7 @@ export const FeedbackButton = styled.div`
 `;
 
 export const InnerBox = styled.div`
+  box-sizing: border-box;
   width: 87vh;
   height: 25vh;
   display: flex;
@@ -291,6 +285,7 @@ export const InnerBox = styled.div`
 `;
 
 export const InnerBox1 = styled.div`
+  box-sizing: border-box;
   width: 44%;
   height: 85%;
   display: flex;
@@ -299,6 +294,7 @@ export const InnerBox1 = styled.div`
 `;
 
 export const InnerBox2 = styled.div`
+  box-sizing: border-box;
   width: 55%;
   height: 85%;
   margin-top: 3vh;
@@ -314,6 +310,7 @@ export const VerticalLine = styled.div`
 `;
 
 export const TB = styled.div`
+  box-sizing: border-box;
   display: flex;
   height: 6vh;
   align-items: center;
@@ -321,6 +318,7 @@ export const TB = styled.div`
 `;
 
 export const TT = styled.p`
+  box-sizing: border-box;
   font-size: 2.5vh;
   font-weight: 600;
   margin: 0 3vh 0 2vh;
@@ -328,6 +326,7 @@ export const TT = styled.p`
 `;
 
 export const T = styled.p`
+  box-sizing: border-box;
   font-size: 2.1vh;
   max-width: 24vh;
   max-height: 5vh;
@@ -339,6 +338,7 @@ export const T = styled.p`
 `;
 
 export const FeedbackTitle = styled.div`
+  box-sizing: border-box;
   width: 100%;
   text-align: center;
   font-size: 3vh;
@@ -347,13 +347,17 @@ export const FeedbackTitle = styled.div`
 `;
 
 export const FeedbackText = styled.div`
-  width: 100%;
+  box-sizing: border-box;
+  width: 90%;
   text-align: center;
   font-size: 3vh;
   font-weight: 600;
   display: flex;
   margin-top: -1vh;
-  justify-content: center;
+  justify-content: end;
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 export const FT = styled.div`
@@ -362,149 +366,60 @@ export const FT = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
+  display: flex;
+  justify-content: center;
+
+  ul {
+    padding-inline-start: 0;
+    height: 100%;
+  }
 
   li {
     font-size: 1.7vh;
     font-weight: 400;
-    margin: 0 2vh 2vh 0;
     white-space: nowrap;
+    padding: 0 20px 15px 0;
   }
 `;
 
 /* result-report > Review */
 
-// export const ContentContainer = styled.div`
-//   position: relative;
-//   display: flex;
-//   flex-direction: column;
-//   margin-top: 0;
-//   width: 100%;
-//   height: 100%;
-//   justify-content: space-between;
-// `;
-
-// export const ReviewContainer = styled.div`
-//   box-sizing: border-box;
-//   width: 100%;
-//   height: 80%;
-//   display: flex;
-//   flex-direction: column;
-//   border-radius: 18px;
-//   text-align: left;
-//   gap: 20px;
-//   background-color: #fff;
-
-//   p {
-//     font-size: 24px;
-//     font-weight: 800;
-//     margin: 0;
-//   }
-// `;
-
-// export const ReviewInnerContainer = styled.div`
-//   width: 72vw;
-//   height: 32vh;
-//   margin: auto;
-//   overflow-y: auto;
-// `;
-
-// export const ReviewBox = styled.div`
-//   width: 72vw;
-//   min-height: 120px;
-//   margin: 0 auto 20px auto;
-//   display: flex;
-//   justify-content: space-between;
-// `;
-
-// export const ProfileBox = styled.div`
-//   width: 20%;
-//   min-height: 6vw;
-//   display: flex;
-//   align-items: flex-end;
-//   margin-left: 10px;
-// `;
-
-// export const ProfileImage = styled.div`
-//   width: 8vh;
-//   height: 8vh;
-//   background: url(${profileImg1});
-//   background-repeat: no-repeat;
-//   background-size: contain;
-//   background-position: center;
-//   margin: 0 0 0.5vh 3vh;
-// `;
-
-// export const ProfileText = styled.div`
-//   width: 15vh;
-//   margin: 0 0 0.5vh 2vh;
-// `;
-
-// export const ProfileName = styled.div`
-//   font-weight: 600;
-//   font-size: 3.3vh;
-//   margin: 0 0 0.5vh 0;
-// `;
-
-// export const ProfileIntroduce = styled.div`
-//   font-weight: 400;
-//   font-size: 1.6vh;
-// `;
-
-// export const CommentBox = styled.div`
-//   width: 70%;
-//   background: url(${comment1});
-//   background-repeat: no-repeat;
-//   background-size: contain;
-//   background-position: right;
-//   display: flex;
-//   justify-content: end;
-//   margin-right: 20px;
-// `;
-
-// export const CommentText = styled.div`
-//   width: 90%;
-//   height: 60%;
-//   margin: auto 1.7vw auto 0;
-//   font-size: 1.11vw;
-//   font-weight: 300;
-//   overflow-y: auto;
-// `;
-
 export const ContentContainer = styled.div`
-  border: 5px solid blue;
   box-sizing: border-box;
   width: 100%;
-  margin-top: 150px;
+  height: 55%;
 `;
 
 export const ReviewContainer = styled.div`
-  border: 1px solid red;
   box-sizing: border-box;
+  height: 85%;
+  margin-bottom: 30px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
 `;
 
 export const ReviewInnerContainer = styled.div`
-  border: 1px solid red;
   box-sizing: border-box;
+  height: 100%;
+  overflow-y: scroll;
 `;
 
 export const ReviewBox = styled.div`
-  border: 1px solid green;
   box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
-  align-items: end;
+  align-items: center;
   margin-bottom: 20px;
-  gap: 20px;
+  gap: 30px;
 `;
 
 export const ProfileBox = styled.div`
-  border: 1px solid yellow;
   box-sizing: border-box;
   display: flex;
 `;
 
 export const ProfileImage = styled.div`
-  border: 1px solid red;
   box-sizing: border-box;
   width: 70px;
   height: 70px;
@@ -515,127 +430,133 @@ export const ProfileImage = styled.div`
 `;
 
 export const ProfileText = styled.div`
-  border: 1px solid blue;
   box-sizing: border-box;
-  padding: 0 10px 0 10px;
+  width: 150px;
+  padding: 0 10px 0 20px;
   display: flex;
   flex-direction: column;
   justify-content: end;
 `;
 
 export const ProfileName = styled.div`
-  border: 1px solid red;
   box-sizing: border-box;
   font-size: 22px;
   font-weight: 600;
   padding: 5px 5px 2px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
 export const ProfileIntroduce = styled.div`
-  border: 1px solid red;
   box-sizing: border-box;
   font-size: 12px;
   font-weight: 400;
   padding-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
 export const CommentBox = styled.div`
-  border: 1px solid blue;
   box-sizing: border-box;
-  width: 80%;
-  height: 100px;
-  background: url(${comment1});
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: left;
-  padding: 20px 30px 20px 50px;
+  /* height: 100px; */
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+  border-radius: 10px;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
   display: flex;
   justify-content: right;
   align-items: center;
+  margin-right: 5px;
 `;
 
 export const CommentText = styled.div`
-  /* border: 1px solid red; */
   box-sizing: border-box;
   width: 100%;
-  height: 60px;
+  height: 30%;
   overflow-y: scroll;
+  line-height: 1.4rem;
 `;
 
 /* result-report > Input */
 
 export const InputBox = styled.div`
+  /* border: 1px solid blue; */
   box-sizing: border-box;
   width: 100%;
   height: 13%;
   display: flex;
-  flex-direction: column;
-  border-radius: 18px;
-  text-align: left;
+  border-radius: 10px;
   background-color: #fff;
-
-  p {
-    font-size: 24px;
-    font-weight: 800;
-    margin: 0;
-  }
-`;
-
-export const InputContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 0 20px;
+  gap: 10px;
 `;
 
 export const InputProfile = styled.div`
-  width: 15%;
-  height: 80%;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
   display: flex;
-  margin-top: 0.5vh;
+  align-items: center;
 `;
 
 export const InputImg = styled.div`
-  width: 4vw;
-  height: 100%;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
   background: url(${profileImg1});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
   display: flex;
-  margin: 0.2vw 0 0 1.8vw;
+  margin-right: 30px;
 `;
 export const InputName = styled.div`
-  border-right: 1px solid black;
-  min-width: 6vw;
-  height: 80%;
-  font-size: 3vh;
+  box-sizing: border-box;
+  font-size: 20px;
   font-weight: 600;
   display: flex;
   align-items: center;
-  margin: 0.5vw 0 0 1vw;
+  white-space: nowrap;
 `;
 export const InputText = styled.input`
-  width: 83%;
+  /* border: 1px solid green; */
+  box-sizing: border-box;
+  width: 100%;
   height: 60%;
-  margin: 0.8vw 0 0 0;
   font-size: 1.2vw;
   &::placeholder {
     color: rgba(1, 1, 1, 0.3);
-    font-size: 2.5vh;
+    font-size: 2vh;
   }
+  margin-left: 10px;
+`;
+
+export const VerticalLine2 = styled.div`
+  /* border: 1px solid blue; */
+  width: 30px;
+  height: 20px;
+  padding: 5px 0;
+  border-right: 1px solid black;
 `;
 
 export const SendButton = styled.div`
-  width: 100%;
-  height: 4vh;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  width: 38px;
+  height: 38px;
   background: url(${sendButton});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
   display: flex;
-  margin: 0.8vw 0 0 0;
+  align-self: center;
 `;
 
 //personal-report

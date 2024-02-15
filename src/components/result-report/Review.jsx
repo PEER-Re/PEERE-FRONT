@@ -14,8 +14,8 @@ import {
 export default function Review() {
   const reviewData = [
     {
-      reviewName: "제갈채은",
-      reviewTeam: "마케팅 팀",
+      reviewName: "긴이름은어쩌지그러게",
+      reviewTeam: "마케팅 팀 hfkdfdkfhdjfhdfhjdhfjhdfjhdjfhjfhdjhfjhd",
       reviewComment:
         "팀원들과의 원활한 협업으로 프로젝트를 성공적으로 이끌어냈습니다.",
     },
@@ -57,7 +57,16 @@ export default function Review() {
                 <ProfileIntroduce>{review.reviewTeam}</ProfileIntroduce>
               </ProfileText>
             </ProfileBox>
-            <CommentBox>
+            <CommentBox
+              style={{
+                backgroundColor:
+                  index % 3 === 0
+                    ? "rgba(255, 202, 202, 0.3)"
+                    : index % 3 === 1
+                    ? "rgba(254, 255, 202, 0.3)"
+                    : "rgba(202, 214, 255, 0.3)",
+              }}
+            >
               <CommentText>{review.reviewComment}</CommentText>
             </CommentBox>
           </ReviewBox>
