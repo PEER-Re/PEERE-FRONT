@@ -5,7 +5,7 @@ import LogOut from "/src/assets/images/sidebar/logout.svg";
 export default function HelperButton({ text }) {
   return (
     <ButtonWrapper>
-    <ButtonImage />
+    <ButtonImage src={LogOut} alt="logout-image" />
     {text}
 </ButtonWrapper>
   )
@@ -18,15 +18,13 @@ export const ButtonWrapper = styled.button`
   color: #868686;
   align-items: center;
   margin-left: 10px;
-
   position: absolue;
   bottom: 0;
 `;
 
-export const ButtonImage = styled.div`
+export const ButtonImage = styled.img`
   width: 23px;
   height: 23px;
-  background: url(${LogOut});
   background-repeat: no-repeat;
   margin-right: 10px;
 `;
