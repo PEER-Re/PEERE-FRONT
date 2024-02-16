@@ -97,26 +97,6 @@ const projects = [
 
 export default function TeamSpace() {
 
-  const { search } = useLocation();
-  const code = new URL(window.location.href).searchParams.get("code");
-
-  console.log('code 확인 : ', code);
-
-  useEffect(() => {
-    console.log('경로 : ', search);
-
-    const confirmLogin = async () => {
-      const params = new URLSearchParams(search);
-      const code = params.get("code");
-      if (code) {
-        console.log('code : ', code);
-        return code;
-      }
-    };
-
-    const code = confirmLogin();
-}, []);
-
   const [teams, setTeams] = useState([...teamsData]);
   const [selectedTeamIndex, setSelectedTeamIndex] = useState([]);
   const navigate = useNavigate();
