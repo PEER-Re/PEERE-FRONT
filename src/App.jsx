@@ -21,12 +21,18 @@ import Feedback from "./pages/feedback/Feedback";
 import FeedbackUsers from "./pages/feedback/FeedbackUsers";
 import Home from "./pages/home/Home";
 
-import { FirstMainWrapper } from "./styles/style";
+import TeamSpaceStore from "/src/stores/teamSpace/TeamSpaceStore";
+import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 
 // route 설정 해주세요
 // 경로 "/"는 추후 각자 설정해주세요.
 function App() {
+
+  const { setSelectedTSName } = TeamSpaceStore((state) => state);
+       // store 값 가져오기
+       const selectedPRName = ProjectIdStore((state) => state.selectedPRName);
+       const selectedTSName = TeamSpaceStore((state) => state.selectedTSName);
 
   const location = useLocation();
 
@@ -73,7 +79,7 @@ function App() {
       </LeftBody>
       <RightBody>
         <HeaderWrapper>
-          <Header />
+          <Header selectedPRName={teamSpaceBg() ? selectedPRName : ''} selectedTSName={selectedTSName}/>
         </HeaderWrapper>
         <ContentWrapper $isbg={isSpecifixBg()} $istsbg={teamSpaceBg()}>
           <Routes>

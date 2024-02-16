@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import Profile from "/src/assets/images/header/user_profile.svg";
 import LogoImage from "/src/assets/images/header/peerre_logo.svg";
+import PropTypes from 'prop-types';
 
-export default function Header() {
+export default function Header({selectedPRName, selectedTSName}) {
+
   return (
     <Body>
         <LeftBody>
@@ -10,7 +12,7 @@ export default function Header() {
             <TitleTextBox>
                 나의 팀
                 <p>
-                    팀 이름 | 프로젝트명
+                    {selectedTSName} | {selectedPRName}
                 </p>
             </TitleTextBox>
         </LeftBody>
@@ -20,6 +22,11 @@ export default function Header() {
     </Body>
   )
 }
+
+Header.propTypes = {
+    selectedPRName: PropTypes.string,
+    selectedTSName: PropTypes.string,
+  };
 
 export const Body = styled.div`
 position: relative;

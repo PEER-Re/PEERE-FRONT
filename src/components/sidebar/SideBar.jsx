@@ -8,6 +8,7 @@ import T_S from "/src/assets/images/sidebar/team_space.svg";
 import S_T_S from "/src/assets/images/sidebar/selected_team_space.svg";
 
 export default function SideBar() {
+
     const navigate = useNavigate();
 
     const [selected, setSelected] = useState(99);
@@ -46,7 +47,6 @@ export default function SideBar() {
         <p>
             김준희
         </p>
-        피어리 마케팅 A팀
     </BarHeaderText>
     </BarHeader>
     <Hr $top="15px"/>
