@@ -14,6 +14,8 @@ import SaturationImage from "/src/assets/images/team-space/Saturation.png";
 import ChevronRightImage from "/src/assets/images/team-space/ChevronRight.png";
 import ChevronRight2Image from "/src/assets/images/team-space/ChevronRight2.png";
 
+import axios from "axios";
+
 const Team_Name = "PEER:Re";
 const Team_Member_Count = "10";
 
@@ -96,6 +98,21 @@ const projects = [
 ];
 
 export default function TeamSpace() {
+
+  useEffect(() => {
+    const getData = () => {
+      axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/oauth2/authorization/kakao`)
+      .then(response => {
+          console.log(response.data);
+      })
+      .catch(error => {
+          console.error(error);
+      });
+  };
+
+  getData();
+
+  }, []);
 
   const [teams, setTeams] = useState([...teamsData]);
   const [selectedTeamIndex, setSelectedTeamIndex] = useState([]);

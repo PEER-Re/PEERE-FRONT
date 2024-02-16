@@ -3,21 +3,12 @@ import axios from 'axios';
 
 const Home = () => {
 
-   /* // kakao login 요청
+    // kakao login 요청
     const handleLogin = () => {
         window.location.href = `${
             import.meta.env.VITE_APP_SERVER_HOST
           }/oauth2/authorization/kakao`;
-    }; */
-    const handleLogin = () => {
-      axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/oauth2/authorization/kakao`)
-      .then(response => {
-          console.log(response.data);
-      })
-      .catch(error => {
-          console.error(error);
-      });
-  };
+    }; 
 
     return (
             <HomeContainer>
