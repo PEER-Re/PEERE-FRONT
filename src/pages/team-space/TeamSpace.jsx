@@ -25,16 +25,18 @@ const Team_Member_Count = "10";
 
 export default function TeamSpace() {
    // localstorage에서 토큰 가져오기
+ 
+   // 임시 토큰 세팅
+   localStorage.setItem('accessToken', `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A`);
    const accessToken = localStorage.getItem('accessToken');
-
   // store 파일의 actions 가져오기 사용자가 선택한 teamspace
   const { setSelectedTSId, setSelectedTSName } = TeamSpaceStore((state) => state);
   const { setSelectedPRId, setSelectedPRName } = ProjectIdStore((state) => state);
   const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
 
-  const [teams, setTeams] = useState(teamspaceResponseDummy); // 팀 스페이스 정보 api 저장용
+  const [teams, setTeams] = useState(teamspaceResponseDummy); // 팀 스페이스 정보 api 저장용 초기 값은 더미 데이터
   console.log('teams : ', teams);
-  const [projects, setProjects] = useState(projectResponseDummy); // project 저장용
+  const [projects, setProjects] = useState(projectResponseDummy); // project 저장용 초기 값은 더미 데이터
   const [selectedTeamIndex, setSelectedTeamIndex] = useState(); // 체크박스 선택
   console.log(selectedTeamIndex);
 
