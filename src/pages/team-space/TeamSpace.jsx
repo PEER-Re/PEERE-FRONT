@@ -631,7 +631,7 @@ const Result_Report_Btn = styled.div`
   cursor: pointer;
 
   p {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     margin: 0;
   }
