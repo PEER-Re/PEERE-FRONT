@@ -96,6 +96,43 @@ const projects = [
 ];
 
 export default function TeamSpace() {
+
+  useEffect(() => {
+    function getAuthorizationCode() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    return urlParams.get('code');
+}
+
+const redirectUri = 'http://example.com/callback';
+const authorizationCode = getAuthorizationCode();
+
+if (authorizationCode) {
+    fetch('http://13.124.90.245:8080/login/oauth2/code/kakao', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code: authorizationCode, redirectUri })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('response not ok');
+        }
+    })
+    .then(data => {
+        console.log('성공 : ', data);
+        // 여기서 필요한 작업을 수행
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
+
+  }, []);
+
   const [teams, setTeams] = useState([...teamsData]);
   const [selectedTeamIndex, setSelectedTeamIndex] = useState([]);
   const navigate = useNavigate();
@@ -124,6 +161,7 @@ export default function TeamSpace() {
   useEffect(() => {
     console.log(selectedTeamIndex);
   }, [selectedTeamIndex]);
+  
 
   return (
     <div>
