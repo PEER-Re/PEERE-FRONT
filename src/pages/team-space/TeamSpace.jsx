@@ -12,7 +12,10 @@ import AddProjectImage from "/src/assets/images/team-space/AddProject.png";
 import TickBoxImage from "/src/assets/images/team-space/TickBox.png";
 import SaturationImage from "/src/assets/images/team-space/Saturation.png";
 import ChevronRightImage from "/src/assets/images/team-space/ChevronRight.png";
+
+// store
 import TeamSpaceStore from "/src/stores/teamSpace/TeamSpaceStore";
+import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 import axios from "axios";
 import { projectResponseDummy, teamspaceResponseDummy } from "/src/data/team-space/dummy";
@@ -25,11 +28,8 @@ export default function TeamSpace() {
 
   // store 파일의 actions 가져오기 사용자가 선택한 teamspace
   const { setSelectedTSId, setSelectedTSName } = TeamSpaceStore((state) => state);
+  const { setSelectedPRId, setSelectedPRName } = ProjectIdStore((state) => state);
   const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
-  const selectedTSName = TeamSpaceStore((state) => state.selectedTSName);
-
-  console.log(selectedTSId);
-
 
   const [teams, setTeams] = useState(teamspaceResponseDummy); // 팀 스페이스 정보 api 저장용
   console.log('teams : ', teams);
@@ -108,6 +108,13 @@ export default function TeamSpace() {
         getProjectsInfo(selectedTSId);
       }
   }
+
+   // 결과 보기로 이동한다. 이동하면서 선택 프로젝트 상태를 변경한다.
+   const navigateResult = async (index) => {
+    navigate("/result-report");
+    setSelectedPRId(index); // 선택한 프로젝트 id를 저장한다.
+    setSelectedPRName(projects[index].title); // 선택한 프로젝트 이름을 저장한다.
+}
 
   return (
     <div>
@@ -211,7 +218,7 @@ export default function TeamSpace() {
                 <p className="projectName">{project.title}</p>
                 <p className="period">{project.startDay}</p>
               </Project_Info_Container>
-              <Result_Report_Btn onClick={() => navigate("/result-report")}>
+              <Result_Report_Btn onClick={() => navigateResult(index)}>
                 <p>결과보기</p>
                 <ChevronRightImg />
               </Result_Report_Btn>
