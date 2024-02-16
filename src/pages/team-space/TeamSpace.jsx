@@ -99,21 +99,6 @@ const projects = [
 
 export default function TeamSpace() {
 
-  useEffect(() => {
-    const getData = () => {
-      axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/oauth2/authorization/kakao`)
-      .then(response => {
-          console.log(response.data);
-      })
-      .catch(error => {
-          console.error(error);
-      });
-  };
-
-  getData();
-
-  }, []);
-
   const [teams, setTeams] = useState([...teamsData]);
   const [selectedTeamIndex, setSelectedTeamIndex] = useState([]);
   const navigate = useNavigate();
