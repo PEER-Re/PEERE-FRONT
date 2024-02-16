@@ -19,7 +19,6 @@ import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 import axios from "axios";
 import { projectResponseDummy, teamspaceResponseDummy } from "/src/data/team-space/dummy";
-import { set } from "lodash";
 
 const Team_Name = "PEER:Re";
 const Team_Member_Count = "10";
