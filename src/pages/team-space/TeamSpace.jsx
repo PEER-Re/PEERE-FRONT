@@ -102,34 +102,31 @@ export default function TeamSpace() {
     function getAuthorizationCode() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+    console.log('urlParams: ', urlParams);
     return urlParams.get('code');
 }
 
 const redirectUri = 'https://peerre-front.vercel.app/team-space';
-const authorizationCode = getAuthorizationCode();
+const authorizationCode = getAuthorizationCode(); // urlParams
 
 if (authorizationCode) {
-    fetch('http://13.124.90.245:8080/login/oauth2/code/kakao', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ code: authorizationCode, redirectUri })
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('response not ok');
-        }
-    })
-    .then(data => {
-        console.log('성공 : ', data);
-        // 여기서 필요한 작업을 수행
-    })
-    .catch(error => {
-        console.error(error);
-    });
+  const url = `http://13.124.90.245:8080/login/oauth2/code/kakao?code=${authorizationCode}&redirectUri=${redirectUri}`;
+
+  fetch(url)
+  .then(response => {
+      if (response.ok) {
+          return response.json();
+      } else {
+          throw new Error('response not ok');
+      }
+  })
+  .then(data => {
+      console.log('성공 : ', data);
+      // 여기서 필요한 작업을 수행
+  })
+  .catch(error => {
+      console.error(error);
+  });
 }
 
   }, []);
