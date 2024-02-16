@@ -5,7 +5,8 @@ const TeamSpaceStore = create(
   persist(
     (set) => ({
       teamspaceIds: [],
-      selectedTId: 0,
+      selectedTSId: 0,
+      selectedTSName: '',
 
       // api를 통한 프로젝트 id 세팅
       addTeamSpaceId: (newteamspaceId) =>
@@ -14,7 +15,8 @@ const TeamSpaceStore = create(
         })),
 
         // 선택한 프로젝트 id 세팅
-      setSelectedTId: (id) => set({ selectedTId: id }),
+      setSelectedTSId: (id) => set({ selectedTSId: id }),
+      setSelectedTSName: (name) => set({ selectedTSName: name }),
 
       // 특정 인덱스의 프로젝트 ID를 제거하는 액션
       // removeProjectId: (index) =>

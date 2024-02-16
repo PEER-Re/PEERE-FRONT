@@ -12,141 +12,102 @@ import AddProjectImage from "/src/assets/images/team-space/AddProject.png";
 import TickBoxImage from "/src/assets/images/team-space/TickBox.png";
 import SaturationImage from "/src/assets/images/team-space/Saturation.png";
 import ChevronRightImage from "/src/assets/images/team-space/ChevronRight.png";
-import ChevronRight2Image from "/src/assets/images/team-space/ChevronRight2.png";
+import TeamSpaceStore from "/src/stores/teamSpace/TeamSpaceStore";
 
 import axios from "axios";
+import { projectResponseDummy, teamspaceResponseDummy } from "/src/data/team-space/dummy";
+import { set } from "lodash";
 
 const Team_Name = "PEER:Re";
 const Team_Member_Count = "10";
 
-const teamsData = [
-  {
-    Team_Name: "팀 A",
-    Team_Member_Count: 8,
-    Team_Intro: "이 팀은 A팀입니다.",
-    Team_Position: "팀장",
-    Team_Selected: "no",
-  },
-  {
-    Team_Name: "팀 B",
-    Team_Member_Count: 6,
-    Team_Intro: "이 팀은 B팀입니다.",
-    Team_Position: "팀원",
-    Team_Selected: "no",
-  },
-  {
-    Team_Name: "팀 C",
-    Team_Member_Count: 7,
-    Team_Intro: "이 팀은 C팀입니다.",
-    Team_Position: "팀원",
-    Team_Selected: "no",
-  },
-  {
-    Team_Name: "팀 D",
-    Team_Member_Count: 5,
-    Team_Intro: "이 팀은 D팀입니다.",
-    Team_Position: "팀장",
-    Team_Selected: "no",
-  },
-  {
-    Team_Name: "팀 E",
-    Team_Member_Count: 9,
-    Team_Intro: "이 팀은 E팀입니다.",
-    Team_Position: "팀원",
-    Team_Selected: "no",
-  },
-  {
-    Team_Name: "팀 F",
-    Team_Member_Count: 4,
-    Team_Intro: "이 팀은 F팀입니다.",
-    Team_Position: "팀장",
-    Team_Selected: "no",
-  },
-];
-
-const projects = [
-  {
-    name: "1분기 프로젝트 A",
-    period: "2023.12.28 ~ 2024.01.10",
-    projectState: "종료됨",
-  },
-  {
-    name: "2분기 프로젝트 B",
-    period: "2024.04.01 ~ 2024.06.30",
-    projectState: "진행중",
-  },
-  {
-    name: "3분기 프로젝트 C",
-    period: "2024.07.01 ~ 2024.09.30",
-    projectState: "진행중",
-  },
-  {
-    name: "4분기 프로젝트 D",
-    period: "2024.10.01 ~ 2024.12.31",
-    projectState: "종료됨",
-  },
-  {
-    name: "5분기 프로젝트 E",
-    period: "2025.01.01 ~ 2025.03.31",
-    projectState: "진행중",
-  },
-  {
-    name: "6분기 프로젝트 F",
-    period: "2025.04.01 ~ 2025.06.30",
-    projectState: "종료됨",
-  },
-];
-
 export default function TeamSpace() {
 
-  const [teams, setTeams] = useState([...teamsData]);
-  const [selectedTeamIndex, setSelectedTeamIndex] = useState([]);
+  // store 파일의 actions 가져오기 사용자가 선택한 teamspace
+  const { setSelectedTSId, setSelectedTSName } = TeamSpaceStore((state) => state);
+  const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
+  const selectedTSName = TeamSpaceStore((state) => state.selectedTSName);
+
+  console.log(selectedTSId);
+
+
+  const [teams, setTeams] = useState(teamspaceResponseDummy); // 팀 스페이스 정보 api 저장용
+  console.log('teams : ', teams);
+  const [projects, setProjects] = useState(projectResponseDummy); // project 저장용
+  const [selectedTeamIndex, setSelectedTeamIndex] = useState(); // 체크박스 선택
+  console.log(selectedTeamIndex);
+
+  const [status, setStatus] = useState(false); // api 상태관리용
+
+  // 예비 token
   const [accessToken, setAccessToken] = useState('Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A');
   const navigate = useNavigate();
 
-  const handleWasteBtnClick = () => {
-    const updatedTeams = teams.filter(
-      (team, index) => !selectedTeamIndex.includes(index)
-    );
-    setSelectedTeamIndex([]);
-    setTeams(updatedTeams);
-  };
+  // 유저 정보 렌더링 함수
+  const getUserInfo = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/teamspaces`, {
+        headers: {
+          'Authorization': accessToken,
+        }
+      });
+      console.log('팀 스페이스 조회 성공');
+      setTeams(response.data.data.teamspaceResponseDtoList);
+    } catch(error) {
+      console.log(error);
+    }
+}
 
-  const handleCheckBtnClick = (index) => {
-    const isSelected = selectedTeamIndex.includes(index);
-
-    setSelectedTeamIndex((prevIndex) =>
-      isSelected
-        ? prevIndex.filter((idx) => idx !== index)
-        : [...prevIndex, index]
-    );
-    const updatedTeams = [...teams];
-    updatedTeams[index].Team_Selected = isSelected ? "no" : "yes";
-    setTeams(updatedTeams);
-  };
-
-  useEffect(() => {
-    console.log(selectedTeamIndex);
-  }, [selectedTeamIndex]);
-  
-  // 팀 스페이스 조회
-  useEffect(() => {
-    const getUserInfo = async () => {
+// 팀 스페이스에 따른 프로젝트 리스트 호출 함수
+    const getProjectsInfo= async (index) => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/teamspaces`, {
+        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}/projects`, {
           headers: {
             'Authorization': accessToken,
           }
         });
-        console.log(response.data.data.teamspaceResponseDtoList[0].role);
-        setTeams(response.data.data.teamspaceResponseDtoList);
+        setProjects(response.data.data.projectResponseDtoList);
+        console.log('프로젝트 조회 성공');
       } catch(error) {
         console.log(error);
       }
   }
+
+  // 팀 스페이스 클릭 후 해당 프로젝트 출력 함수
+  const changeTeamSpace = (index) => {
+    setSelectedTSId(index);
+    setSelectedTSName(teams[index].name); // 선택한 팀 이름 저장
+    getProjectsInfo(index); // 원래 id에 1 더해서 호출
+  }
   
-    getUserInfo();
+  // 시작 시 useEffect
+  useEffect(() => {
+    getUserInfo(); // 유저 정보 렌더링
+    getProjectsInfo(selectedTSId); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
     }, []);
+
+    // 팀 스페이스 삭제 전 선택 함수, 선택한 index가 배열에 포함되어 있다면 이미지를 변경한다.
+    const selectCheckBox = (index) => {
+      setSelectedTeamIndex(index); // index로 세팅, 
+    };
+
+    // 팀 스페이스 삭제 함수, 한 개씩만 삭제한다.
+    const deleteTeamSpace = async (index) => {
+      try {
+        const response = await axios.delete(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}`, {
+          headers: {
+            'Authorization': accessToken,
+          }
+        });
+        console.log('팀 스페이스 삭제 성공', response.data);
+        setStatus(!status);
+      } catch(error) {
+        console.log(error);
+      } finally {
+        getUserInfo();
+        getProjectsInfo(selectedTSId);
+      }
+  }
 
   return (
     <div>
@@ -158,7 +119,7 @@ export default function TeamSpace() {
         <Team_List_Container>
           <MyTeam_Title>
             나의 팀
-            <WasteImg onClick={() => handleWasteBtnClick()} />
+            <WasteImg onClick={() => deleteTeamSpace(selectedTeamIndex)} />
           </MyTeam_Title>
           <ScrollBox>
             {teams.map((team, index) => (
@@ -166,11 +127,11 @@ export default function TeamSpace() {
                 {team.role === 'Leader' ? (
                   <Check_Box
                     $imageurl={
-                      team.Team_Selected === "yes"
+                      selectedTeamIndex === index
                         ? CheckedButton
                         : NoncheckedButton
                     }
-                    onClick={() => handleCheckBtnClick(index)}
+                    onClick={() => selectCheckBox(index)}
                   />
                 ) : (
                   <div
@@ -182,7 +143,7 @@ export default function TeamSpace() {
                   ></div>
                 )}
 
-                <Team_Bar>
+                <Team_Bar onClick={() => changeTeamSpace(index)}>
                   <Role_Box
                     style={{
                       backgroundColor:
@@ -226,14 +187,13 @@ export default function TeamSpace() {
             <p>새 프로젝트 생성</p>
           </Add_New_Project_Btn>
         </Project_Title_Container>
-
         <Project_List_Container>
           {projects.map((project, index) => (
             <Project_Box key={index}>
               <Project_State>
                 <TickBoxImg
                   $imageurl={
-                    project.projectState === "종료됨"
+                    project.status === "종료"
                       ? TickBoxImage
                       : SaturationImage
                   }
@@ -241,15 +201,15 @@ export default function TeamSpace() {
                 <State_Box
                   style={{
                     backgroundColor:
-                      project.projectState === "종료됨" ? "#FF9A6C" : "#1AD079",
+                      project.status === "종료" ? "#FF9A6C" : "#1AD079",
                   }}
                 >
-                  {project.projectState}
+                  {project.status}
                 </State_Box>
               </Project_State>
               <Project_Info_Container>
-                <p className="projectName">{project.name}</p>
-                <p className="period">{project.period}</p>
+                <p className="projectName">{project.title}</p>
+                <p className="period">{project.startDay}</p>
               </Project_Info_Container>
               <Result_Report_Btn onClick={() => navigate("/result-report")}>
                 <p>결과보기</p>
