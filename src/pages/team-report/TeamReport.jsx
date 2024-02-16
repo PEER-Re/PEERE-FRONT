@@ -12,26 +12,25 @@ import axios from "axios";
 import CustomizedProgressBars from "/src/components/team-report/gauge/BorderLinearProgress";
 import PersonalBar from "/src/components/team-report/rank_table/PersonalBar";
 import { useState, useEffect } from "react";
-import getTeamInfo from "/src/api/team-report/getTeamInfo";
 import { dummy } from "/src/data/team-report/dummy";
-import { set } from "lodash";
+// store
+import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 export default function TeamReport() {
 
    // localstorage에서 토큰 가져오기
    const accessToken = localStorage.getItem('accessToken');
 
-  // 임시 더미 데이터
-  const [data, setData] = useState(dummy.data);
-  console.log(data);
+   // 선택한 팀 스페이스 아이디 가져오기
+  const selectedPRId = ProjectIdStore((state) => state.selectedPRId);
 
-  // 프로젝트 id
-  const [projectId, setProjectId] = useState(8);
+  const [data, setData] = useState(dummy.data); // 더미데이터로 초기 세팅
+  console.log(data);
   
 useEffect(() => {
   const getTeamInfo = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/projects/${projectId}/team-report`, {
+      const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/projects/${selectedPRId}/team-report`, {
         headers: {
           'Authorization': accessToken,
         }
