@@ -104,7 +104,7 @@ export default function TeamSpace() {
     return urlParams.get('code');
 }
 
-const redirectUri = 'http://example.com/callback';
+const redirectUri = 'https://peerre-front.vercel.app/team-space';
 const authorizationCode = getAuthorizationCode();
 
 if (authorizationCode) {
