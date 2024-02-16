@@ -36,7 +36,8 @@ export default function SideBar() {
     const logout = () => {
       // accesstoken 삭제
       localStorage.removeItem("accessToken");
-      alert("로그아웃");
+      alert("로그아웃 되었습니다.");
+      navigate('/');
     }
 
   return (
