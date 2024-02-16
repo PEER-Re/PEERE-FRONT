@@ -98,6 +98,7 @@ const projects = [
 export default function TeamSpace() {
 
   useEffect(() => {
+    console.log('코드 시작');
     function getAuthorizationCode() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
