@@ -24,6 +24,7 @@ import {
   teamspaceResponseDummy,
 } from "/src/data/team-space/dummy";
 
+
 const Team_Name = "PEER:Re";
 const Team_Member_Count = "10";
 
@@ -94,6 +95,7 @@ export default function TeamSpace() {
       console.log(error);
     }
   };
+
 
   // 팀 스페이스 클릭 후 해당 프로젝트 출력 함수
   const changeTeamSpace = (index) => {
@@ -266,6 +268,7 @@ export default function TeamSpace() {
                 <p className="period">
                   {project.startDay} ~ {project.endDay}
                 </p>
+
                 {project.status === "종료" && index === latestPJIdx ? (
                   <p className="projectStatusDecision">평가철회</p>
                 ) : (
@@ -448,7 +451,7 @@ const Team_Info_Container = styled.div`
   height: 40px;
   font-size: 16px;
   font-weight: 600;
-  gap: 40px;
+  gap: 20px;
   display: flex;
   align-items: center;
   padding: 0 40px;
