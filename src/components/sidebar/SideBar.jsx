@@ -7,7 +7,7 @@ import T_L from "/src/assets/images/sidebar/team_logo.svg";
 import T_S from "/src/assets/images/sidebar/team_space.svg";
 import S_T_S from "/src/assets/images/sidebar/selected_team_space.svg";
 
-export default function SideBar() {
+export default function SideBar(location) {
 
     const navigate = useNavigate();
 
@@ -58,15 +58,15 @@ export default function SideBar() {
         </ButtonHoverStyle>
         <Hr $top="10px"/>
         <div onClick={getNavigate(0)}>
-        <SideBarButtonStyle text="팀 리포트" index={0} selected={selected}/>
+        <SideBarButtonStyle text="팀 리포트" index={0} selected={selected} location={location}/>
         <Hr $top="10px"/>
         </div>
         <div onClick={getNavigate(1)}>
-        <SideBarButtonStyle text="개인 리포트" index={1} selected={selected}/>
+        <SideBarButtonStyle text="개인 리포트" index={1} selected={selected} location={location}/>
         <Hr $top="10px"/>
         </div>
         <div onClick={getNavigate(2)}>
-        <SideBarButtonStyle text="피드백 관리" index={2} selected={selected}/>
+        <SideBarButtonStyle text="피드백 관리" index={2} selected={selected} location={location}/>
         <Hr $top="10px"/>
         </div>
     </ButtonListBox>

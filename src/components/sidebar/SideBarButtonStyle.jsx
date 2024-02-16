@@ -9,7 +9,7 @@ import S_Feed from "/src/assets/images/sidebar/selected_feedback.svg";
 import Selected from "/src/assets/images/sidebar/arrow.svg";
 import NotSelected from "/src/assets/images/sidebar/prev_arrow.svg";
 
-export default function SideBarButtonStyle({text, index, selected}) {
+export default function SideBarButtonStyle({text, index, selected, location}) {
 
   return (
     <ButtonWrapper $index={index} $selected={selected}>

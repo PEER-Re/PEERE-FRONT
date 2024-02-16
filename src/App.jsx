@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import TestPage from "/src/pages/test/TestPage.jsx";
 import {
   ContentWrapper,
@@ -28,6 +28,7 @@ import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 // route 설정 해주세요
 // 경로 "/"는 추후 각자 설정해주세요.
 function App() {
+  const navigate = useNavigate();
 
   const { setSelectedTSName } = TeamSpaceStore((state) => state);
        // store 값 가져오기
@@ -35,12 +36,35 @@ function App() {
        const selectedTSName = TeamSpaceStore((state) => state.selectedTSName);
 
   const location = useLocation();
+  console.log(location);
 
   useEffect(() => {
     // 경로 변경 시 배경 이미지 변경
     showLogin();
     isSpecifixBg();
     teamSpaceBg();
+
+    const accessToken = localStorage.getItem('accessToken'); // 토큰 가져오기
+/*
+    // 로그인 확인 처리
+    if(location.pathname !== "/") { // 첫 페이지가 아니라면
+      if (accessToken && accessToken !== "undefined" && accessToken !== undefined) {
+        // 토큰이 있다면 아무 일 없다.
+      } else {
+        // 없다면 첫 페이지로 이동 
+        alert("로그인이 필요합니다.");
+        navigate("/"); 
+      }
+    } else {
+      // 첫 페이지라면
+      if (accessToken && accessToken !== "undefined" && accessToken !== undefined) {
+        navigate("/team-space")// 토큰이 있다면 팀 스페이스로 이동
+      } else {
+        // 없다면 아무 일 없다.
+      }
+    }
+    */
+
   }, [location]); 
 
   // 로그인 페이지 사이드바 숨김 함수
@@ -75,7 +99,7 @@ function App() {
   return (
     <MainWrapper>
       <LeftBody>
-        <SideBar />
+        <SideBar location={location} />
       </LeftBody>
       <RightBody>
         <HeaderWrapper>
