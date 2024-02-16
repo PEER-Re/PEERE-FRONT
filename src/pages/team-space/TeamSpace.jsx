@@ -101,6 +101,7 @@ export default function TeamSpace() {
 
   const [teams, setTeams] = useState([...teamsData]);
   const [selectedTeamIndex, setSelectedTeamIndex] = useState([]);
+  const [accessToken, setAccessToken] = useState('Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A');
   const navigate = useNavigate();
 
   const handleWasteBtnClick = () => {
@@ -128,6 +129,24 @@ export default function TeamSpace() {
     console.log(selectedTeamIndex);
   }, [selectedTeamIndex]);
   
+  // 팀 스페이스 조회
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/teamspaces`, {
+          headers: {
+            'Authorization': accessToken,
+          }
+        });
+        console.log(response.data.data.teamspaceResponseDtoList[0].role);
+        setTeams(response.data.data.teamspaceResponseDtoList);
+      } catch(error) {
+        console.log(error);
+      }
+  }
+  
+    getUserInfo();
+    }, []);
 
   return (
     <div>
@@ -144,7 +163,7 @@ export default function TeamSpace() {
           <ScrollBox>
             {teams.map((team, index) => (
               <Team_Select key={index}>
-                {team.Team_Position === "팀장" ? (
+                {team.role === 'Leader' ? (
                   <Check_Box
                     $imageurl={
                       team.Team_Selected === "yes"
@@ -167,15 +186,15 @@ export default function TeamSpace() {
                   <Role_Box
                     style={{
                       backgroundColor:
-                        team.Team_Position === "팀장" ? "#1ad079" : "#07133B",
+                        team.role === 'Leader' ? "#1ad079" : "#07133B",
                     }}
                   >
-                    {team.Team_Position}
+                    {team.role === 'Leader' ? '팀장' : '팀원'}
                   </Role_Box>
                   <Team_Info_Container>
-                    <p>{team.Team_Name}</p>
-                    <p>{team.Team_Member_Count}명</p>
-                    <p>'{team.Team_Intro}'</p>
+                    <p>{team.name}</p>
+                    <p>{team.size}명</p>
+                    <p>'{team.profile}'</p>
                   </Team_Info_Container>
                   <EnterImg />
                 </Team_Bar>
