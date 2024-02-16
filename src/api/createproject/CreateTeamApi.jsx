@@ -21,7 +21,10 @@ const CreateTeamApi = async (teamName, teamIntro) => {
       postData,
       config
     );
-    // const teamspaceId = response.data.data.teamspaceId;
+
+    alert(
+      "생성하신 팀의 초대 코드는" + response.data.data.invitationCode + "입니다"
+    );
     return response.data.data.teamspaceId;
     // navigate(`/create-project`, { state: { apidata: teamspaceId } });
   } catch (error) {
