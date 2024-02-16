@@ -24,6 +24,8 @@ const Team_Name = "PEER:Re";
 const Team_Member_Count = "10";
 
 export default function TeamSpace() {
+   // localstorage에서 토큰 가져오기
+   const accessToken = localStorage.getItem('accessToken');
 
   // store 파일의 actions 가져오기 사용자가 선택한 teamspace
   const { setSelectedTSId, setSelectedTSName } = TeamSpaceStore((state) => state);
@@ -38,8 +40,6 @@ export default function TeamSpace() {
 
   const [status, setStatus] = useState(false); // api 상태관리용
 
-  // 예비 token
-  const [accessToken, setAccessToken] = useState('Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A');
   const navigate = useNavigate();
 
   // 유저 정보 렌더링 함수
