@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {} from "../../styles/style";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Container, Title } from "/src/styles/style";
 import PeopleImage from "/src/assets/images/team-space/People.png";
 import WasteImage from "/src/assets/images/team-space/Waste.png";
@@ -97,39 +97,24 @@ const projects = [
 
 export default function TeamSpace() {
 
+  const { search } = useLocation();
+
   useEffect(() => {
-    console.log('코드 시작');
-    function getAuthorizationCode() {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    console.log('urlParams: ', urlParams);
-    return urlParams.get('code');
-}
+    console.log('경로 : ', search);
 
-const redirectUri = 'https://peerre-front.vercel.app/team-space';
-const authorizationCode = getAuthorizationCode(); // urlParams
-
-if (authorizationCode) {
-  const url = `http://13.124.90.245:8080/login/oauth2/code/kakao?code=${authorizationCode}&redirectUri=${redirectUri}`;
-
-  fetch(url)
-  .then(response => {
-      if (response.ok) {
-          return response.json();
-      } else {
-          throw new Error('response not ok');
+    const confirmLogin = async () => {
+      const params = new URLSearchParams(search);
+      const code = params.get("code");
+      if (code) {
+        console.log('code : ', code);
+        return code;
       }
-  })
-  .then(data => {
-      console.log('성공 : ', data);
-      // 여기서 필요한 작업을 수행
-  })
-  .catch(error => {
-      console.error(error);
-  });
-}
+    };
 
-  }, []);
+    const code = confirmLogin();
+}, []);
+
+
 
   const [teams, setTeams] = useState([...teamsData]);
   const [selectedTeamIndex, setSelectedTeamIndex] = useState([]);
