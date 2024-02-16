@@ -148,11 +148,21 @@ export const Rank_Box = styled.div`
   background-color: rgba(238, 238, 238, 0.36);
   width: 100%;
   height: 70%;
+  max-height: 560px;
   border-radius: 18px;
   overflow: hidden;
 
   display: flex;
   flex-direction: column;
+
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리 등 웹킷 기반 브라우저에서 스크롤바 숨김 */
+  }
+
+  -ms-overflow-style: none; /* IE, 엣지 브라우저에서 스크롤바 숨김 */
+  scrollbar-width: none; /* 파이어폭스에서 스크롤바 숨김 */
 `;
 
 /* rank_box bg가 투명도가 있어 배경색에 묻히는 문제 해결용 컴포넌트 */
@@ -171,6 +181,7 @@ export const TitleBar = styled.div`
   background-color: #fff;
   width: 100%;
   height: 50px;
+  min-height: 50px;
   border-bottom: 1px solid rgba(7, 19, 59, 0.6); /* #07133B의 60% */
   align-items: center;
   text-align: left;

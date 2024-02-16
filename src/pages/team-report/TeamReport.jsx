@@ -8,11 +8,13 @@ import {
   Rank_Box_Color,
   Line,
 } from "/src/styles/style";
+import axios from "axios";
 import CustomizedProgressBars from "/src/components/team-report/gauge/BorderLinearProgress";
 import PersonalBar from "/src/components/team-report/rank_table/PersonalBar";
 import { useState, useEffect } from "react";
 import getTeamInfo from "/src/api/team-report/getTeamInfo";
 import { dummy } from "/src/data/team-report/dummy";
+import { set } from "lodash";
 
 export default function TeamReport() {
 
@@ -21,23 +23,27 @@ export default function TeamReport() {
   console.log(data);
 
   // 프로젝트 id
-  const [projectid, setProjectId] = useState(10);
-  const accessToken = localStorage.getItem("accessToken");
+  const [projectId, setProjectId] = useState(8);
+  const accessToken = 'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A'
   
-/*  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await getTeamInfo(accessToken, projectid);
-        console.log(response);
-        setData(response);
-      } catch(error) {
-        console.log(error);
-      }
-  }
+useEffect(() => {
+  const getTeamInfo = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/projects/${projectId}/team-report`, {
+        headers: {
+          'Authorization': `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A`,
+        }
+      });
+      console.log(response.data.data);
+      setData(response.data.data);
+    } catch(error) {
+      console.log(error);
+    }
+}
 
-  getData();
+  getTeamInfo();
   }, []);
-  */
+  
 
   const [selected, setSelected] = useState(99);
 
@@ -49,7 +55,7 @@ export default function TeamReport() {
   return (
     <Container>
       <Title>팀 리포트</Title>
-      <Team_Box>
+     <Team_Box>
         <p>팀 이름: {data.teamInfo.teamName} </p>
         <p>팀원: {data.teamInfo.teamUserNames.map((member) => member).join(", ")}</p>
         <Gaze_Box>
@@ -81,7 +87,7 @@ export default function TeamReport() {
               feedbacks={member.goodFeedbackContent}
             />
         ))}
-      </Rank_Box>
+          </Rank_Box> 
     </Container>
   );
 }
