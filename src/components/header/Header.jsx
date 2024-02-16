@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <Body>
         <LeftBody>
-            <UserImage />
+            <UserImage src={Profile} alt= "profile" />
             <TitleTextBox>
                 나의 팀
                 <p>
@@ -41,10 +41,9 @@ display: flex;
 align-items: center;
 `;
 
-export const UserImage = styled.div`
+export const UserImage = styled.img`
 width: 40px;
 height: 40px;
-background: url(${Profile});
 background-repeat: no-repeat;
 `;
 

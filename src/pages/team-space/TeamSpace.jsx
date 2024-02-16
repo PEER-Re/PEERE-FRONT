@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {} from "../../styles/style";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Container, Title } from "/src/styles/style";
 import PeopleImage from "/src/assets/images/team-space/People.png";
 import WasteImage from "/src/assets/images/team-space/Waste.png";
@@ -13,6 +13,8 @@ import TickBoxImage from "/src/assets/images/team-space/TickBox.png";
 import SaturationImage from "/src/assets/images/team-space/Saturation.png";
 import ChevronRightImage from "/src/assets/images/team-space/ChevronRight.png";
 import ChevronRight2Image from "/src/assets/images/team-space/ChevronRight2.png";
+
+import axios from "axios";
 
 const Team_Name = "PEER:Re";
 const Team_Member_Count = "10";
@@ -96,6 +98,7 @@ const projects = [
 ];
 
 export default function TeamSpace() {
+
   const [teams, setTeams] = useState([...teamsData]);
   const [selectedTeamIndex, setSelectedTeamIndex] = useState([]);
   const navigate = useNavigate();
@@ -124,6 +127,7 @@ export default function TeamSpace() {
   useEffect(() => {
     console.log(selectedTeamIndex);
   }, [selectedTeamIndex]);
+  
 
   return (
     <div>

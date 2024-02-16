@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import BG from "/src/assets/images/background/background.svg";
-import BG_3 from "/src/assets/images/background/background_3.svg";
-import BG_4 from "/src/assets/images/background/background_4.svg";
+import BG from "/src/assets/images/background/background.png";
+import BG_2 from "/src/assets/images/background/background_2.png";
+import BG_3 from "/src/assets/images/background/background_3.png";
 import detailBackground from "/src/assets/images/result-report/reportBox.png";
 import detailBackground2 from "/src/assets/images/result-report/reportBox2.png";
 import comment1 from "/src/assets/images/result-report/말풍선1.png";
@@ -11,6 +11,10 @@ import profileImg1 from "/src/assets/images/result-report/미모티콘1.png";
 // import profileImg2 from "/src/assets/images/result-report/미모티콘2.png";
 // import profileImg3 from "/src/assets/images/result-report/미모티콘3.png";
 import sendButton from "/src/assets/images/result-report/전송버튼.png";
+import KakaoButtonImage from "/src/assets/images/login/kakaologin.svg";
+import HomeBgImage from "/src/assets/images/login/background.png";
+import HomeLogoImage from "/src/assets/images/login/logo.svg";
+import HomeExplain from "/src/assets/images/login/moto.svg";
 
 // 페이지별로 용도 나눠주세요
 /**  샘플 페이지 스타일 **/
@@ -71,7 +75,7 @@ export const ContentWrapper = styled.div`
   flex-grow: 1;
   margin: 0;
   background: url(${(props) =>
-    props.$isbg ? (props.$istsbg ? BG : BG_4) : props.$istsbg ? BG_3 : BG_4});
+    props.$isbg ? (props.$istsbg ? BG : BG_3) : props.$istsbg ? BG_2 : BG_3});
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -195,41 +199,30 @@ export const Line = styled.hr`
 /* result-report */
 
 export const ResultContainer = styled.div`
-  /* border: 3px solid yellow; */
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 80px;
+  padding: 30px 80px 0 80px;
   text-align: left;
+  overflow: hidden;
 `;
 
 /* result-report > Summary */
 
 export const DetailContainer = styled.div`
-  position: absolute;
+  box-sizing: border-box;
+  position: relative;
   display: flex;
   align-self: flex-end;
-  margin: 0 0 4vh 0;
-
-  @media (max-width: 1500px) {
-    position: relative;
-    margin-top: -120px;
-  }
-
-  @media (max-width: 1500px) and (max-height: 700px) {
-    margin-top: -100px;
-  }
-
-  @media (max-width: 1500px) and (max-height: 600px) {
-    margin-top: 0;
-  }
+  margin: 0 0 30px 0;
 `;
 
 export const Detail = styled.div`
+  box-sizing: border-box;
   min-width: 40vw;
   min-height: 5vh;
   background: url(${detailBackground});
@@ -242,6 +235,7 @@ export const Detail = styled.div`
 `;
 
 export const Detail2 = styled.div`
+  box-sizing: border-box;
   min-width: 40vw;
   min-height: 5vh;
   background: url(${detailBackground2});
@@ -254,6 +248,7 @@ export const Detail2 = styled.div`
 `;
 
 export const ButtonBox = styled.div`
+  box-sizing: border-box;
   width: 87vh;
   height: 2vh;
   display: flex;
@@ -262,6 +257,7 @@ export const ButtonBox = styled.div`
 `;
 
 export const TeamButton = styled.div`
+  box-sizing: border-box;
   width: 10vh;
   margin-right: 4.9vh;
   margin-top: 0.5vh;
@@ -271,6 +267,7 @@ export const TeamButton = styled.div`
 `;
 
 export const FeedbackButton = styled.div`
+  box-sizing: border-box;
   width: 10vh;
   margin-right: 1.8vh;
   margin-top: 0.5vh;
@@ -280,6 +277,7 @@ export const FeedbackButton = styled.div`
 `;
 
 export const InnerBox = styled.div`
+  box-sizing: border-box;
   width: 87vh;
   height: 25vh;
   display: flex;
@@ -288,6 +286,7 @@ export const InnerBox = styled.div`
 `;
 
 export const InnerBox1 = styled.div`
+  box-sizing: border-box;
   width: 44%;
   height: 85%;
   display: flex;
@@ -296,6 +295,7 @@ export const InnerBox1 = styled.div`
 `;
 
 export const InnerBox2 = styled.div`
+  box-sizing: border-box;
   width: 55%;
   height: 85%;
   margin-top: 3vh;
@@ -311,6 +311,7 @@ export const VerticalLine = styled.div`
 `;
 
 export const TB = styled.div`
+  box-sizing: border-box;
   display: flex;
   height: 6vh;
   align-items: center;
@@ -318,6 +319,7 @@ export const TB = styled.div`
 `;
 
 export const TT = styled.p`
+  box-sizing: border-box;
   font-size: 2.5vh;
   font-weight: 600;
   margin: 0 3vh 0 2vh;
@@ -325,6 +327,7 @@ export const TT = styled.p`
 `;
 
 export const T = styled.p`
+  box-sizing: border-box;
   font-size: 2.1vh;
   max-width: 24vh;
   max-height: 5vh;
@@ -336,6 +339,7 @@ export const T = styled.p`
 `;
 
 export const FeedbackTitle = styled.div`
+  box-sizing: border-box;
   width: 100%;
   text-align: center;
   font-size: 3vh;
@@ -344,13 +348,17 @@ export const FeedbackTitle = styled.div`
 `;
 
 export const FeedbackText = styled.div`
-  width: 100%;
+  box-sizing: border-box;
+  width: 90%;
   text-align: center;
   font-size: 3vh;
   font-weight: 600;
   display: flex;
   margin-top: -1vh;
-  justify-content: center;
+  justify-content: end;
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 export const FT = styled.div`
@@ -359,186 +367,197 @@ export const FT = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
+  display: flex;
+  justify-content: center;
+
+  ul {
+    padding-inline-start: 0;
+    height: 100%;
+  }
 
   li {
     font-size: 1.7vh;
     font-weight: 400;
-    margin: 0 2vh 2vh 0;
     white-space: nowrap;
+    padding: 0 20px 15px 0;
   }
 `;
 
 /* result-report > Review */
 
 export const ContentContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-top: 0;
+  box-sizing: border-box;
   width: 100%;
-  height: 100%;
-  justify-content: space-between;
+  height: 55%;
 `;
 
 export const ReviewContainer = styled.div`
   box-sizing: border-box;
-  width: 100%;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  border-radius: 18px;
-  text-align: left;
-  gap: 20px;
-  background-color: #fff;
-
-  p {
-    font-size: 24px;
-    font-weight: 800;
-    margin: 0;
-  }
+  height: 85%;
+  margin-bottom: 30px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
 `;
 
 export const ReviewInnerContainer = styled.div`
-  width: 72vw;
-  height: 32vh;
-  margin: auto;
-  overflow-y: auto;
+  box-sizing: border-box;
+  height: 100%;
+  overflow-y: scroll;
 `;
 
 export const ReviewBox = styled.div`
-  width: 72vw;
-  min-height: 120px;
-  margin: 0 auto 20px auto;
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 30px;
 `;
 
 export const ProfileBox = styled.div`
-  width: 20%;
-  min-height: 6vw;
+  box-sizing: border-box;
   display: flex;
-  align-items: flex-end;
-  margin-left: 10px;
 `;
 
 export const ProfileImage = styled.div`
-  width: 8vh;
-  height: 8vh;
+  box-sizing: border-box;
+  width: 70px;
+  height: 70px;
   background: url(${profileImg1});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  margin: 0 0 0.5vh 3vh;
 `;
 
 export const ProfileText = styled.div`
-  width: 15vh;
-  margin: 0 0 0.5vh 2vh;
+  box-sizing: border-box;
+  width: 150px;
+  padding: 0 10px 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 `;
 
 export const ProfileName = styled.div`
+  box-sizing: border-box;
+  font-size: 22px;
   font-weight: 600;
-  font-size: 3.3vh;
-  margin: 0 0 0.5vh 0;
+  padding: 5px 5px 2px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const ProfileIntroduce = styled.div`
+  box-sizing: border-box;
+  font-size: 12px;
   font-weight: 400;
-  font-size: 1.6vh;
+  padding-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const CommentBox = styled.div`
-  width: 70%;
-  background: url(${comment1});
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: right;
+  box-sizing: border-box;
+  /* height: 100px; */
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+  border-radius: 10px;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
   display: flex;
-  justify-content: end;
-  margin-right: 20px;
+  justify-content: right;
+  align-items: center;
+  margin-right: 5px;
 `;
 
 export const CommentText = styled.div`
-  width: 90%;
-  height: 60%;
-  margin: auto 1.7vw auto 0;
-  font-size: 1.11vw;
-  font-weight: 300;
-  overflow-y: auto;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30%;
+  overflow-y: scroll;
+  line-height: 1.4rem;
 `;
 
 /* result-report > Input */
 
 export const InputBox = styled.div`
+  /* border: 1px solid blue; */
   box-sizing: border-box;
   width: 100%;
   height: 13%;
   display: flex;
-  flex-direction: column;
-  border-radius: 18px;
-  text-align: left;
+  border-radius: 10px;
   background-color: #fff;
-
-  p {
-    font-size: 24px;
-    font-weight: 800;
-    margin: 0;
-  }
-`;
-
-export const InputContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 0 20px;
+  gap: 10px;
 `;
 
 export const InputProfile = styled.div`
-  width: 15%;
-  height: 80%;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
   display: flex;
-  margin-top: 0.5vh;
+  align-items: center;
 `;
 
 export const InputImg = styled.div`
-  width: 4vw;
-  height: 100%;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
   background: url(${profileImg1});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
   display: flex;
-  margin: 0.2vw 0 0 1.8vw;
+  margin-right: 30px;
 `;
 export const InputName = styled.div`
-  border-right: 1px solid black;
-  min-width: 6vw;
-  height: 80%;
-  font-size: 3vh;
+  box-sizing: border-box;
+  font-size: 20px;
   font-weight: 600;
   display: flex;
   align-items: center;
-  margin: 0.5vw 0 0 1vw;
+  white-space: nowrap;
 `;
 export const InputText = styled.input`
-  width: 83%;
+  /* border: 1px solid green; */
+  box-sizing: border-box;
+  width: 100%;
   height: 60%;
-  margin: 0.8vw 0 0 0;
   font-size: 1.2vw;
   &::placeholder {
     color: rgba(1, 1, 1, 0.3);
-    font-size: 2.5vh;
+    font-size: 2vh;
   }
+  margin-left: 10px;
+`;
+
+export const VerticalLine2 = styled.div`
+  /* border: 1px solid blue; */
+  width: 30px;
+  height: 20px;
+  padding: 5px 0;
+  border-right: 1px solid black;
 `;
 
 export const SendButton = styled.div`
-  width: 100%;
-  height: 4vh;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  width: 38px;
+  height: 38px;
   background: url(${sendButton});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
   display: flex;
-  margin: 0.8vw 0 0 0;
+  align-self: center;
 `;
 
 //personal-report
@@ -646,14 +665,15 @@ export const UpdateImg = styled.img`
 
 export const UpdateTime = styled.div`
   font-size: medium;
-  font-weight: 548;
+  font-weight: 600;
   margin: auto 20px;
 `;
 
 export const ProfImg = styled.img`
   background: lightgray 50% / cover no-repeat;
   border-radius: 50%;
-  height: 82%;
+  height: 75px;
+  width: 75px;
   margin: auto 4%;
 `;
 
@@ -744,13 +764,14 @@ export const IntroLabel = styled.div`
 `;
 
 export const IntroInput = styled.input`
-  //  textfield
-  width: 74%;
-  // height: 120px;
+  width: 60%;
   border-radius: 16px;
-  padding-bottom: 20%;
   background: rgba(217, 217, 217, 0.36);
-  text-align: center;
+  min-width: 100px;
+  padding-bottom: 15%;
+  padding-top: 2%;
+  padding-left: 3%;
+  padding-right: 6%;
 `;
 
 export const CreateLeader = styled.div`
@@ -1105,34 +1126,62 @@ export const FeedbackList2 = styled.span``;
 
 /*Home*/
 export const HomeContainer = styled.div`
-  pointer-events: none;
-  height: 100%;
+  position: relative;
+  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-direction: row;
-  background-image: url("/src/assets/images/background/Rectangle 44.svg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  flex-direction: column;
+  align-items: center;
 `;
-export const HomeBox = styled.div`
-  display: flex;
+
+export const HomeBg = styled.div`
+  background-image: url(${HomeBgImage});
   width: 100%;
-  margin: 2%;
-  background-color: white;
-  border-radius: 10px;
+  height: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 10;
+
+  box-sizing: border-box;
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
-export const LogoImg = styled.img`
-  display: block;
-  width: 400px;
-  height: auto; /* 가로 세로 비율 유지 */
+
+export const HomeBox = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 27px;
 `;
-export const MotoImg = styled.img`
-  display: block;
-  width: 400px;
-  height: auto;
+
+export const LogoImg = styled.div`
+  background: url(${HomeLogoImage});
+  width: 523px;
+  height: 200px;
+  background-repeat: no-repeat;
 `;
-export const HomeLogo = styled.div`
-  margin-bottom: 15%;
+export const MotoImg = styled.div`
+  margin-top: 20px;
+  background: url(${HomeExplain});
+  width: 600px;
+  height: 40px;
+  background-repeat: no-repeat;
+`;
+
+export const LoginButton = styled.div`
+  margin-top: 50px;
+  background: url(${KakaoButtonImage});
+  width: 373px;
+  height: 88px;
+  background-repeat: no-repeat;
 `;

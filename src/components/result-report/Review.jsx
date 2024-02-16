@@ -8,72 +8,69 @@ import {
   ProfileImage,
   ProfileText,
   ProfileName,
-  ProfileIntroduce
+  ProfileIntroduce,
 } from "/src/styles/style";
 
-
 export default function Review() {
-  const exampleText = `내일부터 설 연휴가 시작되면서 벌써부터 귀성길, 귀경길 교통 체증
-    걱정하시는 분들 많으실 텐데요. 올해는 지난해보다 도로 교통량이
-    늘어나 고향 오가는 시간이 조금 더 걸릴 것으로 보입니다.이번 설
-    연휴는 대체공휴일을 더해도 나흘로 지난 추석보다 좀 짧은 편인데요
-    내일부터 설 연휴가 시작되면서 벌써부터 귀성길, 귀경길 교통 체증
-    걱정하시는 분들 많으실 텐데요. 올해는 지난해보다 도로 교통량이
-    늘어나 고향 오가는 시간이 조금 더 걸릴 것으로 보입니다.이번 설
-    연휴는 대체공휴일을 더해도 나흘로 지난 추석보다 좀 짧은 편인데요`;
-
+  const reviewData = [
+    {
+      reviewName: "긴이름은어쩌지그러게",
+      reviewTeam: "마케팅 팀 hfkdfdkfhdjfhdfhjdhfjhdfjhdjfhjfhdjhfjhd",
+      reviewComment:
+        "팀원들과의 원활한 협업으로 프로젝트를 성공적으로 이끌어냈습니다.",
+    },
+    {
+      reviewName: "이영희",
+      reviewTeam: "제품 개발 팀",
+      reviewComment:
+        "우리 팀은 동료들 간의 서로 존중하고 신뢰하는 분위기를 만들기 위해 항상 노력했습니다. 이러한 분위기 덕분에 문제가 생겼을 때 서로 도와가며 빠르게 해결할 수 있었습니다. 감사합니다! 저희 팀은 항상 뛰어난 기술과 창의적인 아이디어를 통해 프로젝트를 완수했습니다. 문제가 발생했을 때도 유연하게 대처하고, 팀원들 간의 원활한 커뮤니케이션으로 함께 문제를 해결할 수 있었습니다. 덕분에 매우 효율적인 팀워크를 경험했습니다. 저희 팀은 항상 뛰어난 기술과 창의적인 아이디어를 통해 프로젝트를 완수했습니다. 문제가 발생했을 때도 유연하게 대처하고, 팀원들 간의 원활한 커뮤니케이션으로 함께 문제를 해결할 수 있었습니다. 덕분에 매우 효율적인 팀워크를 경험했습니다. 저희 팀은 항상 뛰어난 기술과 창의적인 아이디어를 통해 프로젝트를 완수했습니다. 문제가 발생했을 때도 유연하게 대처하고, 팀원들 간의 원활한 커뮤니케이션으로 함께 문제를 해결할 수 있었습니다. 덕분에 매우 효율적인 팀워크를 경험했습니다.",
+    },
+    {
+      reviewName: "박철수",
+      reviewTeam: "엔지니어링 팀",
+      reviewComment:
+        "저희 팀은 항상 뛰어난 기술과 창의적인 아이디어를 통해 프로젝트를 완수했습니다. 문제가 발생했을 때도 유연하게 대처하고, 팀원들 간의 원활한 커뮤니케이션으로 함께 문제를 해결할 수 있었습니다. 덕분에 매우 효율적인 팀워크를 경험했습니다.",
+    },
+    {
+      reviewName: "김영희",
+      reviewTeam: "디자인 팀",
+      reviewComment:
+        "우리 팀은 끊임없는 탐구와 실험을 통해 새로운 아이디어를 만들어냈습니다. 혁신적인 디자인과 창의적인 발상 덕분에 고객들의 호응이 매우 높았습니다. 팀원들의 헌신적인 노력에 감사드립니다.",
+    },
+    {
+      reviewName: "최철호",
+      reviewTeam: "영업 팀",
+      reviewComment:
+        "우리 팀은 항상 결과 중심적으로 일해왔습니다. 목표를 달성하기 위해 열정적으로 노력하고, 팀원들 간의 긍정적인 분위기가 프로젝트 성과에 큰 영향을 미쳤습니다. 앞으로도 더 많은 성과를 이루기 위해 함께 노력하겠습니다.",
+    },
+  ];
 
   return (
     <ReviewContainer>
       <ReviewInnerContainer>
-        <ReviewBox>
-          <ProfileBox>
-            <ProfileImage></ProfileImage>
-            <ProfileText>
-                <ProfileName>김준희</ProfileName>
-                <ProfileIntroduce>피어리 마케팅 A팀</ProfileIntroduce>
-            </ProfileText>
-          </ProfileBox>
-          <CommentBox>
-            <CommentText>{exampleText}</CommentText>
-          </CommentBox>
-        </ReviewBox>
-        <ReviewBox>
-          <ProfileBox>
-            <ProfileImage></ProfileImage>
-            <ProfileText>
-                <ProfileName>박서희</ProfileName>
-                <ProfileIntroduce>피어리 마케팅 B팀</ProfileIntroduce>
-            </ProfileText>
-          </ProfileBox>
-          <CommentBox>
-            <CommentText>{exampleText}</CommentText>
-          </CommentBox>
-        </ReviewBox>
-        <ReviewBox>
-          <ProfileBox>
-            <ProfileImage></ProfileImage>
-            <ProfileText>
-                <ProfileName>신주휘</ProfileName>
-                <ProfileIntroduce>피어리 마케팅 C팀</ProfileIntroduce>
-            </ProfileText>
-          </ProfileBox>
-          <CommentBox>
-            <CommentText>{exampleText}</CommentText>
-          </CommentBox>
-        </ReviewBox>
-        <ReviewBox>
-          <ProfileBox>
-            <ProfileImage></ProfileImage>
-            <ProfileText>
-                <ProfileName>고길동</ProfileName>
-                <ProfileIntroduce>피어리 마케팅 D팀</ProfileIntroduce>
-            </ProfileText>
-          </ProfileBox>
-          <CommentBox>
-            <CommentText>{exampleText}</CommentText>
-          </CommentBox>
-        </ReviewBox>
+        {reviewData.map((review, index) => (
+          <ReviewBox key={index}>
+            <ProfileBox>
+              <ProfileImage />
+              <ProfileText>
+                <ProfileName>{review.reviewName}</ProfileName>
+                <ProfileIntroduce>{review.reviewTeam}</ProfileIntroduce>
+              </ProfileText>
+            </ProfileBox>
+            <CommentBox
+              style={{
+                backgroundColor:
+                  index % 3 === 0
+                    ? "rgba(255, 202, 202, 0.3)"
+                    : index % 3 === 1
+                    ? "rgba(254, 255, 202, 0.3)"
+                    : "rgba(202, 214, 255, 0.3)",
+              }}
+            >
+              <CommentText>{review.reviewComment}</CommentText>
+            </CommentBox>
+          </ReviewBox>
+        ))}
       </ReviewInnerContainer>
     </ReviewContainer>
   );

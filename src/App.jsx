@@ -9,7 +9,7 @@ import {
   RightBody,
 } from "/src/styles/style.js";
 import SideBar from "/src/components/sidebar/SideBar";
-import Header from "/src/components/header/header";
+import Header from "/src/components/header/Header";
 import TeamSpace from "./pages/team-space/TeamSpace";
 import TeamReport from "/src/pages/team-report/TeamReport";
 import ResultReport from "/src/pages/result-report/ResultReport";

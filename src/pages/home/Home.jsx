@@ -1,23 +1,26 @@
-import React from 'react'
-import {
-    HomeContainer,
-    HomeBox,
-    LogoImg,
-    MotoImg,
-    HomeLogo,
-  
-  } from "/src/styles/style";
+import { HomeContainer, LogoImg, MotoImg, LoginButton, HomeBg, HomeBox } from '/src/styles/style';
+import axios from 'axios';
 
-function Home() {
+const Home = () => {
+
+    // kakao login 요청
+    const handleLogin = () => {
+        window.location.href = `${
+            import.meta.env.VITE_APP_SERVER_HOST
+          }/oauth2/authorization/kakao`;
+    }; 
+
     return (
-        <HomeContainer>
-            <HomeBox>
-                <HomeLogo>
-                    <LogoImg src="src/assets/images/background/logo.svg" />
-                    <MotoImg src="src/assets/images/background/moto.svg" />
-                </HomeLogo>
-            </HomeBox>
-        </HomeContainer>
+            <HomeContainer>
+                <HomeBg>
+                    <HomeBox>
+                        <LogoImg />
+                        <MotoImg />
+                    <LoginButton onClick={handleLogin} />
+                    </HomeBox>
+                    </HomeBg>
+            </HomeContainer>
     );
-}
+};
+
 export default Home;

@@ -9,6 +9,7 @@ import S_T_S from "/src/assets/images/sidebar/selected_team_space.svg";
 
 export default function SideBar() {
     const navigate = useNavigate();
+
     const [selected, setSelected] = useState(99);
 
     const getPath = (index) => {
@@ -31,10 +32,16 @@ export default function SideBar() {
       setSelected(index);
     }
 
+    const logout = () => {
+      // accesstoken 삭제
+      localStorage.removeItem("accessToken");
+      alert("로그아웃");
+    }
+
   return (
     <Body>
    <BarHeader>
-    <BarHeaderImage />
+    <BarHeaderImage src={T_L} alt="bar-header-image"/>
     <BarHeaderText>
         <p>
             김준희
@@ -45,7 +52,7 @@ export default function SideBar() {
     <Hr $top="15px"/>
     <ButtonListBox>
         <ButtonHoverStyle onClick={getNavigate(99)} $index={selected}>
-            <HoverButtonImage $index={selected}/>
+            <HoverButtonImage src = {selected == 99 ? S_T_S : T_S} alt="team-space-button" />
             팀 스페이스
         </ButtonHoverStyle>
         <Hr $top="10px"/>
@@ -64,7 +71,7 @@ export default function SideBar() {
     </ButtonListBox>
     <HelperBox>
     <Hr $bottom="20px"/>
-            <div onClick={() => alert("로그아웃 버튼을 클릭하였습니다. ")}>
+            <div onClick={() => logout()}>
             <HelperButton text="로그아웃" index={1}/>
             </div>
         </HelperBox>
@@ -90,10 +97,9 @@ export const BarHeader = styled.div`
   margin-top: 24px;
 `;
 
-export const BarHeaderImage = styled.div`
+export const BarHeaderImage = styled.img`
   width: 50px;
   height: 50px;
-  background: url(${T_L});
   background-repeat: no-repeat;
 `;
 
@@ -135,10 +141,9 @@ font-weight: 800;
 color: ${(props) => props.$index == 99 ? '#07133B' : '#868686'};
 `;
 
-export const HoverButtonImage = styled.div`
+export const HoverButtonImage = styled.img`
   width: 35px;
   height: 35px;
-  background: url(${(props) => props.$index == 99 ? S_T_S : T_S});
   background-repeat: no-repeat;
   margin-right: 20px;
   margin-left: 5px;

@@ -13,8 +13,8 @@ export default function SideBarButtonStyle({text, index, selected}) {
 
   return (
     <ButtonWrapper $index={index} $selected={selected}>
-      <SelectedButton $index={index} $selected={selected}/>
-        <ButtonImage $index={index} $selected={selected}/>
+      <SelectedButton $index={index} $selected={selected} src= {selected == index ? Selected : NotSelected} alt="selected-button"/>
+        <ButtonImage src= {getUrl(index, selected)} alt="button-image"/>
         {text}
     </ButtonWrapper>
   )
@@ -31,20 +31,18 @@ export const ButtonWrapper = styled.button`
   color: ${(props) => props.$selected == props.$index ? '#07133B' : '#868686'};
 `;
 
-export const ButtonImage = styled.div`
+export const ButtonImage = styled.img`
   width: 36px;
   height: 36px;
-  background: url(${(props) => getUrl(props.$index, props.$selected)});
   background-repeat: no-repeat;
   /* 3번째 이미지만 여백이 달라서 발생하는 문제 해결 css */
   margin-left: ${(props) => props.$index == 0 ? "-4px" : "0px"};
   margin-right: ${(props) => props.$index == 0 ? "24px" : "20px"};
 `;
 
-export const SelectedButton = styled.div`
+export const SelectedButton = styled.img`
   width: 15px;
   height: 22px;
-  background: url(${(props) => props.$selected == props.$index ? Selected : NotSelected});
   background-repeat: no-repeat;
   margin-right: 15px;
 `;
