@@ -1,6 +1,14 @@
 export const projectResponseDummy = [
     {title: '1분기 프로젝트', status: '종료', startDay: '2024-02-13', endDay: '2024-02-16'},
-    {title: '제목', status: '진행중', startDay: '2024-02-16', endDay: null}
+    {title: '제목', status: '진행중', startDay: '2024-02-16', endDay: null},
+    {title: '1분기 프로젝트', status: '종료', startDay: '2024-02-13', endDay: '2024-02-16'},
+    {title: '제목', status: '진행중', startDay: '2024-02-16', endDay: null},
+    {title: '1분기 프로젝트', status: '종료', startDay: '2024-02-13', endDay: '2024-02-16'},
+    {title: '제목', status: '진행중', startDay: '2024-02-16', endDay: null},
+    {title: '1분기 프로젝트', status: '종료', startDay: '2024-02-13', endDay: '2024-02-16'},
+    {title: '제목', status: '진행중', startDay: '2024-02-16', endDay: null},
+    {title: '1분기 프로젝트', status: '종료', startDay: '2024-02-13', endDay: '2024-02-16'},
+    {title: '제목', status: '진행중', startDay: '2024-02-16', endDay: null},
 ]
 
 export const teamspaceResponseDummy = [
