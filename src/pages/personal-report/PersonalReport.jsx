@@ -21,6 +21,8 @@ import {
 } from "/src/styles/style";
 import Evaluate from "/src/components/Evaluate/Evaluate.jsx";
 
+import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
+
 function PersonalReport() {
   const [profileNameApi, setProfileNameApi] = useState("");
   const [profileImgApi, setProfileImgApi] = useState("");
@@ -28,6 +30,8 @@ function PersonalReport() {
   const [noNumberArray, setNoNumberArray] = useState([]);
   const [yesNumberArray, setYesNumberArray] = useState([]);
   const [updateTime, setUpdateTime] = useState("");
+
+  const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
 
   useEffect(() => {
     // 페이지 렌더링 시 GET 요청 보내기
@@ -49,7 +53,7 @@ function PersonalReport() {
       const projectId = 8; // 프로젝트 ID
 
       const response = await axios.get(
-        `http://13.124.90.245:8080/api/projects/${projectId}/my-report`,
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/projects/${selectedPRId}/my-report`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -145,7 +149,6 @@ function PersonalReport() {
         <ProfImg src={profileImgApi} />
         <ProfName>
           <MyName>{profileNameApi}</MyName>
-          <MyRole>{teamName}</MyRole>
         </ProfName>
       </SelfBox>
       <ReportBox>
