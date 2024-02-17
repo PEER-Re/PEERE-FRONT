@@ -7,6 +7,8 @@ import {
   VerticalLine2,
   SendButton,
 } from "/src/styles/style";
+// store
+import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -18,10 +20,18 @@ export default function Input() {
   const [userNameInfo, setuserNameInfo] = useState("");
   const [userProfileImg, setuserProfileImg] = useState("");
 
+  const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
+  const [isSend, setIsSend] = useState(false); // 보냈는지 확인하는 상태관리
+
   useEffect(() => {
     // 페이지 렌더링 시 GET 요청 보내기
     sendGetRequest();
   }, []);
+
+  useEffect(() => {
+    // 페이지 렌더링 외에 입력 시 get 요청
+    sendGetRequest();
+  }, [isSend]);
 
   const sendGetRequest = async () => {
     try {
@@ -32,6 +42,7 @@ export default function Input() {
         },
       });
 
+      console.log('get');
       setuserNameInfo(response.data.data.nickname);
       setuserProfileImg(response.data.data.profileImgUrl);
     } catch (error) {
@@ -40,9 +51,10 @@ export default function Input() {
   };
 
   const submitContentHandler = async () => {
+  
     try {
       const postData = {
-        projectId: 8,
+        projectId: selectedPRId,
         content: content,
       };
 
@@ -59,7 +71,7 @@ export default function Input() {
         config
       );
 
-      console.log(response.data);
+      setIsSend(!isSend); // 보낸 상태 반대로 변경
     } catch (error) {
       console.error("후기를 생성하는 도중 오류가 발생했습니다:", error);
     }

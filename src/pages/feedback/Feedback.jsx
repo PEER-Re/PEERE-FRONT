@@ -66,7 +66,6 @@ function FeedbackUsers() {
             <TeamProfImg src="src/assets/images/profile/profile.png" />
           <Who>  
             <MemberName>김준희</MemberName>
-            <Team>피어리 마케팅 A팀</Team>
           </Who>
 
           <FeedbackLLine></FeedbackLLine>

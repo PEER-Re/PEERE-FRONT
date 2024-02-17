@@ -40,6 +40,7 @@ export default function Review() {
       );
 
       const userInfo = response.data.data.commentList;
+      console.log(response.data.data);
       setnicknames(userInfo.map((comment) => comment.nickname));
       setprofileImgUrls(userInfo.map((comment) => comment.profileImgUrl));
       setcontents(userInfo.map((comment) => comment.content));

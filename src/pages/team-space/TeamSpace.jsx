@@ -19,6 +19,7 @@ import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 import axios from "axios";
 import { projectResponseDummy, teamspaceResponseDummy } from "/src/data/team-space/dummy";
+import UsersStore from "/src/stores/users/UsersStore";
 
 export default function TeamSpace() {
    // localstorage에서 토큰 가져오기
@@ -29,12 +30,12 @@ export default function TeamSpace() {
   // store 파일의 actions 가져오기 사용자가 선택한 teamspace
   const { setSelectedTSId, setSelectedTSName, setSelectedTSSize } = TeamSpaceStore((state) => state);
   const { setSelectedPRId, setSelectedPRName } = ProjectIdStore((state) => state);
-  // const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
 
-  const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
+  const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
   const selectedTSName = TeamSpaceStore((state) => state.selectedTSName); // 팀이름
   const selectedTSSize = TeamSpaceStore((state) => state.selectedTSSize); // 팀 사이즈
 
+  const { setUserId, setUserName, setUserProfileImage } = UsersStore((state) => state); // 유저 정보 세팅
 
   const [teams, setTeams] = useState(teamspaceResponseDummy); // 팀 스페이스 정보 api 저장용 초기 값은 더미 데이터
   const [projects, setProjects] = useState(projectResponseDummy); // project 저장용 초기 값은 더미 데이터
@@ -44,8 +45,38 @@ export default function TeamSpace() {
 
   const navigate = useNavigate();
 
-  // 유저 정보 렌더링 함수
-  const getUserInfo = async () => {
+    // 유저 정보 호출 함수
+    const getUserInfo = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/user`, {
+          headers: {
+            'Authorization': accessToken,
+          }
+        });
+        console.log('유저 정보', response.data);
+        setUserName(response.data.data.nickname); // 유저 이름 저장
+        setUserProfileImage(response.data.data.profileImgUrl); // 유저 이미지 저장
+      } catch(error) {
+        console.log(error);
+      }
+  }
+
+  // 유저 id 호출 함수
+  const getUserId = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/user/test`, {
+        headers: {
+          'Authorization': accessToken,
+        }
+      });
+      setUserId(response.data); // 유저 아이디 저장
+    } catch(error) {
+      console.log(error);
+    }
+}
+
+  // 팀 스페이스 호출 함수
+  const getTeamInfo = async () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/teamspaces`, {
         headers: {
@@ -90,7 +121,9 @@ export default function TeamSpace() {
   
   // 시작 시 useEffect
   useEffect(() => {
-    getUserInfo(); // 유저 정보 렌더링
+    getUserId(); // 유저 아이디 호출
+    getUserInfo(); //유저 정보 호출
+    getTeamInfo(); // 팀 정보
     getProjectsInfo(selectedTSId); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
     }, []);
 
@@ -113,7 +146,7 @@ export default function TeamSpace() {
       } catch(error) {
         console.log(error);
       } finally {
-        getUserInfo();
+        getTeamInfo();
         getProjectsInfo(selectedTSId);
       }
   }

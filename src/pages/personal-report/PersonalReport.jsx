@@ -52,7 +52,6 @@ function PersonalReport() {
 
   const sendGetRequest = async () => {
     try {
-      const projectId = 8; // 프로젝트 ID
 
       const response = await axios.get(
         `${import.meta.env.VITE_APP_SERVER_HOST}/api/projects/${selectedPRId}/my-report`,
