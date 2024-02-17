@@ -27,6 +27,7 @@ export default function Summary({
   totalNoFeedbackCount,
   totalParticipateRate,
   totalYesFeedbackCount,
+  projectName,
 }) {
   const [button, setButton] = useState("team");
   const [yesFeedbackContents, setYesFeedbackContents] = useState([]);
@@ -93,7 +94,7 @@ export default function Summary({
               </TB>
               <TB>
                 <TT>프로젝트 명</TT>
-                <T style={{ maxWidth: "18vh" }}>1분기 프로젝트</T>
+                <T style={{ maxWidth: "18vh" }}>{projectName}</T>
               </TB>
             </InnerBox1>
             <VerticalLine />

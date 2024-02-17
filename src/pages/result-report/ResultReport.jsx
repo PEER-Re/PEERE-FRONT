@@ -10,6 +10,7 @@ export default function ResultReport() {
   const [endDay, setEndDay] = useState("");
   const [memberNum, setMemberNum] = useState(0);
   const [teamName, setTeamName] = useState("");
+  const [projectName, setProjectName] = useState("");
   const [totalNoFeedbackCount, setTotalNoFeedbackCount] = useState(0);
   const [totalParticipateRate, setTotalParticipateRate] = useState(0);
   const [totalYesFeedbackCount, setTotalYesFeedbackCount] = useState(0);
@@ -39,6 +40,7 @@ export default function ResultReport() {
       setEndDay(responseData.endDay);
       setMemberNum(responseData.size);
       setTeamName(responseData.teamName);
+      setProjectName(responseData.projectName);
       setTotalNoFeedbackCount(responseData.totalNoFeedbackCount);
       setTotalParticipateRate(responseData.totalParticipateRate);
       setTotalYesFeedbackCount(responseData.totalYesFeedbackCount);
@@ -63,6 +65,7 @@ export default function ResultReport() {
         endDay={endDay}
         memberNum={memberNum}
         teamName={teamName}
+        projectName={projectName}
         totalNoFeedbackCount={totalNoFeedbackCount}
         totalParticipateRate={totalParticipateRate}
         totalYesFeedbackCount={totalYesFeedbackCount}
