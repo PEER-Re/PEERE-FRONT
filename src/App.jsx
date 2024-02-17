@@ -30,10 +30,6 @@ import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 function App() {
   const navigate = useNavigate();
 
-       // store 값 가져오기
-       const selectedPRName = ProjectIdStore((state) => state.selectedPRName);
-       const selectedTSName = TeamSpaceStore((state) => state.selectedTSName);
-
   const location = useLocation();
   console.log(location);
 
@@ -102,7 +98,7 @@ function App() {
       </LeftBody>
       <RightBody>
         <HeaderWrapper>
-          <Header selectedPRName={teamSpaceBg() ? selectedPRName : ''} selectedTSName={selectedTSName}/>
+          <Header location={location} />
         </HeaderWrapper>
         <ContentWrapper $isbg={isSpecifixBg()} $istsbg={teamSpaceBg()}>
           <Routes>

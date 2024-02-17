@@ -55,8 +55,8 @@ export default function TeamSpace() {
       });
       console.log('팀 스페이스 조회 성공', response.data);
       setTeams(response.data.data.teamspaceResponseDtoList);
-      setSelectedTSName(response.data.data.teamspaceResponseDtoList[0].name); // 선택한 팀 이름 저장(임시 index)
-      setSelectedTSSize(response.data.data.teamspaceResponseDtoList[0].size); // 선택한 팀 사이즈 저장(임시 index)
+      setSelectedTSName(response.data.data.teamspaceResponseDtoList[selectedTSId].name); // 선택한 팀 이름 저장(임시 index)
+      setSelectedTSSize(response.data.data.teamspaceResponseDtoList[selectedTSId].size); // 선택한 팀 사이즈 저장(임시 index)
     } catch(error) {
       console.log(error);
     }
