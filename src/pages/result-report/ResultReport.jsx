@@ -8,6 +8,8 @@ import Input from "../../components/result-report/Input";
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 export default function ResultReport() {
+  const accessToken = localStorage.getItem('accessToken');
+
   const [startDay, setStartDay] = useState("");
   const [endDay, setEndDay] = useState("");
   const [memberNum, setMemberNum] = useState(0);
@@ -31,7 +33,7 @@ export default function ResultReport() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A`,
+            Authorization: accessToken,
           },
         }
       );
