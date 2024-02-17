@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CreateTeamApi from "../../api/createproject/CreateTeamApi";
+import TeamSpaceStore from "../../stores/teamSpace/TeamSpaceStore";
 
 import {
   TeamContainer,
@@ -24,12 +25,16 @@ import {
 
 function CreateTeam() {
   const navigate = useNavigate();
+  const { setSelectedTSId, setSelectedTSName, setSelectedTSSize } = TeamSpaceStore((state) => state);
 
   const handleNextBoxClick = async () => {
     try {
       const teamspaceId = await CreateTeamApi(teamName, teamIntro);
-      console.log(teamspaceId);
-      navigate(`/create-project`, { state: { apidata: teamspaceId } });
+      console.log(teamspaceId, '번 팀이 생성되었습니다.');
+      setSelectedTSId(teamspaceId);
+      setSelectedTSName(teamName); // 팀 네임도 세팅
+      setSelectedTSSize(0);
+      navigate(`/team-space`);
     } catch (error) {
       console.error(error.message);
     }

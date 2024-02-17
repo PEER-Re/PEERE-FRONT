@@ -17,7 +17,7 @@ const CreateTeamApi = async (teamName, teamIntro) => {
     // console.log(config);
     // console.log(postData);
     const response = await axios.post(
-      "http://13.124.90.245:8080/api/teamspace",
+      `${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace`,
       postData,
       config
     );

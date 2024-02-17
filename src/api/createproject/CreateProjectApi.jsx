@@ -16,7 +16,7 @@ const CreateProjectApi = async (teamspaceId, projectName) => {
   try {
     console.log(postData);
     const response = await axios.post(
-      "http://13.124.90.245:8080/api/project",
+      `${import.meta.env.VITE_APP_SERVER_HOST}/api/project`,
       postData,
       config
     );

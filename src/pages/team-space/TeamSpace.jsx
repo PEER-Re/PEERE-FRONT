@@ -32,7 +32,7 @@ export default function TeamSpace() {
   // const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
 
   // 임시 코드, 15
-  const selectedTSId = 15;
+  const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
   const selectedTSName = TeamSpaceStore((state) => state.selectedTSName); // 팀이름
   const selectedTSSize = TeamSpaceStore((state) => state.selectedTSSize); // 팀 사이즈
 
@@ -64,9 +64,8 @@ export default function TeamSpace() {
 
 // 팀 스페이스에 따른 프로젝트 리스트 호출 함수
     const getProjectsInfo= async (index) => {
-      // 나중에 index 추가
       try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${15}/projects`, {
+        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}/projects`, {
           headers: {
             'Authorization': accessToken,
           }
