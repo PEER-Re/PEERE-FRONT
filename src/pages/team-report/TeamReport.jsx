@@ -35,7 +35,7 @@ useEffect(() => {
           'Authorization': accessToken,
         }
       });
-      console.log(response.data.data);
+      console.log('성공 : ',response.data.data);
       setData(response.data.data);
     } catch(error) {
       console.log(error);

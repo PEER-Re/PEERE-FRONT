@@ -20,9 +20,6 @@ import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 import axios from "axios";
 import { projectResponseDummy, teamspaceResponseDummy } from "/src/data/team-space/dummy";
 
-const Team_Name = "PEER:Re";
-const Team_Member_Count = "10";
-
 export default function TeamSpace() {
    // localstorage에서 토큰 가져오기
  
@@ -35,12 +32,13 @@ export default function TeamSpace() {
   const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
 
   const [teams, setTeams] = useState(teamspaceResponseDummy); // 팀 스페이스 정보 api 저장용 초기 값은 더미 데이터
-  console.log('teams : ', teams);
   const [projects, setProjects] = useState(projectResponseDummy); // project 저장용 초기 값은 더미 데이터
   const [selectedTeamIndex, setSelectedTeamIndex] = useState(); // 체크박스 선택
-  console.log(selectedTeamIndex);
 
   const [status, setStatus] = useState(false); // api 상태관리용
+
+  const [title, setTitle] = useState(''); // 팀 이름
+  const [count, setCount] = useState(0); // 팀 인원
 
   const navigate = useNavigate();
 
@@ -52,7 +50,7 @@ export default function TeamSpace() {
           'Authorization': accessToken,
         }
       });
-      console.log('팀 스페이스 조회 성공');
+      console.log('팀 스페이스 조회 성공', response.data);
       setTeams(response.data.data.teamspaceResponseDtoList);
     } catch(error) {
       console.log(error);
@@ -79,12 +77,21 @@ export default function TeamSpace() {
     setSelectedTSId(index);
     setSelectedTSName(teams[index].name); // 선택한 팀 이름 저장
     getProjectsInfo(index); // 원래 id에 1 더해서 호출
+
+    setTitle(teams[index].name); // 팀 이름과 사이즈
+    setCount(teams[index].size);
+
+    setTitle(prevTitle => ({...prevTitle, name: teams[index].name}));
+    setTitle(prevTitle => ({...prevTitle, size: teams[index].size})); // 선택한 팀 스페이스 이름과 사이즈
   }
   
   // 시작 시 useEffect
   useEffect(() => {
     getUserInfo(); // 유저 정보 렌더링
     getProjectsInfo(selectedTSId); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
+
+   // setTitle(teams[selectedTSId].name); // 팀 이름과 사이즈
+   // setCount(teams[selectedTSId].size);
     }, []);
 
     // 팀 스페이스 삭제 전 선택 함수, 선택한 index가 배열에 포함되어 있다면 이미지를 변경한다.
@@ -187,8 +194,8 @@ export default function TeamSpace() {
       <Bottom_Container>
         <Project_Title_Container>
           <Project_Title>
-            <p>{Team_Name}</p>
-            <p className="member">팀원 {Team_Member_Count}명</p>
+            <p>name</p>
+            <p className="member">팀원 10명</p>
           </Project_Title>
           <Add_New_Project_Btn onClick={() => navigate("/create-project")}>
             <AddProjectImg />
