@@ -11,6 +11,18 @@ import {
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import PropTypes from "prop-types";
+
+Summary.propTypes = {
+  startDay: PropTypes.string.isRequired,
+  endDay: PropTypes.string.isRequired,
+  memberNum: PropTypes.number.isRequired,
+  teamName: PropTypes.string.isRequired,
+  totalNoFeedbackCount: PropTypes.number.isRequired,
+  totalParticipateRate: PropTypes.number.isRequired,
+  totalYesFeedbackCount: PropTypes.number.isRequired,
+  projectName: PropTypes.string.isRequired,
+};
 
 export default function Summary({
   startDay,
