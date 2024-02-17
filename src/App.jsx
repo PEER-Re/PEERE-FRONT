@@ -30,7 +30,6 @@ import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 function App() {
   const navigate = useNavigate();
 
-  const { setSelectedTSName } = TeamSpaceStore((state) => state);
        // store 값 가져오기
        const selectedPRName = ProjectIdStore((state) => state.selectedPRName);
        const selectedTSName = TeamSpaceStore((state) => state.selectedTSName);

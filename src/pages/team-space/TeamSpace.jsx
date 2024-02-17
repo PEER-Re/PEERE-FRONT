@@ -27,18 +27,21 @@ export default function TeamSpace() {
    localStorage.setItem('accessToken', `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A`);
    const accessToken = localStorage.getItem('accessToken');
   // store 파일의 actions 가져오기 사용자가 선택한 teamspace
-  const { setSelectedTSId, setSelectedTSName } = TeamSpaceStore((state) => state);
+  const { setSelectedTSId, setSelectedTSName, setSelectedTSSize } = TeamSpaceStore((state) => state);
   const { setSelectedPRId, setSelectedPRName } = ProjectIdStore((state) => state);
-  const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
+  // const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
+
+  // 임시 코드, 15
+  const selectedTSId = 15;
+  const selectedTSName = TeamSpaceStore((state) => state.selectedTSName); // 팀이름
+  const selectedTSSize = TeamSpaceStore((state) => state.selectedTSSize); // 팀 사이즈
+
 
   const [teams, setTeams] = useState(teamspaceResponseDummy); // 팀 스페이스 정보 api 저장용 초기 값은 더미 데이터
   const [projects, setProjects] = useState(projectResponseDummy); // project 저장용 초기 값은 더미 데이터
   const [selectedTeamIndex, setSelectedTeamIndex] = useState(); // 체크박스 선택
 
-  const [status, setStatus] = useState(false); // api 상태관리용
-
-  const [title, setTitle] = useState(''); // 팀 이름
-  const [count, setCount] = useState(0); // 팀 인원
+  const [status, setStatus] = useState(false); // api 상태관리
 
   const navigate = useNavigate();
 
@@ -52,6 +55,8 @@ export default function TeamSpace() {
       });
       console.log('팀 스페이스 조회 성공', response.data);
       setTeams(response.data.data.teamspaceResponseDtoList);
+      setSelectedTSName(response.data.data.teamspaceResponseDtoList[0].name); // 선택한 팀 이름 저장(임시 index)
+      setSelectedTSSize(response.data.data.teamspaceResponseDtoList[0].size); // 선택한 팀 사이즈 저장(임시 index)
     } catch(error) {
       console.log(error);
     }
@@ -59,14 +64,15 @@ export default function TeamSpace() {
 
 // 팀 스페이스에 따른 프로젝트 리스트 호출 함수
     const getProjectsInfo= async (index) => {
+      // 나중에 index 추가
       try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}/projects`, {
+        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${15}/projects`, {
           headers: {
             'Authorization': accessToken,
           }
         });
         setProjects(response.data.data.projectResponseDtoList);
-        console.log('프로젝트 조회 성공');
+        console.log('프로젝트 조회 성공', response.data);
       } catch(error) {
         console.log(error);
       }
@@ -76,22 +82,17 @@ export default function TeamSpace() {
   const changeTeamSpace = (index) => {
     setSelectedTSId(index);
     setSelectedTSName(teams[index].name); // 선택한 팀 이름 저장
+    setSelectedTSSize(teams[index].size); // 선택한 팀 사이즈 저장
     getProjectsInfo(index); // 원래 id에 1 더해서 호출
 
-    setTitle(teams[index].name); // 팀 이름과 사이즈
-    setCount(teams[index].size);
-
-    setTitle(prevTitle => ({...prevTitle, name: teams[index].name}));
-    setTitle(prevTitle => ({...prevTitle, size: teams[index].size})); // 선택한 팀 스페이스 이름과 사이즈
+    // setTitle(prevTitle => ({...prevTitle, name: teams[index].name}));
+    // setTitle(prevTitle => ({...prevTitle, size: teams[index].size})); // 선택한 팀 스페이스 이름과 사이즈
   }
   
   // 시작 시 useEffect
   useEffect(() => {
     getUserInfo(); // 유저 정보 렌더링
     getProjectsInfo(selectedTSId); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
-
-   // setTitle(teams[selectedTSId].name); // 팀 이름과 사이즈
-   // setCount(teams[selectedTSId].size);
     }, []);
 
     // 팀 스페이스 삭제 전 선택 함수, 선택한 index가 배열에 포함되어 있다면 이미지를 변경한다.
@@ -194,8 +195,8 @@ export default function TeamSpace() {
       <Bottom_Container>
         <Project_Title_Container>
           <Project_Title>
-            <p>name</p>
-            <p className="member">팀원 10명</p>
+            <p>{selectedTSName}</p>
+            <p className="member">{selectedTSSize}</p>
           </Project_Title>
           <Add_New_Project_Btn onClick={() => navigate("/create-project")}>
             <AddProjectImg />
