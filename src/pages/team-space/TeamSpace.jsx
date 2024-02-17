@@ -102,6 +102,7 @@ export default function TeamSpace() {
 
     // 팀 스페이스 삭제 함수, 한 개씩만 삭제한다. 여기서 index는 내가 선택한 팀 스페이스의 id를 가져온다.
     const deleteTeamSpace = async (index) => {
+      setSelectedTeamIndex(selectedTeamIndex + 1); // 선택한 index 제외하기
       try {
         const response = await axios.delete(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}`, {
           headers: {
