@@ -31,7 +31,6 @@ export default function TeamSpace() {
   const { setSelectedPRId, setSelectedPRName } = ProjectIdStore((state) => state);
   // const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
 
-  // 임시 코드, 15
   const selectedTSId = TeamSpaceStore((state) => state.selectedTSId);
   const selectedTSName = TeamSpaceStore((state) => state.selectedTSName); // 팀이름
   const selectedTSSize = TeamSpaceStore((state) => state.selectedTSSize); // 팀 사이즈
@@ -122,7 +121,7 @@ export default function TeamSpace() {
    // 결과 보기로 이동한다. 이동하면서 선택 프로젝트 상태를 변경한다.
    const navigateResult = async (index) => {
     navigate("/result-report");
-    setSelectedPRId(index); // 선택한 프로젝트 id를 저장한다.
+    setSelectedPRId(projects[index].id); // 선택한 프로젝트 id를 저장한다.
     setSelectedPRName(projects[index].title); // 선택한 프로젝트 이름을 저장한다.
 }
 

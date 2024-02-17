@@ -4,6 +4,8 @@ import { ResultContainer, Title, ContentContainer } from "/src/styles/style";
 import Summary from "../../components/result-report/Summary";
 import Review from "../../components/result-report/Review";
 import Input from "../../components/result-report/Input";
+// store
+import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 export default function ResultReport() {
   const [startDay, setStartDay] = useState("");
@@ -15,6 +17,8 @@ export default function ResultReport() {
   const [totalParticipateRate, setTotalParticipateRate] = useState(0);
   const [totalYesFeedbackCount, setTotalYesFeedbackCount] = useState(0);
 
+  const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
+
   useEffect(() => {
     // 페이지 렌더링 시 GET 요청 보내기
     sendGetRequest();
@@ -22,10 +26,8 @@ export default function ResultReport() {
 
   const sendGetRequest = async () => {
     try {
-      const project_id = 8; // 프로젝트 ID
-
       const response = await axios.get(
-        `http://13.124.90.245:8080/api/project/${project_id}/project-info`,
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/project/${selectedPRId}/project-info`,
         {
           headers: {
             "Content-Type": "application/json",

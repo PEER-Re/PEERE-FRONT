@@ -12,10 +12,14 @@ import {
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
+
 export default function Review() {
   const [nicknames, setnicknames] = useState([]);
   const [profileImgUrls, setprofileImgUrls] = useState([]);
   const [contents, setcontents] = useState([]);
+
+  const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
 
   useEffect(() => {
     // 페이지 렌더링 시 GET 요청 보내기
@@ -24,10 +28,9 @@ export default function Review() {
 
   const sendGetRequest = async () => {
     try {
-      const projectId = 8; // 프로젝트 ID
 
       const response = await axios.get(
-        `http://13.124.90.245:8080/api/project/${projectId}/comments`,
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/project/${selectedPRId}/comments`,
         {
           headers: {
             "Content-Type": "application/json",
