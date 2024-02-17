@@ -47,6 +47,7 @@ export default function TeamSpace() {
   const [selectedTeamIndex, setSelectedTeamIndex] = useState(); // 체크박스 선택
 
   const [status, setStatus] = useState(false); // api 상태관리
+  const [latestPJIdx, setLatestPJIdx] = useState(null);
 
   const navigate = useNavigate();
 
@@ -89,8 +90,8 @@ export default function TeamSpace() {
           headers: {
             Authorization: accessToken,
           },
-        }
-      });
+        },
+      );
       console.log('팀 스페이스 조회 성공', response.data);
       setTeams(response.data.data.teamspaceResponseDtoList);
       setSelectedTSName(response.data.data.teamspaceResponseDtoList[selectedTSId].name); // 선택한 팀 이름 저장(임시 index)
