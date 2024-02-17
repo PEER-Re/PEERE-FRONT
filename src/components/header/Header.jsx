@@ -2,8 +2,16 @@ import styled from "styled-components";
 import Profile from "/src/assets/images/header/user_profile.svg";
 import LogoImage from "/src/assets/images/header/peerre_logo.svg";
 import PropTypes from 'prop-types';
+import TeamSpaceStore from "/src/stores/teamSpace/TeamSpaceStore";
+import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
-export default function Header({selectedPRName, selectedTSName}) {
+export default function Header(location) {
+       // store 값 가져오기
+       const selectedTSName = TeamSpaceStore((state) => state.selectedTSName);
+       const selectedPRName = ProjectIdStore((state) => state.selectedPRName);
+
+       // 조건에 따라 렌더링할 텍스트
+  const titleText = location.location.pathname === '/team-space' ? selectedTSName : `${selectedTSName} | ${selectedPRName}`;
 
   return (
     <Body>
@@ -12,7 +20,7 @@ export default function Header({selectedPRName, selectedTSName}) {
             <TitleTextBox>
                 나의 팀
                 <p>
-                    {selectedTSName} | {selectedPRName}
+                   {titleText}
                 </p>
             </TitleTextBox>
         </LeftBody>

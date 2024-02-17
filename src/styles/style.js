@@ -224,175 +224,108 @@ export const ResultContainer = styled.div`
 
 /* result-report > Summary */
 
-export const DetailContainer = styled.div`
-  box-sizing: border-box;
-  position: relative;
-  display: flex;
-  align-self: flex-end;
-  margin: 0 0 30px 0;
+export const SummaryContainer = styled.div`
+/* border: 3px solid red; */
+box-sizing: border-box;
+width: 100%;
+padding: 30px 0 0 20px;
+display: flex;
+flex-direction: column;
+align-items: end;
+margin-bottom: 30px;
 `;
 
-export const Detail = styled.div`
-  box-sizing: border-box;
-  min-width: 40vw;
-  min-height: 5vh;
-  background: url(${detailBackground});
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: right;
-  display: flex;
-  justify-content: end;
-  flex-direction: column;
+export const BtnBox = styled.div`
+/* border: 1px solid blue; */
+box-sizing: border-box;
+width: 300px;
+height: 30px;
+display: flex;
+justify-content: end;
+align-items: end;
 `;
 
-export const Detail2 = styled.div`
-  box-sizing: border-box;
-  min-width: 40vw;
-  min-height: 5vh;
-  background: url(${detailBackground2});
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: right;
-  display: flex;
-  justify-content: end;
-  flex-direction: column;
+export const Btn = styled.div`
+/* border: 1px solid red; */
+height: 1rem;
+padding: 5px 20px 5px 40px;
+border-top-right-radius: 10px;
+font-size: 14px;
 `;
 
-export const ButtonBox = styled.div`
-  box-sizing: border-box;
-  width: 87vh;
-  height: 2vh;
-  display: flex;
-  align-self: flex-end;
-  justify-content: end;
+export const SummaryBox = styled.div`
+/* border: 2px solid green; */
+box-sizing: border-box;
+border-radius: 10px 0 10px 10px;
+background-color: white;
+box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
+padding: 10px 20px;
+display: flex;
 `;
 
-export const TeamButton = styled.div`
-  box-sizing: border-box;
-  width: 10vh;
-  margin-right: 4.9vh;
-  margin-top: 0.5vh;
+export const FeedbackContainer = styled.div`
+/* border: 2px solid red; */
+box-sizing: border-box;
+padding: 5px 5px 10px 5px;
+display: flex;
+flex-direction: column;
+
+.feedback-title {
+  /* border: 1px solid red; */
+  font-size: 22px;
+  font-weight: 600;
   text-align: center;
-  font-size: 1.8vh;
-  font-weight: 400;
+  margin: 5px 0 10px 0;
+}
 `;
 
-export const FeedbackButton = styled.div`
-  box-sizing: border-box;
-  width: 10vh;
-  margin-right: 1.8vh;
-  margin-top: 0.5vh;
-  text-align: center;
-  font-size: 1.8vh;
-  font-weight: 400;
+export const Table = styled.table`
+width: 100%;
+
+td {
+  white-space: nowrap;
+  padding: 5px 10px;
+  font-size: 14px;
+}
 `;
 
-export const InnerBox = styled.div`
-  box-sizing: border-box;
-  width: 87vh;
-  height: 25vh;
-  display: flex;
-  justify-content: space-between;
-  align-self: flex-end;
-`;
+export const Team_Table = styled.table`
+/* border: 1px solid red; */
+width: 100%;
 
-export const InnerBox1 = styled.div`
-  box-sizing: border-box;
-  width: 44%;
-  height: 85%;
-  display: flex;
-  margin: 3vh 2vh 0 4vh;
-  flex-direction: column;
-`;
+td {
+  /* border: 1px solid blue; */
+  white-space: nowrap;
+  padding: 5px 15px;
+  font-size: 20px;
+  font-weight: 500;
 
-export const InnerBox2 = styled.div`
-  box-sizing: border-box;
-  width: 55%;
-  height: 85%;
-  margin-top: 3vh;
-  margin-left: 2vh;
-  flex-direction: column;
+  div {
+    /* border: 1px solid blue; */
+    display: flex;
+    align-items: center;
+  }
+
+  p {
+    /* border: 1px solid green; */
+    padding: 3px;
+    margin: 0;
+  }
+  .res {
+    /* border: 1px solid green; */
+    font-size: 15px;
+    padding: 0 0 0 15px;
+  }
+}
 `;
 
 export const VerticalLine = styled.div`
-  width: 0.3vh;
-  height: 70%;
+  width: 0.1vh;
+  height: 90%;
   background-color: rgb(0, 0, 0, 0.7);
-  margin: 4vh 0 0 0;
+  margin: auto 0;
 `;
 
-export const TB = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  height: 6vh;
-  align-items: center;
-  margin-left: 32h;
-`;
-
-export const TT = styled.p`
-  box-sizing: border-box;
-  font-size: 2.5vh;
-  font-weight: 600;
-  margin: 0 3vh 0 2vh;
-  min-width: 8vh;
-`;
-
-export const T = styled.p`
-  box-sizing: border-box;
-  font-size: 2.1vh;
-  max-width: 24vh;
-  max-height: 5vh;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-`;
-
-export const FeedbackTitle = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  text-align: center;
-  font-size: 3vh;
-  font-weight: 600;
-  padding-top: 1vh;
-`;
-
-export const FeedbackText = styled.div`
-  box-sizing: border-box;
-  width: 90%;
-  text-align: center;
-  font-size: 3vh;
-  font-weight: 600;
-  display: flex;
-  margin-top: -1vh;
-  justify-content: end;
-  @media (max-width: 600px) {
-    display: none;
-  }
-`;
-
-export const FT = styled.div`
-  max-width: 20vh;
-  height: 17vh;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
-  display: flex;
-  justify-content: center;
-
-  ul {
-    padding-inline-start: 0;
-    height: 100%;
-  }
-
-  li {
-    font-size: 1.7vh;
-    font-weight: 400;
-    white-space: nowrap;
-    padding: 0 20px 15px 0;
-  }
-`;
 
 /* result-report > Review */
 
@@ -422,8 +355,9 @@ export const ReviewBox = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  gap: 30px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  gap: 20px;
 `;
 
 export const ProfileBox = styled.div`
@@ -433,9 +367,10 @@ export const ProfileBox = styled.div`
 
 export const ProfileImage = styled.div`
   box-sizing: border-box;
-  width: 70px;
-  height: 70px;
-  background: url(${profileImg1});
+  width: 60px;
+  height: 60px;
+  /* background: url(${profileImg1}); */
+  background-image: url(${(props) => props.src});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -443,11 +378,11 @@ export const ProfileImage = styled.div`
 
 export const ProfileText = styled.div`
   box-sizing: border-box;
-  width: 150px;
-  padding: 0 10px 0 20px;
+  width: 130px;
+  padding: 0 0 0 20px;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: center;
 `;
 
 export const ProfileName = styled.div`
@@ -455,16 +390,6 @@ export const ProfileName = styled.div`
   font-size: 22px;
   font-weight: 600;
   padding: 5px 5px 2px 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-export const ProfileIntroduce = styled.div`
-  box-sizing: border-box;
-  font-size: 12px;
-  font-weight: 400;
-  padding-bottom: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -522,7 +447,7 @@ export const InputImg = styled.div`
   box-sizing: border-box;
   width: 40px;
   height: 40px;
-  background: url(${profileImg1});
+  background-image: url(${(props) => props.src});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;

@@ -7,11 +7,15 @@ import T_L from "/src/assets/images/sidebar/team_logo.svg";
 import T_S from "/src/assets/images/sidebar/team_space.svg";
 import S_T_S from "/src/assets/images/sidebar/selected_team_space.svg";
 
+import UsersStore from "/src/stores/users/UsersStore";
+
 export default function SideBar(location) {
 
     const navigate = useNavigate();
 
     const [selected, setSelected] = useState(99);
+    const userName = UsersStore((state) => state.userName); // 사용자 이름
+    const userImage = UsersStore((state) => state.userProfileImage); // 사용자 이미지
 
     const getPath = (index) => {
       switch (index) {
@@ -43,10 +47,10 @@ export default function SideBar(location) {
   return (
     <Body>
    <BarHeader>
-    <BarHeaderImage src={T_L} alt="bar-header-image"/>
+    <BarHeaderImage src={userImage} alt="bar-header-image"/>
     <BarHeaderText>
         <p>
-            김준희
+            {userName}
         </p>
     </BarHeaderText>
     </BarHeader>

@@ -7,35 +7,71 @@ import {
   VerticalLine2,
   SendButton,
 } from "/src/styles/style";
+// store
+import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Input() {
+  const accessToken = localStorage.getItem('accessToken');
+
   const [content, setContent] = useState("");
+  const [userNameInfo, setuserNameInfo] = useState("");
+  const [userProfileImg, setuserProfileImg] = useState("");
+
+  const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
+  const [isSend, setIsSend] = useState(false); // 보냈는지 확인하는 상태관리
+
+  useEffect(() => {
+    // 페이지 렌더링 시 GET 요청 보내기
+    sendGetRequest();
+  }, []);
+
+  useEffect(() => {
+    // 페이지 렌더링 외에 입력 시 get 요청
+    sendGetRequest();
+  }, [isSend]);
+
+  const sendGetRequest = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/user`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
+      });
+
+      console.log('get');
+      setuserNameInfo(response.data.data.nickname);
+      setuserProfileImg(response.data.data.profileImgUrl);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   const submitContentHandler = async () => {
+  
     try {
       const postData = {
-        projectId: 8,
+        projectId: selectedPRId,
         content: content,
       };
 
       const config = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A`,
+          Authorization: accessToken,
         },
       };
 
       const response = await axios.post(
-        "http://13.124.90.245:8080/api/project/comment",
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/project/comment`,
         postData,
         config
       );
 
-      console.log(response);
-      alert("후기 달기 성공. 새로고침 후 내역을 확인하세요.");
+      setIsSend(!isSend); // 보낸 상태 반대로 변경
     } catch (error) {
       console.error("후기를 생성하는 도중 오류가 발생했습니다:", error);
     }
@@ -44,8 +80,8 @@ export default function Input() {
   return (
     <InputBox>
       <InputProfile>
-        <InputImg />
-        <InputName>김준희</InputName>
+        <InputImg src={userProfileImg} />
+        <InputName>{userNameInfo}</InputName>
         <VerticalLine2 />
       </InputProfile>
       <InputText

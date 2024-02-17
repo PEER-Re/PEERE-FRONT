@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import CreateProjectApi from "../../api/createproject/CreateProjectApi";
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore.js";
+import TeamSpaceStore from "../../stores/teamSpace/TeamSpaceStore";
 
 import {
   TeamContainer,
@@ -22,21 +23,23 @@ import {
 
 function CreateProject() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const teamspaceId = location.state.apidata;
-  const { addProjectId } = ProjectIdStore();
+  const selectedTeamId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디 store에서 받아오기
+  const { setSelectedPRName, setSelectedPRId } = ProjectIdStore((state) => state);
+
+  const [projectName, setProjectName] = useState("");
 
   const handleResultBoxClick = async () => {
     try {
-      const projectId = await CreateProjectApi(teamspaceId, projectName);
-      addProjectId(projectId);
-      navigate(`/team-report`);
+      const projectId = await CreateProjectApi(selectedTeamId, projectName);
+      console.log(selectedTeamId, '번 팀의', projectId, '번 프로젝트가 생성 되었습니다.');
+      setSelectedPRName(projectName);
+      setSelectedPRId(projectId);
+      navigate(`/team-space`);
     } catch (error) {
       console.error(error.message);
     }
   };
 
-  const [projectName, setProjectName] = useState("");
   return (
     <TeamContainer>
       <CreateDetail>

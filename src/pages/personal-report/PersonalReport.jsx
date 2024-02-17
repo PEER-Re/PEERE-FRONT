@@ -21,13 +21,19 @@ import {
 } from "/src/styles/style";
 import Evaluate from "/src/components/Evaluate/Evaluate.jsx";
 
+import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
+
 function PersonalReport() {
+  const accessToken = localStorage.getItem('accessToken');
+
   const [profileNameApi, setProfileNameApi] = useState("");
   const [profileImgApi, setProfileImgApi] = useState("");
   const [teamName, setTeamName] = useState("");
   const [noNumberArray, setNoNumberArray] = useState([]);
   const [yesNumberArray, setYesNumberArray] = useState([]);
   const [updateTime, setUpdateTime] = useState("");
+
+  const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
 
   useEffect(() => {
     // 페이지 렌더링 시 GET 요청 보내기
@@ -46,14 +52,13 @@ function PersonalReport() {
 
   const sendGetRequest = async () => {
     try {
-      const projectId = 8; // 프로젝트 ID
 
       const response = await axios.get(
-        `http://13.124.90.245:8080/api/projects/${projectId}/my-report`,
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/projects/${selectedPRId}/my-report`,
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A`,
+            Authorization: accessToken,
           },
         }
       );
@@ -145,7 +150,6 @@ function PersonalReport() {
         <ProfImg src={profileImgApi} />
         <ProfName>
           <MyName>{profileNameApi}</MyName>
-          <MyRole>{teamName}</MyRole>
         </ProfName>
       </SelfBox>
       <ReportBox>
