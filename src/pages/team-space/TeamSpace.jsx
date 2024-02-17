@@ -12,6 +12,7 @@ import AddProjectImage from "/src/assets/images/team-space/AddProject.png";
 import TickBoxImage from "/src/assets/images/team-space/TickBox.png";
 import SaturationImage from "/src/assets/images/team-space/Saturation.png";
 import ChevronRightImage from "/src/assets/images/team-space/ChevronRight.png";
+import ChevronRight2Image from "/src/assets/images/team-space/ChevronRight2.png";
 
 // store
 import TeamSpaceStore from "/src/stores/teamSpace/TeamSpaceStore";
@@ -22,12 +23,16 @@ import { projectResponseDummy, teamspaceResponseDummy } from "/src/data/team-spa
 import UsersStore from "/src/stores/users/UsersStore";
 
 export default function TeamSpace() {
-   // localstorage에서 토큰 가져오기
- 
-   // 임시 토큰 세팅
-   localStorage.setItem('accessToken', `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A`);
-   const accessToken = localStorage.getItem('accessToken');
+  // localstorage에서 토큰 가져오기
+
+  // 임시 토큰 세팅
+  localStorage.setItem(
+    "accessToken",
+    `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A`
+  );
+  const accessToken = localStorage.getItem("accessToken");
   // store 파일의 actions 가져오기 사용자가 선택한 teamspace
+
   const { setSelectedTSId, setSelectedTSName, setSelectedTSSize } = TeamSpaceStore((state) => state);
   const { setSelectedPRId, setSelectedPRName } = ProjectIdStore((state) => state);
 
@@ -78,9 +83,12 @@ export default function TeamSpace() {
   // 팀 스페이스 호출 함수
   const getTeamInfo = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/teamspaces`, {
-        headers: {
-          'Authorization': accessToken,
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/teamspaces`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
       });
       console.log('팀 스페이스 조회 성공', response.data);
@@ -90,7 +98,7 @@ export default function TeamSpace() {
     } catch(error) {
       console.log(error);
     }
-}
+  };
 
 // 팀 스페이스에 따른 프로젝트 리스트 호출 함수
     const getProjectsInfo= async (index) => {
@@ -125,7 +133,7 @@ export default function TeamSpace() {
     getUserInfo(); //유저 정보 호출
     getTeamInfo(); // 팀 정보
     getProjectsInfo(selectedTSId); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
-    }, []);
+  }, []);
 
     // 팀 스페이스 삭제 전 선택 함수, 선택한 index가 배열에 포함되어 있다면 이미지를 변경한다.
     const selectCheckBox = (index) => {
@@ -151,12 +159,29 @@ export default function TeamSpace() {
       }
   }
 
-   // 결과 보기로 이동한다. 이동하면서 선택 프로젝트 상태를 변경한다.
-   const navigateResult = async (index) => {
+  // 결과 보기로 이동한다. 이동하면서 선택 프로젝트 상태를 변경한다.
+  const navigateResult = async (index) => {
     navigate("/result-report");
     setSelectedPRId(projects[index].id); // 선택한 프로젝트 id를 저장한다.
     setSelectedPRName(projects[index].title); // 선택한 프로젝트 이름을 저장한다.
-}
+  };
+
+  // 프로젝트 목록을 반복하면서 상태가 "종료"이면서 "endDay"가 가장 늦은 프로젝트 찾기.
+  const ShowUndoProject = async (projectList) => {
+    let latestProjectIdx = null;
+    let latestEndDay = null;
+    for (let i = 0; i < projectList.length; i++) {
+      const project = projectList[i];
+      if (project.status === "종료" && project.endDay) {
+        const endDay = new Date(project.endDay);
+        if (!latestEndDay || endDay > latestEndDay) {
+          latestProjectIdx = i;
+          latestEndDay = endDay;
+        }
+      }
+    }
+    setLatestPJIdx(latestProjectIdx);
+  };
 
   return (
     <div>
@@ -173,7 +198,7 @@ export default function TeamSpace() {
           <ScrollBox>
             {teams.map((team, index) => (
               <Team_Select key={index}>
-                {team.role === 'Leader' ? (
+                {team.role === "Leader" ? (
                   <Check_Box
                     $imageurl={
                       selectedTeamIndex === index
@@ -192,21 +217,28 @@ export default function TeamSpace() {
                   ></div>
                 )}
 
-                <Team_Bar onClick={() => changeTeamSpace(index)}>
+                <Team_Bar
+                  style={{
+                    backgroundColor:
+                      selectedTSId === index
+                        ? "rgba(26,208,121, 0.34)"
+                        : "white",
+                  }}
+                >
                   <Role_Box
                     style={{
                       backgroundColor:
-                        team.role === 'Leader' ? "#1ad079" : "#07133B",
+                        team.role === "Leader" ? "#1ad079" : "#07133B",
                     }}
                   >
-                    {team.role === 'Leader' ? '팀장' : '팀원'}
+                    {team.role === "Leader" ? "팀장" : "팀원"}
                   </Role_Box>
                   <Team_Info_Container>
-                    <p>{team.name}</p>
-                    <p>{team.size}명</p>
-                    <p>'{team.profile}'</p>
+                    <p style={{ width: "150px" }}>{team.name}</p>
+                    <p style={{ width: "40px" }}>{team.size}명</p>
+                    <p style={{ width: "500px" }}>'{team.profile}'</p>
                   </Team_Info_Container>
-                  <EnterImg />
+                  <EnterImg onClick={() => changeTeamSpace(index)} />
                 </Team_Bar>
               </Team_Select>
             ))}
@@ -242,9 +274,7 @@ export default function TeamSpace() {
               <Project_State>
                 <TickBoxImg
                   $imageurl={
-                    project.status === "종료"
-                      ? TickBoxImage
-                      : SaturationImage
+                    project.status === "종료" ? TickBoxImage : SaturationImage
                   }
                 />
                 <State_Box
@@ -258,12 +288,34 @@ export default function TeamSpace() {
               </Project_State>
               <Project_Info_Container>
                 <p className="projectName">{project.title}</p>
-                <p className="period">{project.startDay}</p>
+                <p className="period">
+                  {project.startDay} ~ {project.endDay}
+                </p>
+                {project.status === "종료" && index === latestPJIdx ? (
+                  <p className="projectStatusDecision">평가철회</p>
+                ) : (
+                  <p
+                    className="projectStatusDecision"
+                    style={{ color: "transparent" }}
+                  >
+                    .
+                  </p>
+                )}
               </Project_Info_Container>
-              <Result_Report_Btn onClick={() => navigateResult(index)}>
-                <p>결과보기</p>
-                <ChevronRightImg />
-              </Result_Report_Btn>
+              {project.status === "종료" ? (
+                <Result_Report_Btn onClick={() => navigateResult(index)}>
+                  <p>결과 보기</p>
+                  <ChevronRightImg imageurl={ChevronRightImage} />
+                </Result_Report_Btn>
+              ) : (
+                <Result_Report_Btn>
+                  <p>평가 종료</p>
+                  <ChevronRightImg
+                    imageurl={ChevronRight2Image}
+                    style={{ marginLeft: "7px" }}
+                  />
+                </Result_Report_Btn>
+              )}
             </Project_Box>
           ))}
         </Project_List_Container>
@@ -426,6 +478,12 @@ const Team_Info_Container = styled.div`
   align-items: center;
   padding: 0 40px;
   white-space: nowrap;
+
+  p {
+    /* border: 1px solid red; */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `;
 
 const EnterImg = styled.div`
@@ -496,19 +554,20 @@ const Project_List_Container = styled.div`
   box-sizing: border-box;
   width: 77vw;
   height: calc(100vh - 500px); /* 뷰포트의 높이보다 작도록 설정 */
-  max-height: 400px; /* 뷰포트의 높이보다 작도록 설정 */
+  max-height: 500px; /* 뷰포트의 높이보다 작도록 설정 */
   display: flex;
   text-align: left;
   margin-top: 20px;
   overflow-x: auto;
   padding: 10px 0 10px 5px;
   flex-flow: row nowrap;
-  overflow-y: hidden;
 `;
 
 const Project_Box = styled.div`
+  /* border: 1px solid red; */
   box-sizing: border-box;
   min-width: 250px;
+  min-height: 210px;
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
   background-color: white;
@@ -554,6 +613,7 @@ const State_Box = styled.div`
 `;
 
 const Project_Info_Container = styled.div`
+  /* border: 1px solid blue; */
   box-sizing: border-box;
   padding-left: 20px;
 
@@ -564,20 +624,34 @@ const Project_Info_Container = styled.div`
   }
 
   .period {
+    /* border: 1px solid red; */
     font-size: 14px;
     font-weight: 600;
     margin-top: 0;
-    padding-bottom: 110px;
+  }
+
+  .projectStatusDecision {
+    /* border: 1px solid red; */
+    box-sizing: border-box;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: -7px;
+    width: 40%;
+    line-height: 20px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 `;
 
 const Result_Report_Btn = styled.div`
+  /* border: 1px solid red; */
   box-sizing: border-box;
-  width: 90px;
+  width: 110px;
   display: flex;
   align-items: center;
   margin-top: auto;
   align-self: end;
+  justify-content: end;
   padding: 5px 5px 8px 5px;
   cursor: pointer;
 
@@ -589,13 +663,14 @@ const Result_Report_Btn = styled.div`
 `;
 
 const ChevronRightImg = styled.div`
+  /* border: 1px solid red; */
   box-sizing: border-box;
   width: 30px;
   height: 30px;
-  background: url(${ChevronRightImage});
+  background-image: url(${(props) => props.imageurl});
   background-repeat: no-repeat;
-  background-position: left center;
+  background-position: center;
   display: flex;
   align-items: center;
-  margin: 0 0 0 -7px;
 `;
+
