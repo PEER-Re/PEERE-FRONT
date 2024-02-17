@@ -64,6 +64,7 @@ export default function TeamSpace() {
 
 // 팀 스페이스에 따른 프로젝트 리스트 호출 함수
     const getProjectsInfo= async (index) => {
+      console.log(index);
       try {
         const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}/projects`, {
           headers: {
@@ -79,10 +80,10 @@ export default function TeamSpace() {
 
   // 팀 스페이스 클릭 후 해당 프로젝트 출력 함수
   const changeTeamSpace = (index) => {
-    setSelectedTSId(index);
+    setSelectedTSId(teams[index].id);
     setSelectedTSName(teams[index].name); // 선택한 팀 이름 저장
     setSelectedTSSize(teams[index].size); // 선택한 팀 사이즈 저장
-    getProjectsInfo(index); // 원래 id에 1 더해서 호출
+    getProjectsInfo(teams[index].id); // 원래 id에 1 더해서 호출
 
     // setTitle(prevTitle => ({...prevTitle, name: teams[index].name}));
     // setTitle(prevTitle => ({...prevTitle, size: teams[index].size})); // 선택한 팀 스페이스 이름과 사이즈
@@ -96,10 +97,10 @@ export default function TeamSpace() {
 
     // 팀 스페이스 삭제 전 선택 함수, 선택한 index가 배열에 포함되어 있다면 이미지를 변경한다.
     const selectCheckBox = (index) => {
-      setSelectedTeamIndex(index); // index로 세팅, 
+      setSelectedTeamIndex(index); // 선택한 index
     };
 
-    // 팀 스페이스 삭제 함수, 한 개씩만 삭제한다.
+    // 팀 스페이스 삭제 함수, 한 개씩만 삭제한다. 여기서 index는 내가 선택한 팀 스페이스의 id를 가져온다.
     const deleteTeamSpace = async (index) => {
       try {
         const response = await axios.delete(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}`, {
@@ -107,7 +108,7 @@ export default function TeamSpace() {
             'Authorization': accessToken,
           }
         });
-        console.log('팀 스페이스 삭제 성공', response.data);
+        console.log(teams[index].id, '번 팀을 삭제하였습니다. response : ', response.data.data);
         setStatus(!status);
       } catch(error) {
         console.log(error);
@@ -134,7 +135,7 @@ export default function TeamSpace() {
         <Team_List_Container>
           <MyTeam_Title>
             나의 팀
-            <WasteImg onClick={() => deleteTeamSpace(selectedTeamIndex)} />
+            <WasteImg onClick={() => deleteTeamSpace(teams[selectedTeamIndex].id)} />
           </MyTeam_Title>
           <ScrollBox>
             {teams.map((team, index) => (
