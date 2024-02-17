@@ -522,7 +522,7 @@ export const InputImg = styled.div`
   box-sizing: border-box;
   width: 40px;
   height: 40px;
-  background: url(${profileImg1});
+  // background: url(${profileImg1});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
