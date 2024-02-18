@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   Person,
   Member,
@@ -6,10 +6,9 @@ import {
   TeamPerson,
   MemberName,
   MemberTeam,
-  FeedbackPersonLine,
   How,
-  FeedbackList1,
-  FeedbackList2,
+  FeedbackContentBox,
+  FeedbackContent,
 } from "/src/styles/style";
 const FeedbackPerson = () => {
   return (
@@ -20,24 +19,23 @@ const FeedbackPerson = () => {
           <MemberName>김준희</MemberName>
           <MemberTeam>피어리마케팅 A팀</MemberTeam>
         </TeamPerson>
-        <FeedbackPersonLine/>
       </Member>
+      <How>
+        <FeedbackContentBox>
+          <FeedbackContent>
+            <p>• 피드백내용 이것저것</p>
 
- 
-      <FeedbackPersonLine/>
-
-     
-     <How>
-
-      <FeedbackList1>
-        ∙연락이 잘 돼요.
-      </FeedbackList1>
-      <FeedbackList2>
-        ∙연락이 안 돼요.
-        </FeedbackList2>
-    </How>
+          </FeedbackContent>
+          <FeedbackContent>
+            <p>• 피드백내용 이것저것</p>
+            <p>• 피드백내용 이것저것</p>
+            <p>• 피드백내용 이것저것</p>
+            <p>• 피드백내용 이것저것</p>
+          </FeedbackContent>
+        </FeedbackContentBox>
+      </How>
     </Person>
-  )
-}
+  );
+};
 
 export default FeedbackPerson;

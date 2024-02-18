@@ -225,98 +225,98 @@ export const ResultContainer = styled.div`
 /* result-report > Summary */
 
 export const SummaryContainer = styled.div`
-/* border: 3px solid red; */
-box-sizing: border-box;
-width: 100%;
-padding: 30px 0 0 20px;
-display: flex;
-flex-direction: column;
-align-items: end;
-margin-bottom: 30px;
+  /* border: 3px solid red; */
+  box-sizing: border-box;
+  width: 100%;
+  padding: 30px 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-bottom: 30px;
 `;
 
 export const BtnBox = styled.div`
-/* border: 1px solid blue; */
-box-sizing: border-box;
-width: 300px;
-height: 30px;
-display: flex;
-justify-content: end;
-align-items: end;
+  /* border: 1px solid blue; */
+  box-sizing: border-box;
+  width: 300px;
+  height: 30px;
+  display: flex;
+  justify-content: end;
+  align-items: end;
 `;
 
 export const Btn = styled.div`
-/* border: 1px solid red; */
-height: 1rem;
-padding: 5px 20px 5px 40px;
-border-top-right-radius: 10px;
-font-size: 14px;
+  /* border: 1px solid red; */
+  height: 1rem;
+  padding: 5px 20px 5px 40px;
+  border-top-right-radius: 10px;
+  font-size: 14px;
 `;
 
 export const SummaryBox = styled.div`
-/* border: 2px solid green; */
-box-sizing: border-box;
-border-radius: 10px 0 10px 10px;
-background-color: white;
-box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
-padding: 10px 20px;
-display: flex;
+  /* border: 2px solid green; */
+  box-sizing: border-box;
+  border-radius: 10px 0 10px 10px;
+  background-color: white;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  display: flex;
 `;
 
 export const FeedbackContainer = styled.div`
-/* border: 2px solid red; */
-box-sizing: border-box;
-padding: 5px 5px 10px 5px;
-display: flex;
-flex-direction: column;
+  /* border: 2px solid red; */
+  box-sizing: border-box;
+  padding: 5px 5px 10px 5px;
+  display: flex;
+  flex-direction: column;
 
-.feedback-title {
-  /* border: 1px solid red; */
-  font-size: 22px;
-  font-weight: 600;
-  text-align: center;
-  margin: 5px 0 10px 0;
-}
+  .feedback-title {
+    /* border: 1px solid red; */
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    margin: 5px 0 10px 0;
+  }
 `;
 
 export const Table = styled.table`
-width: 100%;
+  width: 100%;
 
-td {
-  white-space: nowrap;
-  padding: 5px 10px;
-  font-size: 14px;
-}
+  td {
+    white-space: nowrap;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
 `;
 
 export const Team_Table = styled.table`
-/* border: 1px solid red; */
-width: 100%;
+  /* border: 1px solid red; */
+  width: 100%;
 
-td {
-  /* border: 1px solid blue; */
-  white-space: nowrap;
-  padding: 5px 15px;
-  font-size: 20px;
-  font-weight: 500;
-
-  div {
+  td {
     /* border: 1px solid blue; */
-    display: flex;
-    align-items: center;
-  }
+    white-space: nowrap;
+    padding: 5px 15px;
+    font-size: 20px;
+    font-weight: 500;
 
-  p {
-    /* border: 1px solid green; */
-    padding: 3px;
-    margin: 0;
+    div {
+      /* border: 1px solid blue; */
+      display: flex;
+      align-items: center;
+    }
+
+    p {
+      /* border: 1px solid green; */
+      padding: 3px;
+      margin: 0;
+    }
+    .res {
+      /* border: 1px solid green; */
+      font-size: 15px;
+      padding: 0 0 0 15px;
+    }
   }
-  .res {
-    /* border: 1px solid green; */
-    font-size: 15px;
-    padding: 0 0 0 15px;
-  }
-}
 `;
 
 export const VerticalLine = styled.div`
@@ -325,7 +325,6 @@ export const VerticalLine = styled.div`
   background-color: rgb(0, 0, 0, 0.7);
   margin: auto 0;
 `;
-
 
 /* result-report > Review */
 
@@ -857,32 +856,32 @@ export const Role = styled.div`
   font-weight: 400;
 `;
 export const OtherMember = styled.button`
-display: flex;
-position: absolute;
-white-space: nowrap;
-top: 22%;
-left: 10%;
+  display: flex;
+  position: absolute;
+  white-space: nowrap;
+  top: 22%;
+  left: 10%;
 `;
 export const OtherMemberName1 = styled.div`
-//팀원 왼쪽 간격
-width: 20%;
-min-width: 450px;
-height: 20px;
-margin-right: 10%;
+  //팀원 왼쪽 간격
+  width: 20%;
+  min-width: 450px;
+  height: 20px;
+  margin-right: 10%;
 `;
 export const OtherMemberName = styled.div`
-background-color: #FFFFFF;
-box-shadow: 0px 1px 4px 0px #00000040;
-padding-left: 1.5%;
-padding-right: 1.5%;
-padding-top: 1%;
-padding-bottom: 1%;
-border-radius: 7px;
-height: 20px;
-margin-right: 5%;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 4px 0px #00000040;
+  padding-left: 1.5%;
+  padding-right: 1.5%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-radius: 7px;
+  height: 20px;
+  margin-right: 5%;
 `;
 export const FeedbackBox = styled.div`
-  background-image: url('/src/assets/images/feedback/bg3.svg');
+  background-image: url("/src/assets/images/feedback/bg3.svg");
   display: flex;
   height: 450px;
   width: 90%;
@@ -962,14 +961,15 @@ export const Button = styled.button`
   }
 `;
 export const Block = styled.div`
-width: 15%;
-height: 11.5%;
+  width: 15%;
+  height: 11.5%;
 `;
-
 
 /*Feedback*/
 
 export const MainCheck = styled.div`
+  /* border: 3px solid red; */
+  box-sizing: border-box;
   pointer-events: none;
   height: 100%;
   display: flex;
@@ -977,14 +977,66 @@ export const MainCheck = styled.div`
   margin: 0;
 `;
 export const MyFeedbackBox = styled.div`
-background-image: url('/src/assets/images/feedback/bg2.svg');
-height:100%;
-width: 90%;
-margin-left: 5%;
-background-size: cover;
-overflow-y: auto;
+  /* border: 3px solid blue; */
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  padding: 0 60px 30px 60px;
 `;
+
+export const IndexContainer = styled.div`
+  /* border: 3px solid red; */
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+`;
+
+export const IndexBtn = styled.div`
+  /* border: 1px solid red; */
+  height: 1rem;
+  padding: 10px 30px 15px 60px;
+  border-top-right-radius: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(130deg, transparent 30px, #1ad079 0),
+    linear-gradient(130deg, transparent 30px, #1ad079 0);
+`;
+
+export const IndexBox = styled.div`
+  /* border: 2px solid green; */
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-height: 70vh;
+  border-radius: 10px 0 10px 10px;
+  background-color: white;
+  box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  display: flex;
+`;
+
+export const InnerContainer = styled.div`
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 100%;
+`;
+
+export const FeedbackPersonBox = styled.div`
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 90%;
+  overflow-y: scroll;
+  position: relative;
+`;
+
+
 export const FeedbackTextBox = styled.div`
+  /* border: 1px solid red; */
+  box-sizing: border-box;
   color: black;
   margin-left: 5%;
   margin-top: 3%;
@@ -992,30 +1044,42 @@ export const FeedbackTextBox = styled.div`
   font-weight: 700;
   display: flex;
 `;
+
 export const Minwidth = styled.div`
-width: 50%;
-min-width: 400px;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  width: 50%;
+  min-width: 400px;
 `;
 export const YesNoBox = styled.div`
+  /* border: 1px solid red; */
+  box-sizing: border-box;
   display: flex;
   padding-top: 8%;
   white-space: nowrap;
   margin-bottom: 2%;
 `;
 export const Yes = styled.span`
+  /* border: 1px solid red; */
+  box-sizing: border-box;
   color: #1ad079;
 `;
 
 export const No = styled.span`
+  /* border: 1px solid red; */
+  box-sizing: border-box;
   color: #ff7d33;
 `;
 export const TextFeedback1 = styled.span`
+  /* border: 1px solid red; */
+  box-sizing: border-box;
   font-weight: 700;
   font-size: x-large;
   margin-right: 13%;
-  
 `;
 export const TextFeedback2 = styled.span`
+  /* border: 1px solid red; */
+  box-sizing: border-box;
   font-weight: 700;
   font-size: x-large;
 `;
@@ -1083,59 +1147,68 @@ export const LoginButton = styled.div`
 
 /* FeedbackPerson*/
 export const Person = styled.div`
+  /* border: 1px solid; */
   display: flex;
   white-space: nowrap;
   margin: 0;
 `;
 export const Member = styled.div`
-display: flex;
-justify-content: flex-start;
-align-items: center;
-width: 40%;
-min-width: 400px;
+  /* border: 3px solid red; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-right: 1.5px solid gray;
+  gap: 15px;
+  padding: 0 50px 40px 20px;
 `;
 export const TeamProfImg = styled.img`
   background: lightgray 50% / cover no-repeat;
   border-radius: 50%;
-  margin-left: 10%;
-  margin-right: 1%;
 `;
 export const TeamPerson = styled.div`
-
-margin-left: 5%;
-`
+  /* border: 1px solid green; */
+  width: 140px;
+`;
 
 export const MemberName = styled.div`
   font-weight: 700;
   font-size: x-large;
-  margin-bottom: 8%;
 `;
-export const MemberTeam = styled.div`
+export const MemberTeam = styled.div``;
 
-`;
-
-export const FeedbackPersonLine = styled.div`
-width: 2px;
-background-color: #07133B80;
-
-`;
 export const How = styled.div`
+  /* border: 1px solid green; */
   display: flex;
-  align-items: center; //열방향 가운데
-  background-color: #E4E4E454;
-  margin-left: 8%;
-  width: 40%;
-  height:100px;
-  border-radius: 21px;
-  font-weight: 700;
-  margin-bottom: 2%;
+  align-items: center;
+  width: 100%;
+  padding: 0 0 40px 50px;
 `;
-export const YesList = styled.div`
 
+export const FeedbackContentBox = styled.div`
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: #e4e4e454;
+  border-radius: 15px;
+  padding: 10px 50px;
+  gap: 60px;
+  margin-top: 20px;
 `;
-export const FeedbackList1 = styled.span`
-margin-right: 32%;
-margin-left: 5%;
+
+export const FeedbackContent = styled.div`
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  p {
+    margin: 3px 0;
+    font-weight: 600;
+    font-size: 18px;
+  }
 `;
-export const FeedbackList2 = styled.span`
-`;
+
+export const YesList = styled.div``;
