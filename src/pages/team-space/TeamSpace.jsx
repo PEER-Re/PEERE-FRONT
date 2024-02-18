@@ -31,6 +31,9 @@ export default function TeamSpace() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const [isSend, setIsSend] = useState(false); // 보냈는지 확인하는 상태관리
+  const [invitationCode, setInvitationCode] = useState("");
+  const [errormsg, setErrorMsg] = useState("");
 
   // localstorage에서 토큰 가져오기
 
@@ -243,6 +246,42 @@ export default function TeamSpace() {
     }
     setLatestPJIdx(latestProjectIdx);
   };
+
+  const submitContentHandler = async () => {
+    try {
+      const postData = {
+        invitationCode: invitationCode,
+      };
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: accessToken,
+        },
+      };
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/invite`,
+        postData,
+        config
+      );
+      console.log(response);
+      alert("해당 코드의 팀에 참여 성공하셨습니다.");
+      // setIsSend(!isSend); // 보낸 상태 반대로 변경
+    } catch (error) {
+      if (error.response) {
+        // 서버 응답이 왔지만 응답 상태가 실패인 경우
+        const errorMessage = error.response.data.message;
+        alert(errorMessage);
+        console.error("팀에 참여하는 도중 에러가 생겼습니다:", errorMessage);
+      } else {
+        // 요청 자체가 실패한 경우
+        alert("잘못된 주소입니다.");
+        console.error("요청 자체가 실패한 경우:", error);
+      }
+    }
+  };
+
   return (
     <div>
       <Container>
@@ -399,6 +438,9 @@ export default function TeamSpace() {
           <input style={{ width: "60%", fontSize: "22px" }}></input>
           <SendButton
             style={{ width: "13%", height: "25px", margin: "0 5px" }}
+            onClick={submitContentHandler}
+            value={invitationCode}
+            onChange={(e) => setInvitationCode(e.target.value)}
           />
         </Team_Bar>
       </Modal>
