@@ -160,8 +160,10 @@ export default function TeamSpace() {
           },
         }
       );
-      
+
       setProjects(response.data.data.projectResponseDtoList);
+      setSelectedPRId(response.data.data.projectResponseDtoList[0].id);
+      setSelectedPRName(response.data.data.projectResponseDtoList[0].title);
         console.log('프로젝트 조회 성공', response.data);
       console.log("프로젝트 조회 성공", response.data);
     } catch (error) {
