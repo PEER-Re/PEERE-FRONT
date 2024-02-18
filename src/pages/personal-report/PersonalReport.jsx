@@ -31,7 +31,10 @@ function PersonalReport() {
   const [teamName, setTeamName] = useState("");
   const [noNumberArray, setNoNumberArray] = useState([]);
   const [yesNumberArray, setYesNumberArray] = useState([]);
+  const [noStringArray, setNoStringArray] = useState([]);
+  const [yesStringArray, setYesStringArray] = useState([]);
   const [updateTime, setUpdateTime] = useState("");
+  const [memberNum, setMemberNum] = useState();
 
   const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
 
@@ -71,10 +74,13 @@ function PersonalReport() {
       setTeamName(userInfo.teamName);
       const NoData = response.data.data.noFeedbackInfo;
       const YesData = response.data.data.yesFeedbackInfo;
+      setMemberNum(response.data.data.totalEvaluationNum);
 
       // 배열 초기화
       const noNumberArray = [];
       const yesNumberArray = [];
+      const noStringArray = [];
+      const yesStringArray = [];
 
       for (const key in NoData) {
         if (key.includes("Num")) {
@@ -82,14 +88,35 @@ function PersonalReport() {
         }
       }
 
+      for (const key in NoData) {
+        if (key.includes("bad")) {
+          const value = NoData[key];
+          if (typeof value === "string" && value !== "") {
+            noStringArray.push(value);
+          }
+        }
+      }
+      console.log(noStringArray);
+
       for (const key in YesData) {
         if (key.includes("Num")) {
           yesNumberArray.push(YesData[key]);
         }
       }
 
+      for (const key in YesData) {
+        if (key.includes("good")) {
+          const value = YesData[key];
+          if (typeof value === "string" && value !== "") {
+            yesStringArray.push(value);
+          }
+        }
+      }
+
       setNoNumberArray(noNumberArray);
       setYesNumberArray(yesNumberArray);
+      setNoStringArray(noStringArray);
+      setYesStringArray(yesStringArray);
     } catch (error) {
       console.error(error.message);
     }
@@ -159,33 +186,33 @@ function PersonalReport() {
             <Highlight1>YES</Highlight1> 피드백
           </ReportName>
           <Evaluate
-            comment="말을 조리있게 잘해요."
-            rate={`${yesNumberArray[0]}/6`}
+            comment={`${yesStringArray[0]}`}
+            rate={`${yesNumberArray[0]}/${memberNum}`}
             backgroundcolor={getYesBackgroundColor(yesNumberArray[0])}
           />
           <Evaluate
-            comment="연락이 잘돼요."
-            rate={`${yesNumberArray[1]}/6`}
+            comment={`${yesStringArray[1]}`}
+            rate={`${yesNumberArray[1]}/${memberNum}`}
             backgroundcolor={getYesBackgroundColor(yesNumberArray[1])}
           />
           <Evaluate
-            comment="능력이 뛰어나요."
-            rate={`${yesNumberArray[2]}/6`}
+            comment={`${yesStringArray[2]}`}
+            rate={`${yesNumberArray[2]}/${memberNum}`}
             backgroundcolor={getYesBackgroundColor(yesNumberArray[2])}
           />
           <Evaluate
-            comment="재미있어요."
-            rate={`${yesNumberArray[3]}/6`}
+            comment={`${yesStringArray[3]}`}
+            rate={`${yesNumberArray[3]}/${memberNum}`}
             backgroundcolor={getYesBackgroundColor(yesNumberArray[3])}
           />
           <Evaluate
-            comment="시간약속을 잘 지켜요."
-            rate={`${yesNumberArray[4]}/6`}
+            comment={`${yesStringArray[4]}`}
+            rate={`${yesNumberArray[4]}/${memberNum}`}
             backgroundcolor={getYesBackgroundColor(yesNumberArray[4])}
           />
           <Evaluate
-            comment="빈틈이 없어요."
-            rate={`${yesNumberArray[5]}/6`}
+            comment={`${yesStringArray[5]}`}
+            rate={`${yesNumberArray[5]}/${memberNum}`}
             backgroundcolor={getYesBackgroundColor(yesNumberArray[5])}
           />
         </FeedBackType>
@@ -198,33 +225,33 @@ function PersonalReport() {
             <Highlight2>NO</Highlight2> 피드백
           </ReportName>
           <Evaluate
-            comment="말을 조리있게 못해요."
-            rate={`${noNumberArray[0]}/6`}
+            comment={`${noStringArray[0]}`}
+            rate={`${noNumberArray[0]}/${memberNum}`}
             backgroundcolor={getBackgroundColor(noNumberArray[0])}
           />
           <Evaluate
-            comment="연락이 안돼요."
-            rate={`${noNumberArray[1]}/6`}
+            comment={`${noStringArray[1]}`}
+            rate={`${noNumberArray[1]}/${memberNum}`}
             backgroundcolor={getBackgroundColor(noNumberArray[1])}
           />
           <Evaluate
-            comment="능력이 뒤떨어져요."
-            rate={`${noNumberArray[2]}/6`}
+            comment={`${noStringArray[2]}`}
+            rate={`${noNumberArray[2]}/${memberNum}`}
             backgroundcolor={getBackgroundColor(noNumberArray[2])}
           />
           <Evaluate
-            comment="재미없어요."
-            rate={`${noNumberArray[3]}/6`}
+            comment={`${noStringArray[3]}`}
+            rate={`${noNumberArray[3]}/${memberNum}`}
             backgroundcolor={getBackgroundColor(noNumberArray[3])}
           />
           <Evaluate
-            comment="시간약속을 잘 안지켜요."
-            rate={`${noNumberArray[4]}/6`}
+            comment={`${noStringArray[4]}`}
+            rate={`${noNumberArray[4]}/${memberNum}`}
             backgroundcolor={getBackgroundColor(noNumberArray[4])}
           />
           <Evaluate
-            comment="빈틈이 있어요."
-            rate={`${noNumberArray[5]}/6`}
+            comment={`${noStringArray[5]}`}
+            rate={`${noNumberArray[5]}/${memberNum}`}
             backgroundcolor={getBackgroundColor(noNumberArray[5])}
           />
         </FeedBackType>

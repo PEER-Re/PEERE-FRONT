@@ -47,8 +47,8 @@ export default function TeamSpace() {
   const { setSelectedPRId, setSelectedPRName } = ProjectIdStore(
     (state) => state
   );
-  // const selectedTSId = 47; // 팀 아이디
-  const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
+  const selectedTSId = 56; // 팀 아이디
+  // const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
   const selectedTSName = TeamSpaceStore((state) => state.selectedTSName); // 팀이름
   const selectedTSSize = TeamSpaceStore((state) => state.selectedTSSize); // 팀 사이즈
 
@@ -164,7 +164,7 @@ export default function TeamSpace() {
       setProjects(response.data.data.projectResponseDtoList);
       setSelectedPRId(response.data.data.projectResponseDtoList[0].id);
       setSelectedPRName(response.data.data.projectResponseDtoList[0].title);
-        console.log('프로젝트 조회 성공', response.data);
+      console.log("프로젝트 조회 성공", response.data);
       console.log("프로젝트 조회 성공", response.data);
     } catch (error) {
       console.log(error);
