@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {} from "../../styles/style";
+import { SendButton } from "../../styles/style";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container, Title } from "/src/styles/style";
@@ -13,6 +13,7 @@ import TickBoxImage from "/src/assets/images/team-space/TickBox.png";
 import SaturationImage from "/src/assets/images/team-space/Saturation.png";
 import ChevronRightImage from "/src/assets/images/team-space/ChevronRight.png";
 import ChevronRight2Image from "/src/assets/images/team-space/ChevronRight2.png";
+import Modal from "/src/components/modal/modal.jsx";
 
 // store
 import TeamSpaceStore from "/src/stores/teamSpace/TeamSpaceStore";
@@ -26,6 +27,11 @@ import {
 import UsersStore from "/src/stores/users/UsersStore";
 
 export default function TeamSpace() {
+  // 모달 열고닫기 관련 useState
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   // localstorage에서 토큰 가져오기
 
   // 임시 토큰 세팅
@@ -41,7 +47,7 @@ export default function TeamSpace() {
   const { setSelectedPRId, setSelectedPRName } = ProjectIdStore(
     (state) => state
   );
-
+  // const selectedTSId = 47; // 팀 아이디
   const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
   const selectedTSName = TeamSpaceStore((state) => state.selectedTSName); // 팀이름
   const selectedTSSize = TeamSpaceStore((state) => state.selectedTSSize); // 팀 사이즈
@@ -53,7 +59,6 @@ export default function TeamSpace() {
   const [teams, setTeams] = useState(teamspaceResponseDummy); // 팀 스페이스 정보 api 저장용 초기 값은 더미 데이터
   const [projects, setProjects] = useState(projectResponseDummy); // project 저장용 초기 값은 더미 데이터
   const [selectedTeamIndex, setSelectedTeamIndex] = useState(); // 체크박스 선택
-
   const [status, setStatus] = useState(false); // api 상태관리
   const [latestPJIdx, setLatestPJIdx] = useState(null);
 
@@ -196,7 +201,6 @@ export default function TeamSpace() {
     setSelectedPRId(projects[index].id); // 선택한 프로젝트 id를 저장한다.
     setSelectedPRName(projects[index].title); // 선택한 프로젝트 이름을 저장한다.
   };
-
   // 프로젝트 목록을 반복하면서 상태가 "종료"이면서 "endDay"가 가장 늦은 프로젝트 찾기.
   const ShowUndoProject = async (projectList) => {
     let latestProjectIdx = null;
@@ -213,13 +217,11 @@ export default function TeamSpace() {
     }
     setLatestPJIdx(latestProjectIdx);
   };
-
   return (
     <div>
       <Container>
         <Title style={{ height: "35px" }}>팀 스페이스</Title>
       </Container>
-
       <Top_Container>
         <Team_List_Container>
           <MyTeam_Title>
@@ -249,7 +251,6 @@ export default function TeamSpace() {
                     }}
                   ></div>
                 )}
-
                 <Team_Bar
                   style={{
                     backgroundColor:
@@ -278,16 +279,29 @@ export default function TeamSpace() {
           </ScrollBox>
         </Team_List_Container>
 
-        <Add_NewSpace_Button onClick={() => navigate("/create-team")}>
-          <PeopleImg />
-          <New_Space_Text>
-            새로운
-            <br />
-            팀 스페이스
-            <br />
-            생성
-          </New_Space_Text>
-        </Add_NewSpace_Button>
+        <div style={{ paddingTop: "35px" }}>
+          <Add_NewSpace_Button onClick={() => navigate("/create-team")}>
+            <PeopleImg />
+            <New_Space_Text>
+              새로운
+              <br />
+              팀 스페이스
+              <br />
+              생성
+            </New_Space_Text>
+          </Add_NewSpace_Button>
+          <EnterTeam_Button onClick={openModal}>
+            <ChevronRightImg
+              imageurl={ChevronRight2Image}
+              style={{ marginRight: "-10px" }}
+            />
+            <ChevronRightImg
+              imageurl={ChevronRight2Image}
+              style={{ marginRight: "10px" }}
+            />
+            <p> 팀 참여하기</p>
+          </EnterTeam_Button>
+        </div>
       </Top_Container>
 
       <Bottom_Container>
@@ -353,10 +367,18 @@ export default function TeamSpace() {
           ))}
         </Project_List_Container>
       </Bottom_Container>
+      <Modal isOpen={isModalOpen} closeModal={closeModal}>
+        <Team_Bar style={{ width: "80%", margin: "15px 0 35px 0" }}>
+          <CopyInvitation>초대코드 입력</CopyInvitation>
+          <input style={{ width: "60%", fontSize: "22px" }}></input>
+          <SendButton
+            style={{ width: "13%", height: "25px", margin: "0 5px" }}
+          />
+        </Team_Bar>
+      </Modal>
     </div>
   );
 }
-
 const Top_Container = styled.div`
   box-sizing: border-box;
   position: relative;
@@ -368,7 +390,6 @@ const Top_Container = styled.div`
   text-align: left;
   gap: 30px;
 `;
-
 const Bottom_Container = styled.div`
   box-sizing: border-box;
   position: relative;
@@ -380,7 +401,6 @@ const Bottom_Container = styled.div`
   text-align: left;
   margin-top: 10px;
 `;
-
 const Add_NewSpace_Button = styled.div`
   box-sizing: border-box;
   width: 10%;
@@ -391,6 +411,24 @@ const Add_NewSpace_Button = styled.div`
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+`;
+
+const EnterTeam_Button = styled.div`
+  /* border: 1px solid blue; */
+  box-sizing: border-box;
+  width: 10%;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  p {
+    padding-left: 20px;
+  }
 `;
 
 const PeopleImg = styled.div`
@@ -400,7 +438,6 @@ const PeopleImg = styled.div`
   background: url(${PeopleImage});
   background-repeat: no-repeat;
 `;
-
 const New_Space_Text = styled.div`
   box-sizing: border-box;
   min-width: 100px;
@@ -408,7 +445,6 @@ const New_Space_Text = styled.div`
   text-align: center;
   padding: 20px 0 20px 20px;
 `;
-
 const Team_List_Container = styled.div`
   /* border: 1px solid red; */
   box-sizing: border-box;
@@ -419,7 +455,6 @@ const Team_List_Container = styled.div`
   text-align: left;
   overflow-y: scroll;
 `;
-
 const MyTeam_Title = styled.div`
   box-sizing: border-box;
   min-width: 100px;
@@ -434,7 +469,6 @@ const MyTeam_Title = styled.div`
   margin: 0 0 10px 45px;
   white-space: nowrap;
 `;
-
 const WasteImg = styled.div`
   box-sizing: border-box;
   width: 28px;
@@ -444,11 +478,9 @@ const WasteImg = styled.div`
   background-repeat: no-repeat;
   cursor: pointer;
 `;
-
 const ScrollBox = styled.div`
   overflow-y: scroll;
 `;
-
 const Team_Select = styled.div`
   box-sizing: border-box;
   width: 100%;
@@ -456,7 +488,6 @@ const Team_Select = styled.div`
   margin-bottom: 15px;
   align-items: center;
 `;
-
 const Check_Box = styled.div`
   box-sizing: border-box;
   width: 25px;
@@ -470,7 +501,6 @@ const Check_Box = styled.div`
   padding-right: 38px;
   cursor: pointer; /* 클릭 가능하도록 커서 설정 */
 `;
-
 const Team_Bar = styled.div`
   /* border: 1px solid red; */
   box-sizing: border-box;
@@ -482,6 +512,11 @@ const Team_Bar = styled.div`
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
   background-color: white;
   margin-right: 5px;
+  input {
+    /* border: 1px solid red; */
+    margin-left: 15px;
+    height: 25px;
+  }
 `;
 
 const Role_Box = styled.div`
@@ -500,7 +535,6 @@ const Role_Box = styled.div`
   justify-content: center;
   color: white;
 `;
-
 const Team_Info_Container = styled.div`
   box-sizing: border-box;
   height: 40px;
@@ -511,14 +545,12 @@ const Team_Info_Container = styled.div`
   align-items: center;
   padding: 0 40px;
   white-space: nowrap;
-
   p {
     /* border: 1px solid red; */
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 `;
-
 const EnterImg = styled.div`
   box-sizing: border-box;
   width: 25px;
@@ -530,7 +562,6 @@ const EnterImg = styled.div`
   padding-right: 35px;
   cursor: pointer;
 `;
-
 const Project_Title_Container = styled.div`
   box-sizing: border-box;
   width: 77vw;
@@ -540,7 +571,6 @@ const Project_Title_Container = styled.div`
   text-align: left;
   margin-top: 15px;
 `;
-
 const Project_Title = styled.div`
   box-sizing: border-box;
   display: flex;
@@ -550,13 +580,11 @@ const Project_Title = styled.div`
   font-weight: 700;
   gap: 15px;
   padding-top: 20px;
-
   .member {
     font-size: 16px;
     margin-top: 18px;
   }
 `;
-
 const Add_New_Project_Btn = styled.div`
   box-sizing: border-box;
   min-width: 200px;
@@ -571,7 +599,6 @@ const Add_New_Project_Btn = styled.div`
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
   margin-right: 10px;
 `;
-
 const AddProjectImg = styled.div`
   box-sizing: border-box;
   width: 30px;
@@ -582,7 +609,6 @@ const AddProjectImg = styled.div`
   display: flex;
   align-items: center;
 `;
-
 const Project_List_Container = styled.div`
   box-sizing: border-box;
   width: 77vw;
@@ -595,7 +621,6 @@ const Project_List_Container = styled.div`
   padding: 10px 0 10px 5px;
   flex-flow: row nowrap;
 `;
-
 const Project_Box = styled.div`
   /* border: 1px solid red; */
   box-sizing: border-box;
@@ -613,7 +638,6 @@ const Project_Box = styled.div`
   flex-shrink: 0;
   margin-bottom: 20px; /* 요소들 사이의 간격을 설정*/
 `;
-
 const Project_State = styled.div`
   box-sizing: border-box;
   display: flex;
@@ -622,7 +646,6 @@ const Project_State = styled.div`
   justify-content: right;
   padding-top: 10px;
 `;
-
 const TickBoxImg = styled.div`
   box-sizing: border-box;
   width: 24px;
@@ -634,7 +657,6 @@ const TickBoxImg = styled.div`
   display: flex;
   align-items: center;
 `;
-
 const State_Box = styled.div`
   box-sizing: border-box;
   display: flex;
@@ -644,25 +666,21 @@ const State_Box = styled.div`
   font-weight: 600;
   font-size: 12px;
 `;
-
 const Project_Info_Container = styled.div`
   /* border: 1px solid blue; */
   box-sizing: border-box;
   padding-left: 20px;
-
   .projectName {
     font-size: 20px;
     font-weight: 600;
     margin: 40px 0 0 0;
   }
-
   .period {
     /* border: 1px solid red; */
     font-size: 14px;
     font-weight: 600;
     margin-top: 0;
   }
-
   .projectStatusDecision {
     /* border: 1px solid red; */
     box-sizing: border-box;
@@ -675,7 +693,6 @@ const Project_Info_Container = styled.div`
     text-underline-offset: 4px;
   }
 `;
-
 const Result_Report_Btn = styled.div`
   /* border: 1px solid red; */
   box-sizing: border-box;
@@ -687,14 +704,12 @@ const Result_Report_Btn = styled.div`
   justify-content: end;
   padding: 5px 5px 8px 5px;
   cursor: pointer;
-
   p {
     font-size: 15px;
     font-weight: 500;
     margin: 0;
   }
 `;
-
 const ChevronRightImg = styled.div`
   /* border: 1px solid red; */
   box-sizing: border-box;
@@ -705,4 +720,22 @@ const ChevronRightImg = styled.div`
   background-position: center;
   display: flex;
   align-items: center;
+`;
+
+const CopyInvitation = styled.div`
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  height: 40px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #1ad079;
+  padding: 0 15px;
+  white-space: nowrap;
 `;
