@@ -1,132 +1,239 @@
 import {
-  DetailContainer,
-  Detail,
-  Detail2,
-  InnerBox,
-  ButtonBox,
-  TeamButton,
-  FeedbackButton,
-  InnerBox1,
-  InnerBox2,
+  SummaryContainer,
+  BtnBox,
+  Btn,
+  SummaryBox,
+  FeedbackContainer,
+  Table,
+  Team_Table,
   VerticalLine,
-  TB,
-  TT,
-  T,
-  FeedbackTitle,
-  FeedbackText,
-  FT,
 } from "/src/styles/style";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import styled from "styled-components";
+import PropTypes from "prop-types";
 
-export default function Summary() {
+Summary.propTypes = {
+  startDay: PropTypes.string.isRequired,
+  endDay: PropTypes.string.isRequired,
+  memberNum: PropTypes.number.isRequired,
+  teamName: PropTypes.string.isRequired,
+  totalNoFeedbackCount: PropTypes.number.isRequired,
+  totalParticipateRate: PropTypes.number.isRequired,
+  totalYesFeedbackCount: PropTypes.number.isRequired,
+  projectName: PropTypes.string.isRequired,
+};
+
+export default function Summary({
+  startDay,
+  endDay,
+  memberNum,
+  teamName,
+  totalNoFeedbackCount,
+  totalParticipateRate,
+  totalYesFeedbackCount,
+  projectName,
+}) {
   const [button, setButton] = useState("team");
+  const [yesFeedbackContents, setYesFeedbackContents] = useState([]);
+  const [noFeedbackContents, setNoFeedbackContents] = useState([]);
 
   const handleButtonClick = (btn) => {
     setButton(btn);
   };
 
   useEffect(() => {}, [button]);
+  useEffect(() => {
+    // 페이지 렌더링 시 GET 요청 보내기
+    sendGetRequest();
+  }, []);
+
+  const sendGetRequest = async () => {
+    try {
+      const project_id = 8; // 프로젝트 ID
+
+      const response = await axios.get(
+        `http://13.124.90.245:8080/api/project/${project_id}/my-feedback`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A`,
+          },
+        }
+      );
+
+      const responseData = response.data.data;
+      // YesData와 NoData 배열을 상태로 설정
+      setYesFeedbackContents(
+        responseData.MyYesFeedback.map((item) => item.yesFeedbackContent)
+      );
+      setNoFeedbackContents(
+        responseData.MyNoFeedback.map((item) => item.NofeedbackContent)
+      );
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
-    <DetailContainer>
+    <>
       {button === "team" ? (
-        <Detail>
-          <ButtonBox>
-            <TeamButton onClick={() => handleButtonClick("team")}>
+        <SummaryContainer>
+          <BtnBox>
+            <Btn
+              style={{
+                background:
+                  "linear-gradient(130deg, transparent 20px, #1AD079 0), linear-gradient(130deg, transparent 20px, #DFDFDF 0)",
+              }}
+              onClick={() => handleButtonClick("team")}
+            >
               팀 정보
-            </TeamButton>
-            <FeedbackButton onClick={() => handleButtonClick("feedback")}>
+            </Btn>
+            <Btn
+              style={{
+                background:
+                  "linear-gradient(130deg, transparent 20px, #DFDFDF 0), linear-gradient(130deg, transparent 20px, #DFDFDF 0)",
+              }}
+              onClick={() => handleButtonClick("feedback")}
+            >
               받은 피드백
-            </FeedbackButton>
-          </ButtonBox>
-          <InnerBox>
-            <InnerBox1>
-              <TB>
-                <TT>팀 이름</TT>
-                <T style={{ maxWidth: "20vh" }}>PEER:RE</T>
-              </TB>
-              <TB>
-                <TT>팀원 수</TT>
-                <T>10명</T>
-              </TB>
-              <TB>
-                <TT>프로젝트 명</TT>
-                <T style={{ maxWidth: "18vh" }}>1분기 프로젝트</T>
-              </TB>
-            </InnerBox1>
-            <VerticalLine />
-            <InnerBox2>
-              <TB>
-                <TT>프로젝트 기간</TT>
-                <T>2023.12.28 ~ 2024.01.11</T>
-              </TB>
-              <TB>
-                <TT>전체 동료평가 참여율</TT>
-                <T>66%</T>
-              </TB>
-              <TB>
-                <TT>전체 피드백 개수</TT>
-                <T>YES 26 / NO 20</T>
-              </TB>
-            </InnerBox2>
-          </InnerBox>
-        </Detail>
+            </Btn>
+          </BtnBox>
+          <SummaryBox>
+            <FeedbackContainer style={{ flexDirection: "row" }}>
+              <Team_Table style={{ paddingRight: "15px" }}>
+                <tr>
+                  <td>
+                    <div>
+                      <p className="title">팀 이름</p>
+                      <p className="res">{teamName}</p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div>
+                      <p className="title">팀원 수</p>
+                      <p className="res">{memberNum}명</p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div>
+                      <p className="title">프로젝트 명</p>
+                      <p className="res">{projectName}</p>
+                    </div>
+                  </td>
+                </tr>
+              </Team_Table>
+              <VerticalLine />
+              <Team_Table style={{ paddingLeft: "15px" }}>
+                <tr>
+                  <td>
+                    <div>
+                      <p className="title">프로젝트 기간</p>
+                      <p className="res">
+                        {startDay} ~ {endDay}
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div>
+                      <p className="title">전체 동료평가 참여율</p>
+                      <p className="res">{Math.floor(totalParticipateRate)}%</p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div>
+                      <p className="title">전체 피드백 개수</p>
+                      <p className="res">
+                        YES {totalYesFeedbackCount} / NO {totalNoFeedbackCount}
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              </Team_Table>
+            </FeedbackContainer>
+          </SummaryBox>
+        </SummaryContainer>
       ) : (
-        <Detail2>
-          <ButtonBox>
-            <TeamButton onClick={() => handleButtonClick("team")}>
+        <SummaryContainer>
+          <BtnBox>
+            <Btn
+              style={{
+                background:
+                  "linear-gradient(130deg, transparent 20px,#DFDFDF 0), linear-gradient(130deg, transparent 20px, #DFDFDF 0)",
+              }}
+              onClick={() => handleButtonClick("team")}
+            >
               팀 정보
-            </TeamButton>
-            <FeedbackButton onClick={() => handleButtonClick("feedback")}>
+            </Btn>
+            <Btn
+              style={{
+                background:
+                  "linear-gradient(130deg, transparent 20px, #1AD079 0), linear-gradient(130deg, transparent 20px, #DFDFDF 0)",
+              }}
+              onClick={() => handleButtonClick("feedback")}
+            >
               받은 피드백
-            </FeedbackButton>
-          </ButtonBox>
-          <InnerBox>
-            <InnerBox1 style={{ width: "49.5%", margin: "3vh 0 0 0" }}>
-              <FeedbackTitle>
-                <span style={{ color: "green" }}>YES</span> 피드백
-              </FeedbackTitle>
-              <FeedbackText>
-                <FT>
-                  <ul>
-                    <li>연락이 잘 돼요.</li>
-                    <li>시간 약속을 잘 지켜요.</li>
-                    <li>능력이 뛰어나요.</li>
-                  </ul>
-                </FT>
-                <FT>
-                  <ul>
-                    <li>말을 조리있게 잘해요.</li>
-                    <li>빈틈이 없어요.</li>
-                    <li>재미있어요.</li>
-                  </ul>
-                </FT>
-              </FeedbackText>
-            </InnerBox1>
+            </Btn>
+          </BtnBox>
+          <SummaryBox>
+            <FeedbackContainer>
+              <p className="feedback-title">
+                <span style={{ color: "#1AD079" }}>YES</span> 피드백
+              </p>
+              <Table style={{ paddingRight: "15px" }}>
+                {yesFeedbackContents
+                  .reduce((acc, cell, index) => {
+                    if (index % 2 === 0) {
+                      acc.push([cell]);
+                    } else {
+                      acc[Math.floor(index / 2)].push(cell);
+                    }
+                    return acc;
+                  }, [])
+                  .map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                      {row.map((cell, cellIndex) => (
+                        <td key={cellIndex}>• {cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+              </Table>
+            </FeedbackContainer>
             <VerticalLine />
-            <InnerBox2 style={{ width: "49.5%", marginLeft: "0" }}>
-              <FeedbackTitle>
-                <span style={{ color: "red" }}>NO</span> 피드백
-              </FeedbackTitle>
-              <FeedbackText>
-                <FT>
-                  <ul>
-                    <li>연락이 안 돼요.</li>
-                    <li>시간 약속을 안 지켜요.</li>
-                    <li>능력이 뒤떨어져요.</li>
-                  </ul>
-                </FT>
-                <FT>
-                  <ul>
-                    <li>말을 조리있게 못해요.</li>
-                    <li>빈틈이 있어요.</li>
-                    <li>재미없어요.</li>
-                  </ul>
-                </FT>
-              </FeedbackText>
-            </InnerBox2>
-          </InnerBox>
-        </Detail2>
+            <FeedbackContainer>
+              <p className="feedback-title">
+                <span style={{ color: "#FF7D33" }}>NO</span> 피드백
+              </p>
+              <Table style={{ paddingLeft: "15px" }}>
+                {noFeedbackContents
+                  .reduce((acc, cell, index) => {
+                    if (index % 2 === 0) {
+                      acc.push([cell]);
+                    } else {
+                      acc[Math.floor(index / 2)].push(cell);
+                    }
+                    return acc;
+                  }, [])
+                  .map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                      {row.map((cell, cellIndex) => (
+                        <td key={cellIndex}>• {cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+              </Table>
+            </FeedbackContainer>
+          </SummaryBox>
+        </SummaryContainer>
       )}
-    </DetailContainer>
+    </>
   );
 }

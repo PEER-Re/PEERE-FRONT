@@ -8,36 +8,43 @@ import {
   Rank_Box_Color,
   Line,
 } from "/src/styles/style";
+import axios from "axios";
 import CustomizedProgressBars from "/src/components/team-report/gauge/BorderLinearProgress";
 import PersonalBar from "/src/components/team-report/rank_table/PersonalBar";
 import { useState, useEffect } from "react";
-import getTeamInfo from "/src/api/team-report/getTeamInfo";
 import { dummy } from "/src/data/team-report/dummy";
+// store
+import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 export default function TeamReport() {
 
-  // 임시 더미 데이터
-  const [data, setData] = useState(dummy.data);
+   // localstorage에서 토큰 가져오기
+   const accessToken = localStorage.getItem('accessToken');
+
+   // 선택한 팀 스페이스 아이디 가져오기
+  const selectedPRId = ProjectIdStore((state) => state.selectedPRId);
+
+  const [data, setData] = useState(dummy.data); // 더미데이터로 초기 세팅
   console.log(data);
-
-  // 프로젝트 id
-  const [projectid, setProjectId] = useState(10);
-  const accessToken = localStorage.getItem("accessToken");
   
-/*  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await getTeamInfo(accessToken, projectid);
-        console.log(response);
-        setData(response);
-      } catch(error) {
-        console.log(error);
-      }
-  }
+useEffect(() => {
+  const getTeamInfo = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/projects/${selectedPRId}/team-report`, {
+        headers: {
+          'Authorization': accessToken,
+        }
+      });
+      console.log('성공 : ',response.data.data);
+      setData(response.data.data);
+    } catch(error) {
+      console.log(error);
+    }
+}
 
-  getData();
+  getTeamInfo();
   }, []);
-  */
+  
 
   const [selected, setSelected] = useState(99);
 
@@ -49,7 +56,7 @@ export default function TeamReport() {
   return (
     <Container>
       <Title>팀 리포트</Title>
-      <Team_Box>
+     <Team_Box>
         <p>팀 이름: {data.teamInfo.teamName} </p>
         <p>팀원: {data.teamInfo.teamUserNames.map((member) => member).join(", ")}</p>
         <Gaze_Box>
@@ -81,7 +88,7 @@ export default function TeamReport() {
               feedbacks={member.goodFeedbackContent}
             />
         ))}
-      </Rank_Box>
+          </Rank_Box> 
     </Container>
   );
 }

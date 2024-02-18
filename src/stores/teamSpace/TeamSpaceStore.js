@@ -1,22 +1,24 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-const ProjectIdStore = create(
+const TeamSpaceStore = create(
   persist(
     (set) => ({
-      projectIds: [],
-      selectedPRId: 0,
-      selectedPRName: '',
+      teamspaceIds: [],
+      selectedTSId: 0,
+      selectedTSName: '',
+      selectedTSSize: 0,
 
       // api를 통한 프로젝트 id 세팅
-      addProjectId: (newProjectId) =>
+      addTeamSpaceId: (newteamspaceId) =>
         set((state) => ({
-          projectIds: [...state.projectIds, newProjectId],
+          teamspaceIds: [...state.teamspaceIds, newteamspaceId],
         })),
 
         // 선택한 프로젝트 id 세팅
-      setSelectedPRId: (id) => set({ selectedPRId: id }),
-      setSelectedPRName: (name) => set({ selectedPRName: name }),
+      setSelectedTSId: (id) => set({ selectedTSId: id }),
+      setSelectedTSName: (name) => set({ selectedTSName: name }),
+      setSelectedTSSize: (size) => set({ selectedTSSize: size }),
 
       // 특정 인덱스의 프로젝트 ID를 제거하는 액션
       // removeProjectId: (index) =>
@@ -25,9 +27,9 @@ const ProjectIdStore = create(
       //   })),
     }),
     {
-      name: "projectIdStorage",
+      name: "teamspaceIdStorage",
     }
   )
 );
 
-export default ProjectIdStore;
+export default TeamSpaceStore;

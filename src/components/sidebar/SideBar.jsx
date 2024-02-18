@@ -7,10 +7,15 @@ import T_L from "/src/assets/images/sidebar/team_logo.svg";
 import T_S from "/src/assets/images/sidebar/team_space.svg";
 import S_T_S from "/src/assets/images/sidebar/selected_team_space.svg";
 
-export default function SideBar() {
+import UsersStore from "/src/stores/users/UsersStore";
+
+export default function SideBar(location) {
+
     const navigate = useNavigate();
 
     const [selected, setSelected] = useState(99);
+    const userName = UsersStore((state) => state.userName); // 사용자 이름
+    const userImage = UsersStore((state) => state.userProfileImage); // 사용자 이미지
 
     const getPath = (index) => {
       switch (index) {
@@ -35,37 +40,37 @@ export default function SideBar() {
     const logout = () => {
       // accesstoken 삭제
       localStorage.removeItem("accessToken");
-      alert("로그아웃");
+      alert("로그아웃 되었습니다.");
+      navigate('/');
     }
 
   return (
     <Body>
    <BarHeader>
-    <BarHeaderImage />
+    <BarHeaderImage src={userImage} alt="bar-header-image"/>
     <BarHeaderText>
         <p>
-            김준희
+            {userName}
         </p>
-        피어리 마케팅 A팀
     </BarHeaderText>
     </BarHeader>
     <Hr $top="15px"/>
     <ButtonListBox>
         <ButtonHoverStyle onClick={getNavigate(99)} $index={selected}>
-            <HoverButtonImage $index={selected}/>
+            <HoverButtonImage src = {selected == 99 ? S_T_S : T_S} alt="team-space-button" />
             팀 스페이스
         </ButtonHoverStyle>
         <Hr $top="10px"/>
         <div onClick={getNavigate(0)}>
-        <SideBarButtonStyle text="팀 리포트" index={0} selected={selected}/>
+        <SideBarButtonStyle text="팀 리포트" index={0} selected={selected} location={location}/>
         <Hr $top="10px"/>
         </div>
         <div onClick={getNavigate(1)}>
-        <SideBarButtonStyle text="개인 리포트" index={1} selected={selected}/>
+        <SideBarButtonStyle text="개인 리포트" index={1} selected={selected} location={location}/>
         <Hr $top="10px"/>
         </div>
         <div onClick={getNavigate(2)}>
-        <SideBarButtonStyle text="피드백 관리" index={2} selected={selected}/>
+        <SideBarButtonStyle text="피드백 관리" index={2} selected={selected} location={location}/>
         <Hr $top="10px"/>
         </div>
     </ButtonListBox>
@@ -97,10 +102,9 @@ export const BarHeader = styled.div`
   margin-top: 24px;
 `;
 
-export const BarHeaderImage = styled.div`
+export const BarHeaderImage = styled.img`
   width: 50px;
   height: 50px;
-  background: url(${T_L});
   background-repeat: no-repeat;
 `;
 
@@ -142,10 +146,9 @@ font-weight: 800;
 color: ${(props) => props.$index == 99 ? '#07133B' : '#868686'};
 `;
 
-export const HoverButtonImage = styled.div`
+export const HoverButtonImage = styled.img`
   width: 35px;
   height: 35px;
-  background: url(${(props) => props.$index == 99 ? S_T_S : T_S});
   background-repeat: no-repeat;
   margin-right: 20px;
   margin-left: 5px;

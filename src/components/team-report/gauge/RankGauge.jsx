@@ -23,6 +23,7 @@ export default function LankGuage({value}) {
     <div style={{ 
       display: 'flex', 
       width: '100%', 
+      minWidth: '20%',
       alignItems: 'center', 
       gap: '20px', 
       }}>

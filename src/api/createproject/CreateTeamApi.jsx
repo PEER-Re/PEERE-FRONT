@@ -17,11 +17,14 @@ const CreateTeamApi = async (teamName, teamIntro) => {
     // console.log(config);
     // console.log(postData);
     const response = await axios.post(
-      "http://13.124.90.245:8080/api/teamspace",
+      `${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace`,
       postData,
       config
     );
-    // const teamspaceId = response.data.data.teamspaceId;
+
+    alert(
+      "생성하신 팀의 초대 코드는" + response.data.data.invitationCode + "입니다"
+    );
     return response.data.data.teamspaceId;
     // navigate(`/create-project`, { state: { apidata: teamspaceId } });
   } catch (error) {
