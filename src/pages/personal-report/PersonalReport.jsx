@@ -24,7 +24,7 @@ import Evaluate from "/src/components/Evaluate/Evaluate.jsx";
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 function PersonalReport() {
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem("accessToken");
 
   const [profileNameApi, setProfileNameApi] = useState("");
   const [profileImgApi, setProfileImgApi] = useState("");
@@ -52,9 +52,10 @@ function PersonalReport() {
 
   const sendGetRequest = async () => {
     try {
-
       const response = await axios.get(
-        `${import.meta.env.VITE_APP_SERVER_HOST}/api/projects/${selectedPRId}/my-report`,
+        `${
+          import.meta.env.VITE_APP_SERVER_HOST
+        }/api/projects/${selectedPRId}/my-report`,
         {
           headers: {
             "Content-Type": "application/json",

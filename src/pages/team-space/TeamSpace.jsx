@@ -19,7 +19,10 @@ import TeamSpaceStore from "/src/stores/teamSpace/TeamSpaceStore";
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 import axios from "axios";
-import { projectResponseDummy, teamspaceResponseDummy } from "/src/data/team-space/dummy";
+import {
+  projectResponseDummy,
+  teamspaceResponseDummy,
+} from "/src/data/team-space/dummy";
 import UsersStore from "/src/stores/users/UsersStore";
 
 export default function TeamSpace() {
@@ -33,14 +36,19 @@ export default function TeamSpace() {
   const accessToken = localStorage.getItem("accessToken");
   // store 파일의 actions 가져오기 사용자가 선택한 teamspace
 
-  const { setSelectedTSId, setSelectedTSName, setSelectedTSSize } = TeamSpaceStore((state) => state);
-  const { setSelectedPRId, setSelectedPRName } = ProjectIdStore((state) => state);
+  const { setSelectedTSId, setSelectedTSName, setSelectedTSSize } =
+    TeamSpaceStore((state) => state);
+  const { setSelectedPRId, setSelectedPRName } = ProjectIdStore(
+    (state) => state
+  );
 
   const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
   const selectedTSName = TeamSpaceStore((state) => state.selectedTSName); // 팀이름
   const selectedTSSize = TeamSpaceStore((state) => state.selectedTSSize); // 팀 사이즈
 
-  const { setUserId, setUserName, setUserProfileImage } = UsersStore((state) => state); // 유저 정보 세팅
+  const { setUserId, setUserName, setUserProfileImage } = UsersStore(
+    (state) => state
+  ); // 유저 정보 세팅
 
   const [teams, setTeams] = useState(teamspaceResponseDummy); // 팀 스페이스 정보 api 저장용 초기 값은 더미 데이터
   const [projects, setProjects] = useState(projectResponseDummy); // project 저장용 초기 값은 더미 데이터
@@ -51,35 +59,41 @@ export default function TeamSpace() {
 
   const navigate = useNavigate();
 
-    // 유저 정보 호출 함수
-    const getUserInfo = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/user`, {
+  // 유저 정보 호출 함수
+  const getUserInfo = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/user`,
+        {
           headers: {
-            'Authorization': accessToken,
-          }
-        });
-        console.log('유저 정보', response.data);
-        setUserName(response.data.data.nickname); // 유저 이름 저장
-        setUserProfileImage(response.data.data.profileImgUrl); // 유저 이미지 저장
-      } catch(error) {
-        console.log(error);
-      }
-  }
+            Authorization: accessToken,
+          },
+        }
+      );
+      console.log("유저 정보", response.data);
+      setUserName(response.data.data.nickname); // 유저 이름 저장
+      setUserProfileImage(response.data.data.profileImgUrl); // 유저 이미지 저장
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // 유저 id 호출 함수
   const getUserId = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/user/test`, {
-        headers: {
-          'Authorization': accessToken,
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/user/test`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      });
+      );
       setUserId(response.data); // 유저 아이디 저장
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
-}
+  };
 
   // 팀 스페이스 호출 함수
   const getTeamInfo = async () => {
@@ -90,32 +104,41 @@ export default function TeamSpace() {
           headers: {
             Authorization: accessToken,
           },
-        },
+        }
       );
-      console.log('팀 스페이스 조회 성공', response.data);
+      console.log("팀 스페이스 조회 성공", response.data);
       setTeams(response.data.data.teamspaceResponseDtoList);
-      setSelectedTSName(response.data.data.teamspaceResponseDtoList[selectedTSId].name); // 선택한 팀 이름 저장(임시 index)
-      setSelectedTSSize(response.data.data.teamspaceResponseDtoList[selectedTSId].size); // 선택한 팀 사이즈 저장(임시 index)
-    } catch(error) {
+      setSelectedTSName(
+        response.data.data.teamspaceResponseDtoList[selectedTSId].name
+      ); // 선택한 팀 이름 저장(임시 index)
+      setSelectedTSSize(
+        response.data.data.teamspaceResponseDtoList[selectedTSId].size
+      ); // 선택한 팀 사이즈 저장(임시 index)
+    } catch (error) {
       console.log(error);
     }
   };
 
-// 팀 스페이스에 따른 프로젝트 리스트 호출 함수
-    const getProjectsInfo= async (index) => {
-      console.log(index);
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}/projects`, {
+  // 팀 스페이스에 따른 프로젝트 리스트 호출 함수
+  const getProjectsInfo = async (index) => {
+    console.log(index);
+    try {
+      const response = await axios.get(
+        `${
+          import.meta.env.VITE_APP_SERVER_HOST
+        }/api/teamspace/${index}/projects`,
+        {
           headers: {
-            'Authorization': accessToken,
-          }
-        });
-        setProjects(response.data.data.projectResponseDtoList);
-        console.log('프로젝트 조회 성공', response.data);
-      } catch(error) {
-        console.log(error);
-      }
-  }
+            Authorization: accessToken,
+          },
+        }
+      );
+      setProjects(response.data.data.projectResponseDtoList);
+      console.log("프로젝트 조회 성공", response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // 팀 스페이스 클릭 후 해당 프로젝트 출력 함수
   const changeTeamSpace = (index) => {
@@ -126,8 +149,8 @@ export default function TeamSpace() {
 
     // setTitle(prevTitle => ({...prevTitle, name: teams[index].name}));
     // setTitle(prevTitle => ({...prevTitle, size: teams[index].size})); // 선택한 팀 스페이스 이름과 사이즈
-  }
-  
+  };
+
   // 시작 시 useEffect
   useEffect(() => {
     getUserId(); // 유저 아이디 호출
@@ -136,29 +159,36 @@ export default function TeamSpace() {
     getProjectsInfo(selectedTSId); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
   }, []);
 
-    // 팀 스페이스 삭제 전 선택 함수, 선택한 index가 배열에 포함되어 있다면 이미지를 변경한다.
-    const selectCheckBox = (index) => {
-      setSelectedTeamIndex(index); // 선택한 index
-    };
+  // 팀 스페이스 삭제 전 선택 함수, 선택한 index가 배열에 포함되어 있다면 이미지를 변경한다.
+  const selectCheckBox = (index) => {
+    setSelectedTeamIndex(index); // 선택한 index
+  };
 
-    // 팀 스페이스 삭제 함수, 한 개씩만 삭제한다. 여기서 index는 내가 선택한 팀 스페이스의 id를 가져온다.
-    const deleteTeamSpace = async (index) => {
-      setSelectedTeamIndex(selectedTeamIndex + 1); // 선택한 index 제외하기
-      try {
-        const response = await axios.delete(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}`, {
+  // 팀 스페이스 삭제 함수, 한 개씩만 삭제한다. 여기서 index는 내가 선택한 팀 스페이스의 id를 가져온다.
+  const deleteTeamSpace = async (index) => {
+    setSelectedTeamIndex(selectedTeamIndex + 1); // 선택한 index 제외하기
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}`,
+        {
           headers: {
-            'Authorization': accessToken,
-          }
-        });
-        console.log(teams[index].id, '번 팀을 삭제하였습니다. response : ', response.data.data);
-        setStatus(!status);
-      } catch(error) {
-        console.log(error);
-      } finally {
-        getTeamInfo();
-        getProjectsInfo(selectedTSId);
-      }
-  }
+            Authorization: accessToken,
+          },
+        }
+      );
+      console.log(
+        teams[index].id,
+        "번 팀을 삭제하였습니다. response : ",
+        response.data.data
+      );
+      setStatus(!status);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      getTeamInfo();
+      getProjectsInfo(selectedTSId);
+    }
+  };
 
   // 결과 보기로 이동한다. 이동하면서 선택 프로젝트 상태를 변경한다.
   const navigateResult = async (index) => {
@@ -194,7 +224,9 @@ export default function TeamSpace() {
         <Team_List_Container>
           <MyTeam_Title>
             나의 팀
-            <WasteImg onClick={() => deleteTeamSpace(teams[selectedTeamIndex].id)} />
+            <WasteImg
+              onClick={() => deleteTeamSpace(teams[selectedTeamIndex].id)}
+            />
           </MyTeam_Title>
           <ScrollBox>
             {teams.map((team, index) => (
@@ -674,4 +706,3 @@ const ChevronRightImg = styled.div`
   display: flex;
   align-items: center;
 `;
-
