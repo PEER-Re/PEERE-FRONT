@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {} from "../../styles/style";
+import { SendButton } from "../../styles/style";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container, Title } from "/src/styles/style";
@@ -13,16 +13,25 @@ import TickBoxImage from "/src/assets/images/team-space/TickBox.png";
 import SaturationImage from "/src/assets/images/team-space/Saturation.png";
 import ChevronRightImage from "/src/assets/images/team-space/ChevronRight.png";
 import ChevronRight2Image from "/src/assets/images/team-space/ChevronRight2.png";
+import Modal from "/src/components/modal/modal.jsx";
 
 // store
 import TeamSpaceStore from "/src/stores/teamSpace/TeamSpaceStore";
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 import axios from "axios";
-import { projectResponseDummy, teamspaceResponseDummy } from "/src/data/team-space/dummy";
+import {
+  projectResponseDummy,
+  teamspaceResponseDummy,
+} from "/src/data/team-space/dummy";
 import UsersStore from "/src/stores/users/UsersStore";
 
 export default function TeamSpace() {
+  // 모달 열고닫기 관련 useState
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   // localstorage에서 토큰 가져오기
 
   // 임시 토큰 세팅
@@ -33,14 +42,19 @@ export default function TeamSpace() {
   const accessToken = localStorage.getItem("accessToken");
   // store 파일의 actions 가져오기 사용자가 선택한 teamspace
 
-  const { setSelectedTSId, setSelectedTSName, setSelectedTSSize } = TeamSpaceStore((state) => state);
-  const { setSelectedPRId, setSelectedPRName } = ProjectIdStore((state) => state);
+  const { setSelectedTSId, setSelectedTSName, setSelectedTSSize } =
+    TeamSpaceStore((state) => state);
+  const { setSelectedPRId, setSelectedPRName } = ProjectIdStore(
+    (state) => state
+  );
 
   const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
   const selectedTSName = TeamSpaceStore((state) => state.selectedTSName); // 팀이름
   const selectedTSSize = TeamSpaceStore((state) => state.selectedTSSize); // 팀 사이즈
 
-  const { setUserId, setUserName, setUserProfileImage } = UsersStore((state) => state); // 유저 정보 세팅
+  const { setUserId, setUserName, setUserProfileImage } = UsersStore(
+    (state) => state
+  ); // 유저 정보 세팅
 
   const [teams, setTeams] = useState(teamspaceResponseDummy); // 팀 스페이스 정보 api 저장용 초기 값은 더미 데이터
   const [projects, setProjects] = useState(projectResponseDummy); // project 저장용 초기 값은 더미 데이터
@@ -51,35 +65,41 @@ export default function TeamSpace() {
 
   const navigate = useNavigate();
 
-    // 유저 정보 호출 함수
-    const getUserInfo = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/user`, {
+  // 유저 정보 호출 함수
+  const getUserInfo = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/user`,
+        {
           headers: {
-            'Authorization': accessToken,
-          }
-        });
-        console.log('유저 정보', response.data);
-        setUserName(response.data.data.nickname); // 유저 이름 저장
-        setUserProfileImage(response.data.data.profileImgUrl); // 유저 이미지 저장
-      } catch(error) {
-        console.log(error);
-      }
-  }
+            Authorization: accessToken,
+          },
+        }
+      );
+      console.log("유저 정보", response.data);
+      setUserName(response.data.data.nickname); // 유저 이름 저장
+      setUserProfileImage(response.data.data.profileImgUrl); // 유저 이미지 저장
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // 유저 id 호출 함수
   const getUserId = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/user/test`, {
-        headers: {
-          'Authorization': accessToken,
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/user/test`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
         }
-      });
+      );
       setUserId(response.data); // 유저 아이디 저장
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
-}
+  };
 
   // 팀 스페이스 호출 함수
   const getTeamInfo = async () => {
@@ -90,32 +110,41 @@ export default function TeamSpace() {
           headers: {
             Authorization: accessToken,
           },
-        },
+        }
       );
-      console.log('팀 스페이스 조회 성공', response.data);
+      console.log("팀 스페이스 조회 성공", response.data);
       setTeams(response.data.data.teamspaceResponseDtoList);
-      setSelectedTSName(response.data.data.teamspaceResponseDtoList[selectedTSId].name); // 선택한 팀 이름 저장(임시 index)
-      setSelectedTSSize(response.data.data.teamspaceResponseDtoList[selectedTSId].size); // 선택한 팀 사이즈 저장(임시 index)
-    } catch(error) {
+      setSelectedTSName(
+        response.data.data.teamspaceResponseDtoList[selectedTSId].name
+      ); // 선택한 팀 이름 저장(임시 index)
+      setSelectedTSSize(
+        response.data.data.teamspaceResponseDtoList[selectedTSId].size
+      ); // 선택한 팀 사이즈 저장(임시 index)
+    } catch (error) {
       console.log(error);
     }
   };
 
-// 팀 스페이스에 따른 프로젝트 리스트 호출 함수
-    const getProjectsInfo= async (index) => {
-      console.log(index);
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}/projects`, {
+  // 팀 스페이스에 따른 프로젝트 리스트 호출 함수
+  const getProjectsInfo = async (index) => {
+    console.log(index);
+    try {
+      const response = await axios.get(
+        `${
+          import.meta.env.VITE_APP_SERVER_HOST
+        }/api/teamspace/${index}/projects`,
+        {
           headers: {
-            'Authorization': accessToken,
-          }
-        });
-        setProjects(response.data.data.projectResponseDtoList);
-        console.log('프로젝트 조회 성공', response.data);
-      } catch(error) {
-        console.log(error);
-      }
-  }
+            Authorization: accessToken,
+          },
+        }
+      );
+      setProjects(response.data.data.projectResponseDtoList);
+      console.log("프로젝트 조회 성공", response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // 팀 스페이스 클릭 후 해당 프로젝트 출력 함수
   const changeTeamSpace = (index) => {
@@ -126,8 +155,8 @@ export default function TeamSpace() {
 
     // setTitle(prevTitle => ({...prevTitle, name: teams[index].name}));
     // setTitle(prevTitle => ({...prevTitle, size: teams[index].size})); // 선택한 팀 스페이스 이름과 사이즈
-  }
-  
+  };
+
   // 시작 시 useEffect
   useEffect(() => {
     getUserId(); // 유저 아이디 호출
@@ -136,29 +165,36 @@ export default function TeamSpace() {
     getProjectsInfo(selectedTSId); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
   }, []);
 
-    // 팀 스페이스 삭제 전 선택 함수, 선택한 index가 배열에 포함되어 있다면 이미지를 변경한다.
-    const selectCheckBox = (index) => {
-      setSelectedTeamIndex(index); // 선택한 index
-    };
+  // 팀 스페이스 삭제 전 선택 함수, 선택한 index가 배열에 포함되어 있다면 이미지를 변경한다.
+  const selectCheckBox = (index) => {
+    setSelectedTeamIndex(index); // 선택한 index
+  };
 
-    // 팀 스페이스 삭제 함수, 한 개씩만 삭제한다. 여기서 index는 내가 선택한 팀 스페이스의 id를 가져온다.
-    const deleteTeamSpace = async (index) => {
-      setSelectedTeamIndex(selectedTeamIndex + 1); // 선택한 index 제외하기
-      try {
-        const response = await axios.delete(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}`, {
+  // 팀 스페이스 삭제 함수, 한 개씩만 삭제한다. 여기서 index는 내가 선택한 팀 스페이스의 id를 가져온다.
+  const deleteTeamSpace = async (index) => {
+    setSelectedTeamIndex(selectedTeamIndex + 1); // 선택한 index 제외하기
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}`,
+        {
           headers: {
-            'Authorization': accessToken,
-          }
-        });
-        console.log(teams[index].id, '번 팀을 삭제하였습니다. response : ', response.data.data);
-        setStatus(!status);
-      } catch(error) {
-        console.log(error);
-      } finally {
-        getTeamInfo();
-        getProjectsInfo(selectedTSId);
-      }
-  }
+            Authorization: accessToken,
+          },
+        }
+      );
+      console.log(
+        teams[index].id,
+        "번 팀을 삭제하였습니다. response : ",
+        response.data.data
+      );
+      setStatus(!status);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      getTeamInfo();
+      getProjectsInfo(selectedTSId);
+    }
+  };
 
   // 결과 보기로 이동한다. 이동하면서 선택 프로젝트 상태를 변경한다.
   const navigateResult = async (index) => {
@@ -194,7 +230,9 @@ export default function TeamSpace() {
         <Team_List_Container>
           <MyTeam_Title>
             나의 팀
-            <WasteImg onClick={() => deleteTeamSpace(teams[selectedTeamIndex].id)} />
+            <WasteImg
+              onClick={() => deleteTeamSpace(teams[selectedTeamIndex].id)}
+            />
           </MyTeam_Title>
           <ScrollBox>
             {teams.map((team, index) => (
@@ -246,16 +284,29 @@ export default function TeamSpace() {
           </ScrollBox>
         </Team_List_Container>
 
-        <Add_NewSpace_Button onClick={() => navigate("/create-team")}>
-          <PeopleImg />
-          <New_Space_Text>
-            새로운
-            <br />
-            팀 스페이스
-            <br />
-            생성
-          </New_Space_Text>
-        </Add_NewSpace_Button>
+        <div style={{ paddingTop: "35px" }}>
+          <Add_NewSpace_Button onClick={() => navigate("/create-team")}>
+            <PeopleImg />
+            <New_Space_Text>
+              새로운
+              <br />
+              팀 스페이스
+              <br />
+              생성
+            </New_Space_Text>
+          </Add_NewSpace_Button>
+          <EnterTeam_Button onClick={openModal}>
+            <ChevronRightImg
+              imageurl={ChevronRight2Image}
+              style={{ marginRight: "-10px" }}
+            />
+            <ChevronRightImg
+              imageurl={ChevronRight2Image}
+              style={{ marginRight: "10px" }}
+            />
+            <p> 팀 참여하기</p>
+          </EnterTeam_Button>
+        </div>
       </Top_Container>
 
       <Bottom_Container>
@@ -321,6 +372,15 @@ export default function TeamSpace() {
           ))}
         </Project_List_Container>
       </Bottom_Container>
+      <Modal isOpen={isModalOpen} closeModal={closeModal}>
+        <Team_Bar style={{ width: "80%", margin: "15px 0 35px 0" }}>
+          <CopyInvitation>초대코드 입력</CopyInvitation>
+          <input style={{ width: "60%", fontSize: "22px" }}></input>
+          <SendButton
+            style={{ width: "13%", height: "25px", margin: "0 5px" }}
+          />
+        </Team_Bar>
+      </Modal>
     </div>
   );
 }
@@ -359,6 +419,25 @@ const Add_NewSpace_Button = styled.div`
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+`;
+
+const EnterTeam_Button = styled.div`
+  /* border: 1px solid blue; */
+  box-sizing: border-box;
+  width: 10%;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+
+  p {
+    padding-left: 20px;
+  }
 `;
 
 const PeopleImg = styled.div`
@@ -450,6 +529,12 @@ const Team_Bar = styled.div`
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
   background-color: white;
   margin-right: 5px;
+
+  input {
+    /* border: 1px solid red; */
+    margin-left: 15px;
+    height: 25px;
+  }
 `;
 
 const Role_Box = styled.div`
@@ -675,3 +760,20 @@ const ChevronRightImg = styled.div`
   align-items: center;
 `;
 
+const CopyInvitation = styled.div`
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  height: 40px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: #1ad079;
+  padding: 0 15px;
+  white-space: nowrap;
+`;
