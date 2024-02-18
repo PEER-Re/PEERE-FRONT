@@ -12,8 +12,9 @@ import {
   TeamName,
   Name,
   Role,
-  Assess1,
-  Assess2,
+  OtherMember,
+  OtherMemberName,
+  OtherMemberName1,
   FeedbackLine,
   Button,
   Block,
@@ -21,6 +22,8 @@ import {
 import axios from "axios";
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 import UsersStore from "/src/stores/users/UsersStore";
+import YesFeedbackList from "./YesFeedbackList";
+import NoFeedbackList from "../feedback/NoFeedbackList";
 
 function FeedbackUsers() {
 
@@ -55,29 +58,36 @@ function FeedbackUsers() {
       <FeedbackUsersTextBox>
         피드백관리
       </FeedbackUsersTextBox>
-      <FeedBackNameBox>
-        <UserTeamProfImg src={userImage}/>
-        <TeamName>
-          <Name>{userName}</Name>
-        </TeamName>
-      </FeedBackNameBox>
+
+        <FeedBackNameBox>
+          <UserTeamProfImg src={userImage}/>
+           <TeamName>
+            <Name>{userName}</Name>
+            <Role>피어리마케팅A팀</Role>
+           </TeamName>
+        </FeedBackNameBox>
+
+        <OtherMember>
+
+              <OtherMemberName1> </OtherMemberName1>
+              <OtherMemberName>{userName}</OtherMemberName>
+              <OtherMemberName>{userName}</OtherMemberName>
+              <OtherMemberName>{userName}</OtherMemberName>
+              <OtherMemberName>{userName}</OtherMemberName>
+              <OtherMemberName>{userName}</OtherMemberName>
+              <OtherMemberName>{userName}</OtherMemberName>
+              <OtherMemberName>{userName}</OtherMemberName>
+          </OtherMember>
+
+
       <FeedbackBox>
         <UsersFeedBackType>
           <FeedbackAnswer>
             <Highlight1>YES</Highlight1> 피드백
           </FeedbackAnswer>
-            <Assess1>연락이 잘돼요.</Assess1>
-         
-            <Assess1>시간약속을 잘지켜요.</Assess1>
-         
-          
-            <Assess1>능력이 뛰어나요.</Assess1>
-         
-            <Assess1>말을 조리있게 잘해요.</Assess1>
-       
-          
-            <Assess1>빈틈이 없어요.</Assess1>
-         
+
+          <YesFeedbackList/>
+
           <Button onClick={(() => PostFeedbacks())}>완료</Button>
         </UsersFeedBackType>
       
@@ -88,19 +98,8 @@ function FeedbackUsers() {
             <Highlight2>NO</Highlight2> 피드백
           </FeedbackAnswer>
        
-            <Assess2>연락이 안 돼요.</Assess2>
-       
-         
-            <Assess2>시간약속을 안 지켜요.</Assess2>
-    
-            <Assess2>능력이 뒤떨어져요.</Assess2>
-      
-       
-            <Assess2>말을 조리있게 못해요.</Assess2>
-    
-            <Assess2>빈틈이 있어요.</Assess2>
-      
-          <Block/>
+          <NoFeedbackList/>
+        <Block/>
         </UsersFeedBackType>
       </FeedbackBox>
     </MainFeedback>

@@ -802,7 +802,6 @@ export const MainFeedback = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 10%;
 `;
 export const FeedbackUsersTextBox = styled.div`
   pointer-events: none;
@@ -822,7 +821,7 @@ export const FeedBackNameBox = styled.div`
   margin-top: 1%;
   background-color: white;
   border-radius: 10px;
-  height: 15%;
+  height: 13%;
   width: 300px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -831,7 +830,21 @@ export const FeedBackNameBox = styled.div`
   padding-left: 1%;
   white-space: nowrap;
 `;
-
+export const UserTeamProfImg = styled.img`
+  pointer-events: none;
+  background: lightgray 50% / cover no-repeat;
+  border-radius: 50%;
+  height: 82%;
+  margin-left: 10%;
+  margin-right: 15%;
+`;
+export const TeamName = styled.div`
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2.5%;
+  margin-bottom: 2%;
+`;
 export const Name = styled.div`
   pointer-events: none;
   font-size: x-large;
@@ -841,23 +854,62 @@ export const Role = styled.div`
   pointer-events: none;
   font-size: medium;
   margin-top: 6%;
-  font-weight: 550;
+  font-weight: 400;
 `;
-export const UserTeamProfImg = styled.img`
+export const OtherMember = styled.button`
+display: flex;
+position: absolute;
+white-space: nowrap;
+top: 22%;
+left: 10%;
+`;
+export const OtherMemberName1 = styled.div`
+//팀원 왼쪽 간격
+width: 20%;
+min-width: 450px;
+height: 20px;
+margin-right: 10%;
+`;
+export const OtherMemberName = styled.div`
+background-color: #FFFFFF;
+box-shadow: 0px 1px 4px 0px #00000040;
+padding-left: 1.5%;
+padding-right: 1.5%;
+padding-top: 1%;
+padding-bottom: 1%;
+border-radius: 7px;
+height: 20px;
+margin-right: 5%;
+`;
+export const FeedbackBox = styled.div`
+  background-image: url('/src/assets/images/feedback/bg3.svg');
+  display: flex;
+  height: 450px;
+  width: 90%;
+  margin-left: 5%;
+  background-size: cover;
+  overflow-y: auto;
+`;
+export const UsersFeedBackType = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 80%;
+`;
+export const FeedbackAnswer = styled.div`
   pointer-events: none;
-  background: lightgray 50% / cover no-repeat;
-  border-radius: 50%;
-  height: 82%;
-  margin-left: 3%;
-  margin-right: 1%;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  font-size: x-large;
+  font-weight: 700;
+  color: ${({ color }) => color};
 `;
-
 export const Assess1 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-left: 11%;
+  margin-left: 13%;
   margin-bottom: 2%;
   font-weight: 700;
   height: 12%;
@@ -873,7 +925,7 @@ export const Assess2 = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-left: 11%;
+  margin-left: 13%;
   margin-bottom: 2%;
   font-weight: 700;
   height: 12%;
@@ -888,11 +940,11 @@ export const Assess2 = styled.div`
 export const FeedbackLine = styled.div`
   pointer-events: none;
   width: 1%;
-  height: 69%;
+  height: 75%;
   border-right: 1.5px solid #07133b80;
   margin-top: 5%;
 `;
-export const Button = styled.div`
+export const Button = styled.button`
   cursor: pointer;
   background-color: #e6e6e6b8;
   border-radius: 16px;
@@ -910,47 +962,11 @@ export const Button = styled.div`
   }
 `;
 export const Block = styled.div`
-  width: 13%;
-  height: 11.5%;
+width: 15%;
+height: 11.5%;
 `;
 
-export const FeedbackBox = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  margin-left: 4%;
-  margin-right: 4%;
-  margin-top: 1%;
-  margin-bottom: 20px;
-  background-color: white;
-  border-radius: 10px;
-  justify-content: space-evenly;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-`;
 
-export const UsersFeedBackType = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  width: 80%;
-`;
-
-export const TeamName = styled.div`
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  margin-top: 2.5%;
-  margin-bottom: 2%;
-`;
-
-export const FeedbackAnswer = styled.div`
-  pointer-events: none;
-  margin-top: 1.5%;
-  margin-bottom: 5%;
-  font-size: x-large;
-  font-weight: 700;
-  color: ${({ color }) => color};
-`;
 /*Feedback*/
 
 export const MainCheck = styled.div`
@@ -958,42 +974,33 @@ export const MainCheck = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 10%;
   margin: 0;
 `;
 export const MyFeedbackBox = styled.div`
-  height: 100%;
-  flex-direction: row;
-  margin-left: 4%;
-  margin-right: 4%;
-  margin-top: 1%;
-  margin-bottom: 2%;
-  background-color: white;
-  border-radius: 10px;
-  justify-content: end;
-
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+background-image: url('/src/assets/images/feedback/bg2.svg');
+height:100%;
+width: 90%;
+margin-left: 5%;
+background-size: cover;
+overflow-y: auto;
 `;
 export const FeedbackTextBox = styled.div`
   color: black;
-  margin-left: 4%;
+  margin-left: 5%;
   margin-top: 3%;
-  margin-bottom: 3%;
   font-size: xx-large;
   font-weight: 700;
   display: flex;
 `;
-// export const FeedbackDesign = styled.img`
-// position: absolute;
-
-//`
+export const Minwidth = styled.div`
+width: 50%;
+min-width: 400px;
+`;
 export const YesNoBox = styled.div`
   display: flex;
-  height: 10%;
-  padding-top: 2%;
-  flex-direction: row;
-  justify-content: end;
+  padding-top: 8%;
   white-space: nowrap;
+  margin-bottom: 2%;
 `;
 export const Yes = styled.span`
   color: #1ad079;
@@ -1005,61 +1012,13 @@ export const No = styled.span`
 export const TextFeedback1 = styled.span`
   font-weight: 700;
   font-size: x-large;
-  margin-right: 15%;
+  margin-right: 13%;
+  
 `;
 export const TextFeedback2 = styled.span`
   font-weight: 700;
   font-size: x-large;
-  padding-right: 13%;
 `;
-export const Person = styled.div`
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  margin: 0;
-`;
-export const TeamProfImg = styled.img`
-  background: lightgray 50% / cover no-repeat;
-  border-radius: 50%;
-  height: 82%;
-  margin-left: 3%;
-  margin-right: 1%;
-`;
-export const Who = styled.div`
-  margin-right: 1%;
-  margin-left: 1%;
-`;
-export const FeedbackLLine = styled.div`
-  width: 0.08%;
-  height: 300px;
-  margin-left: 5%;
-  margin-top: 3%;
-  background-color: #07133b80;
-  opacity: 0.5;
-`;
-export const Team = styled.div``;
-export const MemberName = styled.div`
-  font-weight: 700;
-  font-size: x-large;
-  margin-bottom: 8%;
-`;
-export const How = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #e4e4e454;
-  width: 550px;
-  height: 120px;
-  border-radius: 21px;
-  margin-left: 15%;
-  font-weight: 700;
-`;
-export const FeedbackList1 = styled.span`
-posiroom' lwfrSWWWW
-padding-right: 5%;
-`;
-export const FeedbackList2 = styled.span``;
-
 /*Home*/
 export const HomeContainer = styled.div`
   position: relative;
@@ -1120,4 +1079,63 @@ export const LoginButton = styled.div`
   width: 373px;
   height: 88px;
   background-repeat: no-repeat;
+`;
+
+/* FeedbackPerson*/
+export const Person = styled.div`
+  display: flex;
+  white-space: nowrap;
+  margin: 0;
+`;
+export const Member = styled.div`
+display: flex;
+justify-content: flex-start;
+align-items: center;
+width: 40%;
+min-width: 400px;
+`;
+export const TeamProfImg = styled.img`
+  background: lightgray 50% / cover no-repeat;
+  border-radius: 50%;
+  margin-left: 10%;
+  margin-right: 1%;
+`;
+export const TeamPerson = styled.div`
+
+margin-left: 5%;
+`
+
+export const MemberName = styled.div`
+  font-weight: 700;
+  font-size: x-large;
+  margin-bottom: 8%;
+`;
+export const MemberTeam = styled.div`
+
+`;
+
+export const FeedbackPersonLine = styled.div`
+width: 2px;
+background-color: #07133B80;
+
+`;
+export const How = styled.div`
+  display: flex;
+  align-items: center; //열방향 가운데
+  background-color: #E4E4E454;
+  margin-left: 8%;
+  width: 40%;
+  height:100px;
+  border-radius: 21px;
+  font-weight: 700;
+  margin-bottom: 2%;
+`;
+export const YesList = styled.div`
+
+`;
+export const FeedbackList1 = styled.span`
+margin-right: 32%;
+margin-left: 5%;
+`;
+export const FeedbackList2 = styled.span`
 `;
