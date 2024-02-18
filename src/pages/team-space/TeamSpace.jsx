@@ -99,7 +99,8 @@ export default function TeamSpace() {
       console.log(error);
     }
   };
-  // 추가한 api 코드
+
+  // 첫 번째 렌더링
   const firstGetTeamInfo = async () => {
     try {
       const response = await axios.get(
@@ -108,20 +109,22 @@ export default function TeamSpace() {
           headers: {
             Authorization: accessToken,
           },
-        }
+        },
       );
-      console.log("팀 스페이스 조회 성공", response.data);
+      console.log('팀 스페이스 조회 성공', response.data);
       setTeams(response.data.data.teamspaceResponseDtoList);
       setSelectedTSName(response.data.data.teamspaceResponseDtoList[0].name); // 선택한 팀 이름 저장(임시 index)
       setSelectedTSSize(response.data.data.teamspaceResponseDtoList[0].size); // 선택한 팀 사이즈 저장(임시 index)
-      setSelectedTSId(response.data.data.teamspaceResponseDtoList[0].id); // 첫 팀스페이스로 우선 세팅
-    } catch (error) {
+      setSelectedTSId(response.data.data.teamspaceResponseDtoList[0].id); // 선택한 팀 사이즈 저장(임시 index)
+
+      getProjectsInfo(response.data.data.teamspaceResponseDtoList[0].id); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
+    } catch(error) {
       console.log(error);
     }
   };
 
-  // 팀 스페이스 호출 함수
-  const getTeamInfo = async () => {
+   // 팀 정보 받아오기
+   const getTeamInfo = async () => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/teamspaces`,
@@ -129,41 +132,33 @@ export default function TeamSpace() {
           headers: {
             Authorization: accessToken,
           },
-        }
+        },
       );
-      console.log("팀 스페이스 조회 성공", response.data);
+      console.log('팀 스페이스 조회 성공', response.data);
       setTeams(response.data.data.teamspaceResponseDtoList);
-      setSelectedTSName(
-        response.data.data.teamspaceResponseDtoList[selectedTSId].name
-      ); // 선택한 팀 이름 저장(임시 index)
-      setSelectedTSSize(
-        response.data.data.teamspaceResponseDtoList[selectedTSId].size
-      ); // 선택한 팀 사이즈 저장(임시 index)
-    } catch (error) {
+      setSelectedTSName(response.data.data.teamspaceResponseDtoList[selectedTSId].name); // 선택한 팀 이름 저장(임시 index)
+      setSelectedTSSize(response.data.data.teamspaceResponseDtoList[selectedTSId].size); // 선택한 팀 사이즈 저장(임시 index)
+
+    } catch(error) {
       console.log(error);
     }
   };
 
-  // 팀 스페이스에 따른 프로젝트 리스트 호출 함수
-  const getProjectsInfo = async (index) => {
-    console.log(index);
-    try {
-      const response = await axios.get(
-        `${
-          import.meta.env.VITE_APP_SERVER_HOST
-        }/api/teamspace/${index}/projects`,
-        {
+// 팀 스페이스에 따른 프로젝트 리스트 호출 함수
+    const getProjectsInfo= async (index) => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/${index}/projects`, {
           headers: {
-            Authorization: accessToken,
-          },
-        }
-      );
-      setProjects(response.data.data.projectResponseDtoList);
-      console.log("프로젝트 조회 성공", response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+            'Authorization': accessToken,
+          }
+        });
+        setProjects(response.data.data.projectResponseDtoList);
+        setSelectedPRId(response.data.data.projectResponseDtoList[0].id);
+        console.log('프로젝트 조회 성공', response.data);
+      } catch(error) {
+        console.log(error);
+      }
+  }
 
   // 팀 스페이스 클릭 후 해당 프로젝트 출력 함수
   const changeTeamSpace = (index) => {
@@ -182,7 +177,6 @@ export default function TeamSpace() {
     getUserInfo(); //유저 정보 호출
     firstGetTeamInfo();
     // getTeamInfo(); // 팀 정보
-    getProjectsInfo(selectedTSId); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
   }, []);
 
   // 팀 스페이스 삭제 전 선택 함수, 선택한 index가 배열에 포함되어 있다면 이미지를 변경한다.
