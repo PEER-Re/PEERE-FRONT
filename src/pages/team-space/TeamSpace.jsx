@@ -47,8 +47,8 @@ export default function TeamSpace() {
   const { setSelectedPRId, setSelectedPRName } = ProjectIdStore(
     (state) => state
   );
-  const selectedTSId = 47; // 팀 아이디
-  // const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
+  // const selectedTSId = 47; // 팀 아이디
+  const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
   const selectedTSName = TeamSpaceStore((state) => state.selectedTSName); // 팀이름
   const selectedTSSize = TeamSpaceStore((state) => state.selectedTSSize); // 팀 사이즈
 
@@ -95,6 +95,26 @@ export default function TeamSpace() {
         }
       );
       setUserId(response.data); // 유저 아이디 저장
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // 추가한 api 코드
+  const firstGetTeamInfo = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/teamspaces`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      );
+      console.log("팀 스페이스 조회 성공", response.data);
+      setTeams(response.data.data.teamspaceResponseDtoList);
+      setSelectedTSName(response.data.data.teamspaceResponseDtoList[0].name); // 선택한 팀 이름 저장(임시 index)
+      setSelectedTSSize(response.data.data.teamspaceResponseDtoList[0].size); // 선택한 팀 사이즈 저장(임시 index)
+      setSelectedTSId(response.data.data.teamspaceResponseDtoList[0].id); // 첫 팀스페이스로 우선 세팅
     } catch (error) {
       console.log(error);
     }
@@ -160,7 +180,8 @@ export default function TeamSpace() {
   useEffect(() => {
     getUserId(); // 유저 아이디 호출
     getUserInfo(); //유저 정보 호출
-    getTeamInfo(); // 팀 정보
+    firstGetTeamInfo();
+    // getTeamInfo(); // 팀 정보
     getProjectsInfo(selectedTSId); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
   }, []);
 
