@@ -47,8 +47,8 @@ export default function TeamSpace() {
   const { setSelectedPRId, setSelectedPRName } = ProjectIdStore(
     (state) => state
   );
-  // const selectedTSId = 47; // 팀 아이디
-  const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
+  const selectedTSId = 47; // 팀 아이디
+  // const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
   const selectedTSName = TeamSpaceStore((state) => state.selectedTSName); // 팀이름
   const selectedTSSize = TeamSpaceStore((state) => state.selectedTSSize); // 팀 사이즈
 
