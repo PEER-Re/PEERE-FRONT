@@ -294,9 +294,9 @@ export default function TeamSpace() {
                     {team.role === "Leader" ? "팀장" : "팀원"}
                   </Role_Box>
                   <Team_Info_Container>
-                    <p style={{ width: "150px" }}>{team.name}</p>
-                    <p style={{ width: "40px" }}>{team.size}명</p>
-                    <p style={{ width: "500px" }}>'{team.profile}'</p>
+                    <p style={{ width: "130px"}}>{team.name}</p>
+                    <p style={{ width: "35px"}}>{team.size}명</p>
+                    <p style={{ width: "500px"}}>'{team.profile}'</p>
                   </Team_Info_Container>
                   <EnterImg onClick={() => changeTeamSpace(index)} />
                 </Team_Bar>
@@ -334,7 +334,8 @@ export default function TeamSpace() {
         <Project_Title_Container>
           <Project_Title>
             <p>{selectedTSName}</p>
-            <p className="member">{selectedTSSize}</p>
+            <p className="member">{selectedTSSize}명</p>
+            <p className="code">(참여코드: 1234)</p>
           </Project_Title>
           <Add_New_Project_Btn onClick={() => navigate("/create-project")}>
             <AddProjectImg />
@@ -566,7 +567,7 @@ const Team_Info_Container = styled.div`
   height: 40px;
   font-size: 16px;
   font-weight: 600;
-  gap: 40px;
+  gap: 30px;
   display: flex;
   align-items: center;
   padding: 0 40px;
@@ -610,6 +611,13 @@ const Project_Title = styled.div`
     font-size: 16px;
     margin-top: 18px;
   }
+
+  .code {
+    font-size: 16px;
+    margin-top: 18px;
+    color: #5e5e5e;
+  }
+  
 `;
 const Add_New_Project_Btn = styled.div`
   box-sizing: border-box;
@@ -764,4 +772,3 @@ const CopyInvitation = styled.div`
   background-color: #1ad079;
   padding: 0 15px;
   white-space: nowrap;
-`;
