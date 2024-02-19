@@ -40,7 +40,7 @@ export default function TeamSpace() {
   // 임시 토큰 세팅
   localStorage.setItem(
     "accessToken",
-    `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A`
+    `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJwZWVyNEB0ZXN0LmNvbSJ9.XnDdI0u3LLLiJ5hZmZSY-5_bGRNV5rZfmoS_hdK6RvRx09UnZ9pu5P-EuM-2RiJFOf2RZXuyesXiC8wUkCOw7A`
   );
   const accessToken = localStorage.getItem("accessToken");
   // store 파일의 actions 가져오기 사용자가 선택한 teamspace
@@ -50,8 +50,8 @@ export default function TeamSpace() {
   const { setSelectedPRId, setSelectedPRName } = ProjectIdStore(
     (state) => state
   );
-  const selectedTSId = 56; // 팀 아이디
-  // const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
+  // const selectedTSId = 56; // 팀 아이디
+  const selectedTSId = TeamSpaceStore((state) => state.selectedTSId); // 팀 아이디
   const selectedTSName = TeamSpaceStore((state) => state.selectedTSName); // 팀이름
   const selectedTSSize = TeamSpaceStore((state) => state.selectedTSSize); // 팀 사이즈
 
@@ -435,12 +435,15 @@ export default function TeamSpace() {
       <Modal isOpen={isModalOpen} closeModal={closeModal}>
         <Team_Bar style={{ width: "80%", margin: "15px 0 35px 0" }}>
           <CopyInvitation>초대코드 입력</CopyInvitation>
-          <input style={{ width: "60%", fontSize: "22px" }}></input>
+          <input
+            style={{ width: "60%", fontSize: "22px" }}
+            value={invitationCode}
+            onChange={(e) => setInvitationCode(e.target.value)}
+            type="text"
+          ></input>
           <SendButton
             style={{ width: "13%", height: "25px", margin: "0 5px" }}
             onClick={submitContentHandler}
-            value={invitationCode}
-            onChange={(e) => setInvitationCode(e.target.value)}
           />
         </Team_Bar>
       </Modal>
