@@ -1,31 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MainCheck,
   FeedbackTextBox,
   MyFeedbackBox,
-  YesNoBox,
-  TextFeedback1,
-  TextFeedback2,
-  Yes,
-  No,
-  Person,
-  Who,
-  TeamProfImg,
-  Team,
-  MemberName,
-  How,
-  FeedbackList1,
-  FeedbackList2,
-  FeedbackLLine,
-
+  IndexContainer,
+  BtnBox,
+  IndexBtn,
+  IndexBox,
+  InnerContainer,
+  FeedbackPersonBox,
 } from "/src/styles/style";
 
 import axios from "axios";
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
-
+import FeedbackPerson from "/src/components/feedback/FeedbackPerson.jsx";
+import FeedbackTitle from "/src/components/feedback/FeedbackTitle.jsx";
 function FeedbackUsers() {
-
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem("accessToken");
   const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
 
   const [feedbacks, setFeedbacks] = useState();
@@ -33,54 +24,51 @@ function FeedbackUsers() {
   useEffect(() => {
     const getFeedbacks = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/projects/${selectedPRId}/feedback`, {
-          headers: {
-            'Authorization': accessToken,
+        const response = await axios.get(
+          `${
+            import.meta.env.VITE_APP_SERVER_HOST
+          }/api/projects/${selectedPRId}/feedback`,
+          {
+            headers: {
+              Authorization: accessToken,
+            },
           }
-        });
-        console.log('피드백 조회 성공', response.data);
+        );
+        console.log("피드백 조회 성공", response.data);
         setFeedbacks(response.data.data.sendFeedbackList);
-      } catch(error) {
+      } catch (error) {
         console.log(error);
       }
-  }
+    };
 
-  getFeedbacks();
-  }, [])
+    getFeedbacks();
+  }, []);
   // 피드백 get
-
 
   return (
     <MainCheck>
-      <FeedbackTextBox>
-        피드백관리
-      </FeedbackTextBox>
-      {/* <FeedbackDesign src="src/assets/images/background/Union.svg"/>  */}
+      <FeedbackTextBox>피드백관리</FeedbackTextBox>
       <MyFeedbackBox>
-        <YesNoBox>
-          <div style = {{ width: '1000px'}}> </div>
-          <TextFeedback1><Yes>YES</Yes> 피드백 </TextFeedback1>
-          <TextFeedback2><No>NO</No> 피드백 </TextFeedback2>
-       </YesNoBox>
-       <Person>
-            <TeamProfImg src="src/assets/images/profile/profile.png" />
-          <Who>  
-            <MemberName>김준희</MemberName>
-          </Who>
-
-          <FeedbackLLine></FeedbackLLine>
-          
-         <How>
-            <FeedbackList1>
-              ∙연락이 잘 돼요.
-              
-            </FeedbackList1>
-            <FeedbackList2>
-              ∙연락이 안 돼요.
-              </FeedbackList2>
-          </How>
-          
-       </Person>
+        <IndexContainer>
+          <BtnBox>
+            <IndexBtn>보낸 피드백</IndexBtn>
+          </BtnBox>
+          <IndexBox>
+            <InnerContainer>
+              <FeedbackTitle />
+              <FeedbackPersonBox>
+                <FeedbackPerson />
+                <FeedbackPerson />
+                <FeedbackPerson />
+                <FeedbackPerson />
+                <FeedbackPerson />
+                <FeedbackPerson />
+                <FeedbackPerson />
+                <FeedbackPerson />
+              </FeedbackPersonBox>
+            </InnerContainer>
+          </IndexBox>
+        </IndexContainer>
       </MyFeedbackBox>
     </MainCheck>
   );

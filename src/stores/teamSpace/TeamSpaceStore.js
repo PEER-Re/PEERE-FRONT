@@ -6,7 +6,7 @@ const TeamSpaceStore = create(
     (set) => ({
       teamspaceIds: [],
       selectedTSId: 0,
-      selectedTSName: '',
+      selectedTSName: "",
       selectedTSSize: 0,
 
       // api를 통한 프로젝트 id 세팅
@@ -15,7 +15,7 @@ const TeamSpaceStore = create(
           teamspaceIds: [...state.teamspaceIds, newteamspaceId],
         })),
 
-        // 선택한 프로젝트 id 세팅
+      // 선택한 프로젝트 id 세팅
       setSelectedTSId: (id) => set({ selectedTSId: id }),
       setSelectedTSName: (name) => set({ selectedTSName: name }),
       setSelectedTSSize: (size) => set({ selectedTSSize: size }),

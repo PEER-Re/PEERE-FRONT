@@ -100,7 +100,30 @@ export default function TeamSpace() {
     }
   };
 
-  // 팀 스페이스 호출 함수
+  // 첫 번째 렌더링
+  const firstGetTeamInfo = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/teamspaces`,
+        {
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      );
+      console.log("팀 스페이스 조회 성공", response.data);
+      setTeams(response.data.data.teamspaceResponseDtoList);
+      setSelectedTSName(response.data.data.teamspaceResponseDtoList[0].name); // 선택한 팀 이름 저장(임시 index)
+      setSelectedTSSize(response.data.data.teamspaceResponseDtoList[0].size); // 선택한 팀 사이즈 저장(임시 index)
+      setSelectedTSId(response.data.data.teamspaceResponseDtoList[0].id); // 선택한 팀 사이즈 저장(임시 index)
+
+      getProjectsInfo(response.data.data.teamspaceResponseDtoList[0].id); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 팀 정보 받아오기
   const getTeamInfo = async () => {
     try {
       const response = await axios.get(
@@ -126,7 +149,6 @@ export default function TeamSpace() {
 
   // 팀 스페이스에 따른 프로젝트 리스트 호출 함수
   const getProjectsInfo = async (index) => {
-    console.log(index);
     try {
       const response = await axios.get(
         `${
@@ -138,7 +160,11 @@ export default function TeamSpace() {
           },
         }
       );
+
       setProjects(response.data.data.projectResponseDtoList);
+      setSelectedPRId(response.data.data.projectResponseDtoList[0].id);
+      setSelectedPRName(response.data.data.projectResponseDtoList[0].title);
+        console.log('프로젝트 조회 성공', response.data);
       console.log("프로젝트 조회 성공", response.data);
     } catch (error) {
       console.log(error);
@@ -161,7 +187,7 @@ export default function TeamSpace() {
     getUserId(); // 유저 아이디 호출
     getUserInfo(); //유저 정보 호출
     getTeamInfo(); // 팀 정보
-    getProjectsInfo(selectedTSId); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
+    getProjectsInfo(selectedTSId);
   }, []);
 
   // 팀 스페이스 삭제 전 선택 함수, 선택한 index가 배열에 포함되어 있다면 이미지를 변경한다.
@@ -746,5 +772,3 @@ const CopyInvitation = styled.div`
   background-color: #1ad079;
   padding: 0 15px;
   white-space: nowrap;
-`;
-
