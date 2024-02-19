@@ -11,6 +11,8 @@ import {
   FeedbackPersonBox,
 } from "/src/styles/style";
 
+import { feedback_dummy } from "/src/data/feedbacks/feedback_dummy";
+
 import axios from "axios";
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 import FeedbackPerson from "/src/components/feedback/FeedbackPerson.jsx";
@@ -19,7 +21,7 @@ function FeedbackUsers() {
   const accessToken = localStorage.getItem("accessToken");
   const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
 
-  const [feedbacks, setFeedbacks] = useState();
+  const [feedbacks, setFeedbacks] = useState(feedback_dummy);
 
   useEffect(() => {
     const getFeedbacks = async () => {
@@ -35,7 +37,7 @@ function FeedbackUsers() {
           }
         );
         console.log("피드백 조회 성공", response.data);
-        setFeedbacks(response.data.data.sendFeedbackList);
+        setFeedbacks(response.data.data.sentFeedbackList);
       } catch (error) {
         console.log(error);
       }
@@ -57,14 +59,9 @@ function FeedbackUsers() {
             <InnerContainer>
               <FeedbackTitle />
               <FeedbackPersonBox>
-                <FeedbackPerson />
-                <FeedbackPerson />
-                <FeedbackPerson />
-                <FeedbackPerson />
-                <FeedbackPerson />
-                <FeedbackPerson />
-                <FeedbackPerson />
-                <FeedbackPerson />
+              {feedbacks.map((data, index) => (
+        <FeedbackPerson key={index} name={data.teamUserNickname} image_url={data.teamUserProfileImageUrl} no_feedbacks={data.noFeedbackList} yes_feedbacks={data.yesFeedbackList} />
+      ))}
               </FeedbackPersonBox>
             </InnerContainer>
           </IndexBox>

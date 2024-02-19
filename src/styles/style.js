@@ -1088,6 +1088,8 @@ export const Member = styled.div`
 export const TeamProfImg = styled.img`
   background: lightgray 50% / cover no-repeat;
   border-radius: 50%;
+  max-width: 100px;
+  height: 10s0px;
 `;
 export const TeamPerson = styled.div`
   /* border: 1px solid green; */

@@ -189,7 +189,15 @@ export default function TeamSpace() {
         "번 팀을 삭제하였습니다. response : ",
         response.data.data
       );
+
+      if(teams[index].id === selectedTSId) {
+        console.log('같아요');
+      } else {
+        console.log('달라요');
+      }
+
       setStatus(!status);
+
     } catch (error) {
       console.log(error);
     } finally {

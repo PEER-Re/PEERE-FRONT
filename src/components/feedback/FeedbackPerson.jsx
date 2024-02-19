@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {
   Person,
   Member,
@@ -10,32 +11,39 @@ import {
   FeedbackContentBox,
   FeedbackContent,
 } from "/src/styles/style";
-const FeedbackPerson = () => {
+
+const FeedbackPerson = ({ name, image_url, no_feedbacks, yes_feedbacks }) => {
   return (
     <Person>
       <Member>
-        <TeamProfImg src="src/assets/images/profile/profile.png" />
+        <TeamProfImg src={image_url} />
         <TeamPerson>
-          <MemberName>김준희</MemberName>
-          <MemberTeam>피어리마케팅 A팀</MemberTeam>
+          <MemberName>{name}</MemberName>
         </TeamPerson>
       </Member>
       <How>
         <FeedbackContentBox>
           <FeedbackContent>
-            <p>• 피드백내용 이것저것</p>
-
+          {yes_feedbacks.map((feedback, index) => (
+              <p key={index}>• {feedback}</p>
+            ))}
           </FeedbackContent>
           <FeedbackContent>
-            <p>• 피드백내용 이것저것</p>
-            <p>• 피드백내용 이것저것</p>
-            <p>• 피드백내용 이것저것</p>
-            <p>• 피드백내용 이것저것</p>
+          {no_feedbacks.map((feedback, index) => (
+              <p key={index}>• {feedback}</p>
+            ))}
           </FeedbackContent>
         </FeedbackContentBox>
       </How>
     </Person>
   );
+};
+
+FeedbackPerson.propTypes = {
+  name: PropTypes.string,
+  image_url: PropTypes.string,
+  no_feedbacks: PropTypes.arrayOf(PropTypes.string),
+  yes_feedbacks: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default FeedbackPerson;
