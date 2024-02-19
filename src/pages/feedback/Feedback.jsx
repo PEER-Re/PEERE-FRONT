@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MainCheck,
   FeedbackTextBox,
@@ -13,8 +13,8 @@ import {
 
 import axios from "axios";
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
-import FeedbackPerson from "../feedback/FeedbackPerson.jsx";
-import FeedbackTitle from "../feedback/FeedbackTitle.jsx";
+import FeedbackPerson from "/src/components/feedback/FeedbackPerson.jsx";
+import FeedbackTitle from "/src/components/feedback/FeedbackTitle.jsx";
 function FeedbackUsers() {
   const accessToken = localStorage.getItem("accessToken");
   const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id

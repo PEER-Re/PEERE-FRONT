@@ -505,7 +505,6 @@ export const MainContainer = styled.div`
 `;
 
 export const HeaderBox = styled.div`
-  // border: 1px solid black;
   color: black;
   margin-left: 4%;
   margin-top: 1.5%;
@@ -517,6 +516,7 @@ export const HeaderBox = styled.div`
 `;
 
 export const SelfBox = styled.div`
+  /* border: 1px solid blue; */
   color: black;
   margin-left: 4%;
   font-size: xx-large;
@@ -531,6 +531,7 @@ export const SelfBox = styled.div`
 `;
 
 export const ReportBox = styled.div`
+  /* border: 1px solid red; */
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -546,10 +547,11 @@ export const ReportBox = styled.div`
 `;
 
 export const FeedBackType = styled.div`
+  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 80%;
+  width: 90%;
 `;
 
 export const ReportName = styled.div`
@@ -607,8 +609,8 @@ export const UpdateTime = styled.div`
 export const ProfImg = styled.img`
   background: lightgray 50% / cover no-repeat;
   border-radius: 50%;
-  height: 75px;
-  width: 75px;
+  height: 70px;
+  width: 70px;
   margin: auto 4%;
 `;
 
@@ -795,176 +797,6 @@ export const CreateProjectName = styled.div`
 
 //
 
-/*FeedbackUsers*/
-
-export const MainFeedback = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-export const FeedbackUsersTextBox = styled.div`
-  pointer-events: none;
-  color: black;
-  margin-left: 4%;
-  margin-top: 1%;
-  font-size: xx-large;
-  font-weight: 700;
-  display: flex;
-  flex-direction: row;
-`;
-
-export const FeedBackNameBox = styled.div`
-  pointer-events: none;
-  color: black;
-  margin-left: 4%;
-  margin-top: 1%;
-  background-color: white;
-  border-radius: 10px;
-  height: 13%;
-  width: 300px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  display: flex;
-  font-size: xx-large;
-  align-items: center;
-  padding-left: 1%;
-  white-space: nowrap;
-`;
-export const UserTeamProfImg = styled.img`
-  pointer-events: none;
-  background: lightgray 50% / cover no-repeat;
-  border-radius: 50%;
-  height: 82%;
-  margin-left: 10%;
-  margin-right: 15%;
-`;
-export const TeamName = styled.div`
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  margin-top: 2.5%;
-  margin-bottom: 2%;
-`;
-export const Name = styled.div`
-  pointer-events: none;
-  font-size: x-large;
-  font-weight: 900;
-`;
-export const Role = styled.div`
-  pointer-events: none;
-  font-size: medium;
-  margin-top: 6%;
-  font-weight: 400;
-`;
-export const OtherMember = styled.button`
-  display: flex;
-  position: absolute;
-  white-space: nowrap;
-  top: 22%;
-  left: 10%;
-`;
-export const OtherMemberName1 = styled.div`
-  //팀원 왼쪽 간격
-  width: 20%;
-  min-width: 450px;
-  height: 20px;
-  margin-right: 10%;
-`;
-export const OtherMemberName = styled.div`
-  background-color: #ffffff;
-  box-shadow: 0px 1px 4px 0px #00000040;
-  padding-left: 1.5%;
-  padding-right: 1.5%;
-  padding-top: 1%;
-  padding-bottom: 1%;
-  border-radius: 7px;
-  height: 20px;
-  margin-right: 5%;
-`;
-export const FeedbackBox = styled.div`
-  background-image: url("/src/assets/images/feedback/bg3.svg");
-  display: flex;
-  height: 450px;
-  width: 90%;
-  margin-left: 5%;
-  background-size: cover;
-  overflow-y: auto;
-`;
-export const UsersFeedBackType = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  width: 80%;
-`;
-export const FeedbackAnswer = styled.div`
-  pointer-events: none;
-  margin-top: 10%;
-  margin-bottom: 5%;
-  font-size: x-large;
-  font-weight: 700;
-  color: ${({ color }) => color};
-`;
-export const Assess1 = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  margin-left: 13%;
-  margin-bottom: 2%;
-  font-weight: 700;
-  height: 12%;
-  width: 70%;
-  border-radius: 20px;
-  background-color: #f4f4f4;
-  &:active {
-    background-color: #1ad079b2;
-  }
-`;
-export const Assess2 = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  margin-left: 13%;
-  margin-bottom: 2%;
-  font-weight: 700;
-  height: 12%;
-  width: 70%;
-  border-radius: 20px;
-  background-color: #f4f4f4;
-  &:active {
-    background-color: #ffa471;
-  }
-`;
-
-export const FeedbackLine = styled.div`
-  pointer-events: none;
-  width: 1%;
-  height: 75%;
-  border-right: 1.5px solid #07133b80;
-  margin-top: 5%;
-`;
-export const Button = styled.button`
-  cursor: pointer;
-  background-color: #e6e6e6b8;
-  border-radius: 16px;
-  box-shadow: 0px 4px 6.099999904632568px -1px #00000033;
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 13%;
-  height: 11.5%;
-  margin-left: 95%;
-  margin-bottom: 2%;
-  &:active {
-    background-color: #868686;
-  }
-`;
-export const Block = styled.div`
-  width: 15%;
-  height: 11.5%;
-`;
-
 /*Feedback*/
 
 export const MainCheck = styled.div`
@@ -1032,7 +864,6 @@ export const FeedbackPersonBox = styled.div`
   overflow-y: scroll;
   position: relative;
 `;
-
 
 export const FeedbackTextBox = styled.div`
   /* border: 1px solid red; */
@@ -1145,6 +976,99 @@ export const LoginButton = styled.div`
   background-repeat: no-repeat;
 `;
 
+//////////////////
+/* FeedbackUsers*/
+export const ProfileContainer = styled.div`
+  /* border: 1px solid blue; */
+  color: black;
+  margin: 0 4%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  gap: 30px;
+`;
+
+export const ProfileContainer_Inner = styled.div`
+  /* border: 1px solid blue; */
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  padding: 10px 40px 10px 30px;
+  gap: 20px;
+`;
+
+export const MemberList = styled.div`
+  /* border: 1px solid red; */
+  display: flex;
+  width: 62vw;
+  height: 50px;
+  overflow-x: scroll;
+`;
+
+export const MemebrBtn = styled.div`
+  /* border: 1px solid green; */
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  height: 30px;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  margin-right: 21px;
+  white-space: nowrap;
+`;
+
+/* FeedbackUsers > FeedbackBlocks */
+export const ReportBox2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding-bottom: 1%;
+  margin: 2% 4%;
+  margin-bottom: -100px;
+`;
+
+export const FeedBackType2 = styled.div`
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  padding: 0 3%;
+  overflow-y: scroll;
+`;
+
+export const FeedbackData = styled.div`
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  max-height: 390px;
+`;
+
+export const SaveFeedbackBtn = styled.button`
+  /* border: 1px solid green; */
+  margin: 10px auto 0 auto;
+  padding: 10px 40px;
+  white-space: nowrap;
+  border-radius: 10px;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  background-color: #f4f4f4;
+  font-size: 20px;
+  font-weight: 600;
+`;
+
 /* FeedbackPerson*/
 export const Person = styled.div`
   /* border: 1px solid; */
@@ -1212,3 +1136,173 @@ export const FeedbackContent = styled.div`
 `;
 
 export const YesList = styled.div``;
+
+/*FeedbackUsers*/
+
+// export const MainFeedback = styled.div`
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
+// `;
+// export const FeedbackUsersTextBox = styled.div`
+//   pointer-events: none;
+//   color: black;
+//   margin-left: 4%;
+//   margin-top: 1%;
+//   font-size: xx-large;
+//   font-weight: 700;
+//   display: flex;
+//   flex-direction: row;
+// `;
+
+// export const FeedBackNameBox = styled.div`
+//   pointer-events: none;
+//   color: black;
+//   margin-left: 4%;
+//   margin-top: 1%;
+//   background-color: white;
+//   border-radius: 10px;
+//   height: 13%;
+//   width: 300px;
+//   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+//   display: flex;
+//   font-size: xx-large;
+//   align-items: center;
+//   padding-left: 1%;
+//   white-space: nowrap;
+// `;
+// export const UserTeamProfImg = styled.img`
+//   pointer-events: none;
+//   background: lightgray 50% / cover no-repeat;
+//   border-radius: 50%;
+//   height: 82%;
+//   margin-left: 10%;
+//   margin-right: 15%;
+// `;
+// export const TeamName = styled.div`
+//   pointer-events: none;
+//   display: flex;
+//   flex-direction: column;
+//   margin-top: 2.5%;
+//   margin-bottom: 2%;
+// `;
+// export const Name = styled.div`
+//   pointer-events: none;
+//   font-size: x-large;
+//   font-weight: 900;
+// `;
+// export const Role = styled.div`
+//   pointer-events: none;
+//   font-size: medium;
+//   margin-top: 6%;
+//   font-weight: 400;
+// `;
+// export const OtherMember = styled.button`
+//   display: flex;
+//   position: absolute;
+//   white-space: nowrap;
+//   top: 22%;
+//   left: 10%;
+// `;
+// export const OtherMemberName1 = styled.div`
+//   //팀원 왼쪽 간격
+//   width: 20%;
+//   min-width: 450px;
+//   height: 20px;
+//   margin-right: 10%;
+// `;
+// export const OtherMemberName = styled.div`
+//   background-color: #ffffff;
+//   box-shadow: 0px 1px 4px 0px #00000040;
+//   padding-left: 1.5%;
+//   padding-right: 1.5%;
+//   padding-top: 1%;
+//   padding-bottom: 1%;
+//   border-radius: 7px;
+//   height: 20px;
+//   margin-right: 5%;
+// `;
+// export const FeedbackBox = styled.div`
+//   background-image: url("/src/assets/images/feedback/bg3.svg");
+//   display: flex;
+//   height: 450px;
+//   width: 90%;
+//   margin-left: 5%;
+//   background-size: cover;
+//   overflow-y: auto;
+// `;
+// export const UsersFeedBackType = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   text-align: center;
+//   width: 80%;
+// `;
+// export const FeedbackAnswer = styled.div`
+//   pointer-events: none;
+//   margin-top: 10%;
+//   margin-bottom: 5%;
+//   font-size: x-large;
+//   font-weight: 700;
+//   color: ${({ color }) => color};
+// `;
+// export const Assess1 = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   cursor: pointer;
+//   margin-left: 13%;
+//   margin-bottom: 2%;
+//   font-weight: 700;
+//   height: 12%;
+//   width: 70%;
+//   border-radius: 20px;
+//   background-color: #f4f4f4;
+//   &:active {
+//     background-color: #1ad079b2;
+//   }
+// `;
+// export const Assess2 = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   cursor: pointer;
+//   margin-left: 13%;
+//   margin-bottom: 2%;
+//   font-weight: 700;
+//   height: 12%;
+//   width: 70%;
+//   border-radius: 20px;
+//   background-color: #f4f4f4;
+//   &:active {
+//     background-color: #ffa471;
+//   }
+// `;
+
+// export const FeedbackLine = styled.div`
+//   pointer-events: none;
+//   width: 1%;
+//   height: 75%;
+//   border-right: 1.5px solid #07133b80;
+//   margin-top: 5%;
+// `;
+// export const Button = styled.button`
+//   cursor: pointer;
+//   background-color: #e6e6e6b8;
+//   border-radius: 16px;
+//   box-shadow: 0px 4px 6.099999904632568px -1px #00000033;
+//   font-weight: 700;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 13%;
+//   height: 11.5%;
+//   margin-left: 95%;
+//   margin-bottom: 2%;
+//   &:active {
+//     background-color: #868686;
+//   }
+// `;
+// export const Block = styled.div`
+//   width: 15%;
+//   height: 11.5%;
+// `;
