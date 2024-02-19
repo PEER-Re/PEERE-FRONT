@@ -13,6 +13,8 @@ import {
 } from "/src/styles/style";
 import FeedbackBlock from "/src/components/feedback-users/FeedbackBlock.jsx";
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
+import TeamSpaceStore from "/src/stores/teamSpace/TeamSpaceStore";
+import FeedbacksStore from "/src/stores/feedback/FeedbackStore";
 
 const yesData = [
   { comment: "연락이 잘 돼요." },
@@ -38,24 +40,13 @@ const noData = [
   { comment: "매너가 없어요." },
 ];
 
-const memberData = [
-  { name: "김준희" },
-  { name: "이준희" },
-  { name: "정준희" },
-  { name: "강준희" },
-  { name: "박준희" },
-  { name: "심준희" },
-  { name: "소준희" },
-  { name: "여준희" },
-  { name: "문준희" },
-  { name: "나준희" },
-  { name: "윤준희" },
-  { name: "한준희" },
-  { name: "구준희" },
-];
-
 function FeedbackUsers() {
   const accessToken = localStorage.getItem("accessToken");
+
+  const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
+  const selectedUser = FeedbacksStore((state) => state.selectedUser); // 선택 유저
+  const { setTeamMembers } = TeamSpaceStore((state) => state);
+  const { setSelectedUser} = FeedbacksStore((state) => state);
 
   const [profileNameApi, setProfileNameApi] = useState("");
   const [profileImgApi, setProfileImgApi] = useState("");
@@ -63,12 +54,29 @@ function FeedbackUsers() {
   const [noNumberArray, setNoNumberArray] = useState([]);
   const [yesNumberArray, setYesNumberArray] = useState([]);
   const [updateTime, setUpdateTime] = useState("");
+  const [members, setMembers] = useState([]);
 
-  const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
+// 팀 정보 받아오기
+    const getTeamInfo = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_APP_SERVER_HOST}/api/projects/${selectedPRId}/team-report`, {
+          headers: {
+            'Authorization': accessToken,
+          }
+        });
+        console.log('성공 : ',response.data.data);
+        setTeamMembers(response.data.data.teamInfo.teamUserNames); // team member 저장
+        setMembers(response.data.data.teamInfo.teamUserNames);
+      } catch(error) {
+        console.log(error);
+      }
+  }
+
 
   useEffect(() => {
     // 페이지 렌더링 시 GET 요청 보내기
     sendGetRequest();
+    getTeamInfo();
     setUpdateTime(getCurrentTime());
   }, []);
 
@@ -95,7 +103,7 @@ function FeedbackUsers() {
         }
       );
 
-      console.log(response);
+      console.log('response : ', response);
       const userInfo = response.data.data.userInfo;
       setProfileNameApi(userInfo.nickname);
       setProfileImgApi(userInfo.profileImageUrl);
@@ -126,6 +134,11 @@ function FeedbackUsers() {
     }
   };
 
+  const changeUser = (index) => {
+    setSelectedUser(index); // 선택한 유저 변경
+    console.log('유저 번경  : ', index);
+  }
+
   return (
     <MainContainer>
       <HeaderBox>피드백 관리</HeaderBox>
@@ -137,8 +150,8 @@ function FeedbackUsers() {
           </ProfName>
         </ProfileContainer_Inner>
         <MemberList>
-          {memberData.map((item, index) => (
-            <MemebrBtn key={index}>{item.name}</MemebrBtn>
+          {members.map((item, index) => (
+            <MemebrBtn key={index} onClick={() => changeUser(index)}>{item}</MemebrBtn>
           ))}
         </MemberList>
       </ProfileContainer>

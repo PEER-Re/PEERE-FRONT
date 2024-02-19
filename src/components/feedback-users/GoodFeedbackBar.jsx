@@ -13,6 +13,7 @@ const StyledReportContent = styled.div`
   font-weight: 700;
   align-items: center;
   padding: 10px 0;
+  cursor: pointer;
 `;
 
 const StyledReportComment = styled.div`
@@ -25,12 +26,19 @@ const StyledReportComment = styled.div`
 `;
 
 // Evaluate 컴포넌트
-function FeedbackBar({ comment, backgroundcolor }) {
+export default function GoodFeedbackBar({ comment, backgroundcolor, index, data, setData }) {
+
+  const handleClick = () => {
+    console.log('클릭');
+    const newData = [...data];
+    newData[index] = true; // 선택한 index의 값을 true로
+
+    setData(newData); 
+  }
+
   return (
-    <StyledReportContent style={{ backgroundColor: backgroundcolor }}>
+    <StyledReportContent style={{ backgroundColor: backgroundcolor }} onClick={() => handleClick()}>
       <StyledReportComment>{comment}</StyledReportComment>
     </StyledReportContent>
   );
 }
-
-export default FeedbackBar;
