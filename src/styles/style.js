@@ -882,10 +882,10 @@ height: 20px;
 margin-right: 5%;
 `;
 export const FeedbackBox = styled.div`
-  background-image: url('/src/assets/images/feedback/bg3.svg');
+  background-image: url('/src/assets/images/feedback/bg5.png');
   display: flex;
   height: 450px;
-  width: 90%;
+  width: 85%;
   margin-left: 5%;
   background-size: cover;
   overflow-y: auto;
