@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const CreateTeamApi = async (teamName, teamIntro) => {
+const CreateTeamApi = async (teamName, teamIntro, accessToken) => {
   const postData = {
     name: teamName,
     profile: teamIntro,
@@ -9,7 +9,7 @@ const CreateTeamApi = async (teamName, teamIntro) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcwOTkxMTQzNCwic29jaWFsSWQiOiJ0aGRkbXMyMDA5QG5hdmVyLmNvbSJ9.Kd3e8Xm2k_SgnyWMf84p7WPd9FzNwBF7VDLSD7h55my8J--xBuYNjKM8mexLg5oPVSHr7sHchssKMRNKpVPx2A`,
+      Authorization: accessToken,
     },
   };
 

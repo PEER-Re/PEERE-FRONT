@@ -100,29 +100,6 @@ export default function TeamSpace() {
     }
   };
 
-  // 첫 번째 렌더링
-  const firstGetTeamInfo = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_APP_SERVER_HOST}/api/teamspace/teamspaces`,
-        {
-          headers: {
-            Authorization: accessToken,
-          },
-        }
-      );
-      console.log("팀 스페이스 조회 성공", response.data);
-      setTeams(response.data.data.teamspaceResponseDtoList);
-      setSelectedTSName(response.data.data.teamspaceResponseDtoList[0].name); // 선택한 팀 이름 저장(임시 index)
-      setSelectedTSSize(response.data.data.teamspaceResponseDtoList[0].size); // 선택한 팀 사이즈 저장(임시 index)
-      setSelectedTSId(response.data.data.teamspaceResponseDtoList[0].id); // 선택한 팀 사이즈 저장(임시 index)
-
-      getProjectsInfo(response.data.data.teamspaceResponseDtoList[0].id); // 선택 팀 스페이스에 대한 프로젝트 리스트 호출
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   // 팀 정보 받아오기
   const getTeamInfo = async () => {
     try {
@@ -772,3 +749,4 @@ const CopyInvitation = styled.div`
   background-color: #1ad079;
   padding: 0 15px;
   white-space: nowrap;
+  `

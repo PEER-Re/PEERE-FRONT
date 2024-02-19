@@ -27,9 +27,11 @@ function CreateTeam() {
   const navigate = useNavigate();
   const { setSelectedTSId, setSelectedTSName, setSelectedTSSize } = TeamSpaceStore((state) => state);
 
+  const accessToken = localStorage.getItem("accessToken");
+  
   const handleNextBoxClick = async () => {
     try {
-      const teamspaceId = await CreateTeamApi(teamName, teamIntro);
+      const teamspaceId = await CreateTeamApi(teamName, teamIntro, accessToken);
       console.log(teamspaceId, '번 팀이 생성되었습니다.');
       setSelectedTSId(teamspaceId);
       setSelectedTSName(teamName); // 팀 네임도 세팅
