@@ -80,8 +80,8 @@ export default function Input() {
   return (
     <InputBox>
       <InputProfile>
-        <InputImg src={userProfileImg} />
-        <InputName>{userNameInfo}</InputName>
+        <InputImg src='/src/assets/images/user/minyoung.jpeg' />
+        <InputName>김민영</InputName>
         <VerticalLine2 />
       </InputProfile>
       <InputText

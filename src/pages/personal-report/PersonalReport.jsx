@@ -148,7 +148,7 @@ function PersonalReport() {
       {/* */}
       <SelfBox>
         <IntroSelf>나</IntroSelf>
-        <ProfImg src={profileImgApi} />
+        <ProfImg src='/src/assets/images/user/minyoung.jpeg' />
         <ProfName>
           <MyName>{profileNameApi}</MyName>
         </ProfName>
@@ -160,33 +160,33 @@ function PersonalReport() {
           </ReportName>
           <Evaluate
             comment="말을 조리있게 잘해요."
-            rate={`${yesNumberArray[0]}/6`}
-            backgroundcolor={getYesBackgroundColor(yesNumberArray[0])}
+            rate={`10/10`}
+            backgroundcolor={getYesBackgroundColor(6)}
           />
           <Evaluate
             comment="연락이 잘돼요."
-            rate={`${yesNumberArray[1]}/6`}
-            backgroundcolor={getYesBackgroundColor(yesNumberArray[1])}
+            rate={`9/10`}
+            backgroundcolor={getYesBackgroundColor(5)}
           />
           <Evaluate
             comment="능력이 뛰어나요."
-            rate={`${yesNumberArray[2]}/6`}
-            backgroundcolor={getYesBackgroundColor(yesNumberArray[2])}
+            rate={`8/10`}
+            backgroundcolor={getYesBackgroundColor(4)}
           />
           <Evaluate
             comment="재미있어요."
-            rate={`${yesNumberArray[3]}/6`}
-            backgroundcolor={getYesBackgroundColor(yesNumberArray[3])}
+            rate={`7/10`}
+            backgroundcolor={getYesBackgroundColor(3)}
           />
           <Evaluate
             comment="시간약속을 잘 지켜요."
-            rate={`${yesNumberArray[4]}/6`}
-            backgroundcolor={getYesBackgroundColor(yesNumberArray[4])}
+            rate={`7/10`}
+            backgroundcolor={getYesBackgroundColor(3)}
           />
           <Evaluate
             comment="빈틈이 없어요."
-            rate={`${yesNumberArray[5]}/6`}
-            backgroundcolor={getYesBackgroundColor(yesNumberArray[5])}
+            rate={`7/10`}
+            backgroundcolor={getYesBackgroundColor(3)}
           />
         </FeedBackType>
 
@@ -199,33 +199,33 @@ function PersonalReport() {
           </ReportName>
           <Evaluate
             comment="말을 조리있게 못해요."
-            rate={`${noNumberArray[0]}/6`}
-            backgroundcolor={getBackgroundColor(noNumberArray[0])}
+            rate={`3/10`}
+            backgroundcolor={getBackgroundColor(3)}
           />
           <Evaluate
             comment="연락이 안돼요."
-            rate={`${noNumberArray[1]}/6`}
-            backgroundcolor={getBackgroundColor(noNumberArray[1])}
+            rate={`3/10`}
+            backgroundcolor={getBackgroundColor(3)}
           />
           <Evaluate
             comment="능력이 뒤떨어져요."
-            rate={`${noNumberArray[2]}/6`}
-            backgroundcolor={getBackgroundColor(noNumberArray[2])}
+            rate={`2/10`}
+            backgroundcolor={getBackgroundColor(2)}
           />
           <Evaluate
             comment="재미없어요."
-            rate={`${noNumberArray[3]}/6`}
-            backgroundcolor={getBackgroundColor(noNumberArray[3])}
+            rate={`2/10`}
+            backgroundcolor={getBackgroundColor(2)}
           />
           <Evaluate
             comment="시간약속을 잘 안지켜요."
-            rate={`${noNumberArray[4]}/6`}
-            backgroundcolor={getBackgroundColor(noNumberArray[4])}
+            rate={`1/10`}
+            backgroundcolor={getBackgroundColor(1)}
           />
           <Evaluate
             comment="빈틈이 있어요."
-            rate={`${noNumberArray[5]}/6`}
-            backgroundcolor={getBackgroundColor(noNumberArray[5])}
+            rate={`0/10`}
+            backgroundcolor={getBackgroundColor(1)}
           />
         </FeedBackType>
       </ReportBox>

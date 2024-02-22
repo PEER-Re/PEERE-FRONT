@@ -47,10 +47,12 @@ export default function SideBar(location) {
   return (
     <Body>
    <BarHeader>
-    <BarHeaderImage src={userImage} alt="bar-header-image"/>
+    <BarHeaderImage>
+      <img src='/src/assets/images/user/minyoung.jpeg' alt="bar-header-image" />
+    </BarHeaderImage>
     <BarHeaderText>
         <p>
-            {userName}
+            김민영
         </p>
     </BarHeaderText>
     </BarHeader>
@@ -102,10 +104,16 @@ export const BarHeader = styled.div`
   margin-top: 24px;
 `;
 
-export const BarHeaderImage = styled.img`
+export const BarHeaderImage = styled.div`
   width: 50px;
   height: 50px;
-  background-repeat: no-repeat;
+
+  img {
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+  }
 `;
 
 export const BarHeaderText = styled.div`

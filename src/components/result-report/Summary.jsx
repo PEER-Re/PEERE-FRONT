@@ -106,7 +106,7 @@ export default function Summary({
                   <td>
                     <div>
                       <p className="title">팀 이름</p>
-                      <p className="res">{teamName}</p>
+                      <p className="res">PEER:RE</p>
                     </div>
                   </td>
                 </tr>
@@ -114,7 +114,7 @@ export default function Summary({
                   <td>
                     <div>
                       <p className="title">팀원 수</p>
-                      <p className="res">{memberNum}명</p>
+                      <p className="res">10명</p>
                     </div>
                   </td>
                 </tr>
@@ -122,7 +122,7 @@ export default function Summary({
                   <td>
                     <div>
                       <p className="title">프로젝트 명</p>
-                      <p className="res">{projectName}</p>
+                      <p className="res">PEER:RE</p>
                     </div>
                   </td>
                 </tr>
@@ -134,7 +134,7 @@ export default function Summary({
                     <div>
                       <p className="title">프로젝트 기간</p>
                       <p className="res">
-                        {startDay} ~ {endDay}
+                        2024--1-12 ~ 2023-02-19
                       </p>
                     </div>
                   </td>
@@ -143,7 +143,7 @@ export default function Summary({
                   <td>
                     <div>
                       <p className="title">전체 동료평가 참여율</p>
-                      <p className="res">{Math.floor(totalParticipateRate)}%</p>
+                      <p className="res">100%</p>
                     </div>
                   </td>
                 </tr>
@@ -152,7 +152,7 @@ export default function Summary({
                     <div>
                       <p className="title">전체 피드백 개수</p>
                       <p className="res">
-                        YES {totalYesFeedbackCount} / NO {totalNoFeedbackCount}
+                        YES 194개 / NO 39개
                       </p>
                     </div>
                   </td>

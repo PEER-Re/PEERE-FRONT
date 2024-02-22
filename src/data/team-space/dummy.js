@@ -1,19 +1,10 @@
 export const projectResponseDummy = [
-    {title: '1분기 프로젝트', status: '종료', startDay: '2024-02-13', endDay: '2024-02-16'},
-    {title: '제목', status: '진행중', startDay: '2024-02-16', endDay: null},
-    {title: '1분기 프로젝트', status: '종료', startDay: '2024-02-13', endDay: '2024-02-16'},
-    {title: '제목', status: '진행중', startDay: '2024-02-16', endDay: null},
-    {title: '1분기 프로젝트', status: '종료', startDay: '2024-02-13', endDay: '2024-02-16'},
-    {title: '제목', status: '진행중', startDay: '2024-02-16', endDay: null},
-    {title: '1분기 프로젝트', status: '종료', startDay: '2024-02-13', endDay: '2024-02-16'},
-    {title: '제목', status: '진행중', startDay: '2024-02-16', endDay: null},
-    {title: '1분기 프로젝트', status: '종료', startDay: '2024-02-13', endDay: '2024-02-16'},
-    {title: '제목', status: '진행중', startDay: '2024-02-16', endDay: null},
+    {title: 'PEER:RE', status: '종료', startDay: '2024-01-21', endDay: '2024-02-19'},
+    {title: 'PEER:RE-renew', status: '진행중', startDay: '2024-02-19', endDay: null},
 ]
 
 export const teamspaceResponseDummy = [
-{name: 'a', profile: 'a team intro', size: 1, role: 'Leader'},
-{name: '피어리 프앤팀', profile: '프앤팀입니다.', size: 1, role: 'Leader'},
-{name: '피어리 a팀', profile: '피어리 a 팀 소개', size: 1, role: 'Leader'},
-{name: 'team aa', profile: 'aa intro', size: 1, role: 'Leader'},
+{name: 'PEER:RE', profile: 'UMC peer:re 팀입니다!', size: 10, role: 'Leader'},
+{name: 'Solution Challenge', profile: 'GDSC 솔챌 준비', size: 4, role: 'Leader'},
+{name: 'Inglo', profile: '공모전 준비', size: 1, role: ''},
 ]

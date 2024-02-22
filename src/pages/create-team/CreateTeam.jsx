@@ -72,7 +72,7 @@ function CreateTeam() {
           <LeaderLabel>팀장</LeaderLabel>
           <LeaderBox>
             <CreateLeaderProfile src="src/assets/images/team-create/leaderprof.png" />
-            <CreateLeaderName>BBB</CreateLeaderName>
+            <CreateLeaderName>김민영</CreateLeaderName>
           </LeaderBox>
         </CreateLeader>
         {/*  */}

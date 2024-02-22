@@ -16,7 +16,7 @@ export default function Header(location) {
   return (
     <Body>
         <LeftBody>
-            <UserImage src={Profile} alt= "profile" />
+            <UserImage src='/src/assets/images/logo.png' alt= "profile" />
             <TitleTextBox>
                 나의 팀
                 <p>
@@ -60,6 +60,7 @@ export const UserImage = styled.img`
 width: 40px;
 height: 40px;
 background-repeat: no-repeat;
+border-radius: 100px;
 `;
 
 export const TitleTextBox = styled.div`

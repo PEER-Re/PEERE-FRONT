@@ -58,7 +58,7 @@ function CreateProject() {
           <ProjectLabel>팀장</ProjectLabel>
           <ProjectBox>
             <CreateProjectProfile src="src/assets/images/team-create/leaderprof.png" />
-            <CreateProjectName>BBB</CreateProjectName>
+            <CreateProjectName>김민영</CreateProjectName>
           </ProjectBox>
         </CreateTeamProject>
         {/*  */}

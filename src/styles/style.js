@@ -373,6 +373,7 @@ export const ProfileImage = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  border-radius: 100px;
 `;
 
 export const ProfileText = styled.div`
@@ -452,6 +453,7 @@ export const InputImg = styled.div`
   background-position: center;
   display: flex;
   margin-right: 30px;
+  border-radius: 100px;
 `;
 export const InputName = styled.div`
   box-sizing: border-box;
