@@ -19,25 +19,53 @@ import {
   MyRole,
   IntroSelf,
 } from "/src/styles/style";
+import { personal_dummy } from "../../data/personal-report/personal_dummy"; // 임시 더미 데이터 (api 연결 성공시 삭제)
 import Evaluate from "/src/components/Evaluate/Evaluate.jsx";
-
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 function PersonalReport() {
   const accessToken = localStorage.getItem("accessToken");
 
-  const [profileNameApi, setProfileNameApi] = useState("");
-  const [profileImgApi, setProfileImgApi] = useState("");
-  const [teamName, setTeamName] = useState("");
-  const [noNumberArray, setNoNumberArray] = useState([]);
-  const [yesNumberArray, setYesNumberArray] = useState([]);
+  //// api로 받아올 원 데이터 (api 연결 성공시 주석 해제)
+  // const [profileNameApi, setProfileNameApi] = useState("");
+  // const [profileImgApi, setProfileImgApi] = useState("");
+  // const [teamName, setTeamName] = useState("");
+  // const [noNumberArray, setNoNumberArray] = useState([]);
+  // const [yesNumberArray, setYesNumberArray] = useState([]);
+  // const [updateTime, setUpdateTime] = useState("");
+
+  // 임시 더미 데이터 (api 연결 후 삭제) ~~~
+  const [profileNameApi, setProfileNameApi] = useState("홍길동");
+  const [profileImgApi, setProfileImgApi] = useState(
+    "/src/assets/images/result-report/미모티콘1.png"
+  );
+  const [teamName, setTeamName] = useState(
+    personal_dummy.data.userInfo.teamName
+  );
+  const [noNumberArray, setNoNumberArray] = useState([
+    personal_dummy.data.noFeedbackInfo.badCommunicationNum,
+    personal_dummy.data.noFeedbackInfo.badPunctualNum,
+    personal_dummy.data.noFeedbackInfo.badCompetentNum,
+    personal_dummy.data.noFeedbackInfo.badArticulateNum,
+    personal_dummy.data.noFeedbackInfo.badThoroughNum,
+    personal_dummy.data.noFeedbackInfo.badEngagingNum,
+  ]);
+  const [yesNumberArray, setYesNumberArray] = useState([
+    personal_dummy.data.yesFeedbackInfo.goodCommunicationNum,
+    personal_dummy.data.yesFeedbackInfo.goodPunctualNum,
+    personal_dummy.data.yesFeedbackInfo.goodCompetentNum,
+    personal_dummy.data.yesFeedbackInfo.goodArticulateNum,
+    personal_dummy.data.yesFeedbackInfo.goodThoroughNum,
+    personal_dummy.data.yesFeedbackInfo.goodEngagingNum,
+  ]);
   const [updateTime, setUpdateTime] = useState("");
+  // ~~~임시 더미 데이터 (api 연결 후 삭제)
 
   const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
 
   useEffect(() => {
     // 페이지 렌더링 시 GET 요청 보내기
-    sendGetRequest();
+    // sendGetRequest();  //api로 받아올 원 데이터
     setUpdateTime(getCurrentTime());
   }, []);
 

@@ -38,6 +38,7 @@ export const MainWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 export const LeftBody = styled.div`
@@ -373,6 +374,7 @@ export const ProfileImage = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  border-radius: 50%;
 `;
 
 export const ProfileText = styled.div`
@@ -609,8 +611,8 @@ export const UpdateTime = styled.div`
 export const ProfImg = styled.img`
   background: lightgray 50% / cover no-repeat;
   border-radius: 50%;
-  height: 70px;
-  width: 70px;
+  height: 80px;
+  width: 80px;
   margin: auto 4%;
 `;
 
@@ -1044,7 +1046,6 @@ export const FeedBackType2 = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0 3%;
-  overflow-y: scroll;
 `;
 
 export const FeedbackData = styled.div`
@@ -1083,13 +1084,14 @@ export const Member = styled.div`
   align-items: center;
   border-right: 1.5px solid gray;
   gap: 15px;
-  padding: 0 50px 40px 20px;
+  padding: 0 20px 40px 20px;
 `;
 export const TeamProfImg = styled.img`
   background: lightgray 50% / cover no-repeat;
   border-radius: 50%;
-  max-width: 100px;
-  height: 10s0px;
+  width: 80px;
+  height: 80px;
+  pointer-events: auto;
 `;
 export const TeamPerson = styled.div`
   /* border: 1px solid green; */
@@ -1099,7 +1101,9 @@ export const TeamPerson = styled.div`
 export const MemberName = styled.div`
   font-weight: 700;
   font-size: x-large;
+  pointer-events: auto;
 `;
+
 export const MemberTeam = styled.div``;
 
 export const How = styled.div`

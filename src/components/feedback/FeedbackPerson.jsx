@@ -1,35 +1,37 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   Person,
   Member,
   TeamProfImg,
   TeamPerson,
   MemberName,
-  MemberTeam,
   How,
   FeedbackContentBox,
   FeedbackContent,
 } from "/src/styles/style";
 
 const FeedbackPerson = ({ name, image_url, no_feedbacks, yes_feedbacks }) => {
+
+  const navigate = useNavigate();
   return (
     <Person>
       <Member>
-        <TeamProfImg src={image_url} />
+        <TeamProfImg src={image_url} onClick={() => navigate("/feedback/users")}/>
         <TeamPerson>
-          <MemberName>{name}</MemberName>
+        <MemberName onClick={() => navigate("/feedback/users")}>{name}</MemberName>
         </TeamPerson>
       </Member>
       <How>
         <FeedbackContentBox>
           <FeedbackContent>
-          {yes_feedbacks.map((feedback, index) => (
+            {yes_feedbacks.map((feedback, index) => (
               <p key={index}>• {feedback}</p>
             ))}
           </FeedbackContent>
           <FeedbackContent>
-          {no_feedbacks.map((feedback, index) => (
+            {no_feedbacks.map((feedback, index) => (
               <p key={index}>• {feedback}</p>
             ))}
           </FeedbackContent>

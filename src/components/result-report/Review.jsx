@@ -9,15 +9,24 @@ import {
   ProfileText,
   ProfileName,
 } from "/src/styles/style";
+import {
+  nickname,
+  profileImgUrl,
+  content,
+} from "../../data/result-report/review_dummy"; // 임시 더미 데이터 (api 연결 성공시 삭제)
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 
 export default function Review() {
-  const [nicknames, setnicknames] = useState([]);
-  const [profileImgUrls, setprofileImgUrls] = useState([]);
-  const [contents, setcontents] = useState([]);
+  // 원 데이터
+  // const [nicknames, setnicknames] = useState([]);    
+  // const [profileImgUrls, setprofileImgUrls] = useState([]);
+  // const [contents, setcontents] = useState([]);
+  const [nicknames, setnicknames] = useState(nickname); // 임시 더미 데이터 (api 연결 성공시 삭제)
+  const [profileImgUrls, setprofileImgUrls] = useState(profileImgUrl); // 임시 더미 데이터 (api 연결 성공시 삭제)
+  const [contents, setcontents] = useState(content); // 임시 더미 데이터 (api 연결 성공시 삭제)
 
   const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
 
@@ -28,9 +37,10 @@ export default function Review() {
 
   const sendGetRequest = async () => {
     try {
-
       const response = await axios.get(
-        `${import.meta.env.VITE_APP_SERVER_HOST}/api/project/${selectedPRId}/comments`,
+        `${
+          import.meta.env.VITE_APP_SERVER_HOST
+        }/api/project/${selectedPRId}/comments`,
         {
           headers: {
             "Content-Type": "application/json",

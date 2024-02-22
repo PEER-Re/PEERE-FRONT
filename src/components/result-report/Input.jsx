@@ -17,8 +17,10 @@ export default function Input() {
   const accessToken = localStorage.getItem('accessToken');
 
   const [content, setContent] = useState("");
-  const [userNameInfo, setuserNameInfo] = useState("");
-  const [userProfileImg, setuserProfileImg] = useState("");
+  // const [userNameInfo, setuserNameInfo] = useState("");   // 원 데이터
+  // const [userProfileImg, setuserProfileImg] = useState("");  // 원 데이터
+  const [userNameInfo, setuserNameInfo] = useState("홍길동");   // 임시 더미 데이터 (api 연결 성공시 삭제)
+  const [userProfileImg, setuserProfileImg] = useState("/src/assets/images/result-report/미모티콘1.png");  // 임시 더미 데이터 (api 연결 성공시 삭제)
 
   const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
   const [isSend, setIsSend] = useState(false); // 보냈는지 확인하는 상태관리

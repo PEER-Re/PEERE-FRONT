@@ -8,9 +8,9 @@ import {
   Team_Table,
   VerticalLine,
 } from "/src/styles/style";
+import { summary_dummy, summary_feedback_dummy } from "../../data/result-report/summary_dummy";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import PropTypes from "prop-types";
 
 Summary.propTypes = {
@@ -35,8 +35,21 @@ export default function Summary({
   projectName,
 }) {
   const [button, setButton] = useState("team");
-  const [yesFeedbackContents, setYesFeedbackContents] = useState([]);
-  const [noFeedbackContents, setNoFeedbackContents] = useState([]);
+
+   // 임시 더미 데이터 (api 연결 성공시 삭제)
+  startDay = summary_dummy[0].startDay; 
+  endDay = summary_dummy[0].endDay;   
+  memberNum = summary_dummy[0].memberNum;   
+  teamName = summary_dummy[0].teamName;   
+  totalNoFeedbackCount = summary_dummy[0].totalNoFeedbackCount;   
+  totalParticipateRate = summary_dummy[0].totalParticipateRate;   
+  totalYesFeedbackCount = summary_dummy[0].totalYesFeedbackCount;   
+  projectName = summary_dummy[0].projectName;   
+
+  // const [yesFeedbackContents, setYesFeedbackContents] = useState([]);  // 원 데이터
+  // const [noFeedbackContents, setNoFeedbackContents] = useState([]);   // 원 데이터
+  const [yesFeedbackContents, setYesFeedbackContents] = useState(summary_feedback_dummy[0].yesFeedbackList); // 임시 더미 데이터 (api 연결 성공시 삭제)
+  const [noFeedbackContents, setNoFeedbackContents] = useState(summary_feedback_dummy[1].noFeedbackList); // 임시 더미 데이터 (api 연결 성공시 삭제)
 
   const handleButtonClick = (btn) => {
     setButton(btn);

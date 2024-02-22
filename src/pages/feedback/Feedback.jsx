@@ -17,7 +17,10 @@ import axios from "axios";
 import ProjectIdStore from "/src/stores/projectId/ProjectIdStore";
 import FeedbackPerson from "/src/components/feedback/FeedbackPerson.jsx";
 import FeedbackTitle from "/src/components/feedback/FeedbackTitle.jsx";
-function FeedbackUsers() {
+
+
+function Feedback() {
+
   const accessToken = localStorage.getItem("accessToken");
   const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
 
@@ -46,7 +49,6 @@ function FeedbackUsers() {
     getFeedbacks();
   }, []);
   // 피드백 get
-
   return (
     <MainCheck>
       <FeedbackTextBox>피드백관리</FeedbackTextBox>
@@ -60,7 +62,7 @@ function FeedbackUsers() {
               <FeedbackTitle />
               <FeedbackPersonBox>
               {feedbacks.map((data, index) => (
-        <FeedbackPerson key={index} name={data.teamUserNickname} image_url={data.teamUserProfileImageUrl} no_feedbacks={data.noFeedbackList} yes_feedbacks={data.yesFeedbackList} />
+        <FeedbackPerson key={index} name={data.teamUserNickname} image_url={data.teamUserProfileImageUrl} no_feedbacks={data.noFeedbackList} yes_feedbacks={data.yesFeedbackList}/>
       ))}
               </FeedbackPersonBox>
             </InnerContainer>
@@ -71,4 +73,4 @@ function FeedbackUsers() {
   );
 }
 
-export default FeedbackUsers;
+export default Feedback;

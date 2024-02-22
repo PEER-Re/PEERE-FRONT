@@ -1,5 +1,6 @@
 import { HomeContainer, LogoImg, MotoImg, LoginButton, HomeBg, HomeBox } from '/src/styles/style';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 
@@ -23,13 +24,16 @@ const Home = () => {
         }
     };
 
+    const navigate = useNavigate();
+
     return (
             <HomeContainer>
                 <HomeBg>
                     <HomeBox>
                         <LogoImg />
                         <MotoImg />
-                    <LoginButton onClick={handleLogin} />
+                    {/* <LoginButton onClick={handleLogin} /> */}
+                    <LoginButton onClick={() => navigate("/team-space")}/>
                     </HomeBox>
                     </HomeBg>
             </HomeContainer>

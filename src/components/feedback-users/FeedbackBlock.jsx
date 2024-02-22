@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ReportBox2,
   ContentLine,
@@ -18,7 +19,7 @@ import FeedbacksStore from "/src/stores/feedback/FeedbackStore";
 import axios from "axios";
 
 export default function FeedbackBlock({ yesData, noData, selectedUser }){
-
+  const navigate = useNavigate();
   const selectedPRId = ProjectIdStore((state) => state.selectedPRId); // 프로젝트 id
 
   // 선택 데이터 저장
@@ -37,6 +38,7 @@ export default function FeedbackBlock({ yesData, noData, selectedUser }){
         'thorough': data[4],
         'engaging': data[5], 
       };
+      
 
       console.log(newData);
     
@@ -101,7 +103,8 @@ export default function FeedbackBlock({ yesData, noData, selectedUser }){
           </FeedbackData>
         </FeedBackType2>
       </div>
-      <SaveFeedbackBtn onClick={() => SendUserFeedback()}>완료</SaveFeedbackBtn>
+      {/* <SaveFeedbackBtn onClick={() => SendUserFeedback()}>완료</SaveFeedbackBtn> */}
+      <SaveFeedbackBtn onClick={() => navigate("/feedback")}>완료</SaveFeedbackBtn>
     </ReportBox2>
     );
 }

@@ -47,11 +47,12 @@ export default function SideBar(location) {
   return (
     <Body>
    <BarHeader>
-    <BarHeaderImage src={userImage} alt="bar-header-image"/>
+    
+    {/* <BarHeaderImage src={userImage} alt="bar-header-image"/> */}
+    <BarHeaderImage src={T_L} alt="bar-header-image"/>
     <BarHeaderText>
-        <p>
-            {userName}
-        </p>
+        {/* <p>{userName}</p> */}
+        <p>홍길동</p>
     </BarHeaderText>
     </BarHeader>
     <Hr $top="15px"/>
